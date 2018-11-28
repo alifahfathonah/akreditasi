@@ -1,0 +1,1 @@
+[19-Dec-2017 13:22:49 America/Chicago] PHP Fatal error:  Class 'yii\test\ActiveFixture' not found in /home1/ambara77/lpmbenoa.org/lpm/common/fixtures/UserFixture.php on line 7
