@@ -21,6 +21,17 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'bg_nama')->textInput(['maxlength' => true]) ?>
 
+<<<<<<< HEAD
+=======
+    <!-- <?= $form->field($model, 'created_by')->textInput() ?>
+
+    <?= $form->field($model, 'created_at')->textInput() ?>
+
+    <?= $form->field($model, 'updated_by')->textInput() ?>
+
+    <?= $form->field($model, 'updated_at')->textInput() ?> -->
+
+>>>>>>> refs/remotes/origin/master
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
