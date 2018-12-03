@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\BagPn */
+/* @var $model common\models\PnKelas */
 
-$this->title = $model->bg_id;
-$this->params['breadcrumbs'][] = ['label' => 'Bagian Pengadilan Negeri', 'url' => ['index']];
+$this->title = $model->kelas_id;
+$this->params['breadcrumbs'][] = ['label' => 'Kelas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="bag-pn-view">
+<div class="pn-kelas-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->bg_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->bg_id], [
+        <?= Html::a('Update', ['update', 'id' => $model->kelas_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->kelas_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -28,9 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'bg_id',
-            // 'pn_id',
-            'bg_nama',
+            'kelas_id',
+            'kelas_nama',
             'created_by',
             'created_at',
             'updated_by',

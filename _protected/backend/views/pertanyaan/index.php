@@ -2,22 +2,22 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use common\models\PnKelas;
+use common\models\BagPn;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\PengadilannegeriSearch */
+/* @var $searchModel backend\models\PertanyaanSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pengadilan Negeri';
+$this->title = 'Pertanyaan';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pengadilan-negeri-index">
+<div class="pertanyaan-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Pengadilan Negeri', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Tambah Pertanyaan', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,25 +26,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'pn_id',
-            'pn_nama',
-            'pn_alamat:ntext',
+            // 'tanya_id',
+            'pertanyaan:ntext',
+            'tanya_ket_a:ntext',
+            'tanya_ket_b:ntext',
+            'tanya_ket_c:ntext',
+            'tanya_bobot',
             [
-              'attribute'=>'pn_kelas',
+              'attribute'=>'tanya_bagian',
               'format' => 'text',
               'value' => function($data){
-                    $c = new PnKelas;
-                   return $c->getlistKelas($data->pn_kelas);
+                    $c = new BagPn;
+                   return $c->getlistBagian($data->tanya_bagian);
                },
             ],
-            'pn_akreditasi',
-            'pn_ketua',
-            'pn_email:email',
-            'pn_website',
-            'pn_telp',
-            'pn_fax',
-            'pn_pegawai',
-            'pn_honorer',
             //'created_by',
             //'created_at',
             //'updated_by',

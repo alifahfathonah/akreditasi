@@ -62,7 +62,7 @@ class PengadilanNegeri extends \yii\db\ActiveRecord
             [['pn_pegawai', 'pn_honorer', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['pn_id'], 'string', 'max' => 5],
             [['pn_nama', 'pn_ketua', 'pn_email', 'pn_website'], 'string', 'max' => 255],
-            [['pn_kelas', 'pn_akreditasi'], 'string', 'max' => 3],
+            [['pn_kelas', 'pn_akreditasi'], 'string', 'max' => 5],
             [['pn_telp', 'pn_fax'], 'string', 'max' => 50],
             [['pn_id'], 'unique'],
         ];

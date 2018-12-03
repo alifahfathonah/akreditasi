@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="bag-pn-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php  echo $this->render('_search', ['model' => $searchModel,'data' => $data]); ?>
+    <?php  //echo $this->render('_search', ['model' => $searchModel,'data' => $data]); ?>
 
     <p>
         <?= Html::a('Tambah Bagian', ['create'], ['class' => 'btn btn-success']) ?>
@@ -28,14 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
             // 'bg_id',
             // 'pn_id',
-            [
-              'attribute'=>'pn_id',
-              'format' => 'text',
-              'value' => function($data){
-                    $c = new PengadilanNegeri;
-                   return $c->getlistPN($data->pn_id);
-               },
-            ],
+            // [
+            //   'attribute'=>'pn_id',
+            //   'format' => 'text',
+            //   'value' => function($data){
+            //         $c = new PengadilanNegeri;
+            //        return $c->getlistPN($data->pn_id);
+            //    },
+            // ],
             'bg_nama',
             // 'created_by',
             // 'created_at',

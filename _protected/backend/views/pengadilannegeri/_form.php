@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\PengadilanNegeri */
@@ -18,7 +19,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'pn_alamat')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'pn_kelas')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'pn_kelas')->dropDownList(
+        ArrayHelper::map($data,'kelas_id','kelas_nama')
+    ) ?>
 
     <?= $form->field($model, 'pn_akreditasi')->textInput(['maxlength' => true]) ?>
 

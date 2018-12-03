@@ -8,7 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-backend',
-    'name' => 'LPM Benoa',
+    'name' => 'Akreditasi Pengadilan Negeri',
 	//'defaultRoute' => 'musrenbang/index',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',

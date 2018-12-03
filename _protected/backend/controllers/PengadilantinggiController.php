@@ -3,18 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\PengadilanNegeri;
-use backend\models\PengadilannegeriSearch;
-use yii\data\ActiveDataProvider;
+use common\models\PengadilanTinggi;
+use backend\models\PengadilantinggiSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use common\models\PnKelas;
 
 /**
- * PengadilannegeriController implements the CRUD actions for PengadilanNegeri model.
+ * PengadilantinggiController implements the CRUD actions for PengadilanTinggi model.
  */
-class PengadilannegeriController extends Controller
+class PengadilantinggiController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,12 +30,12 @@ class PengadilannegeriController extends Controller
     }
 
     /**
-     * Lists all PengadilanNegeri models.
+     * Lists all PengadilanTinggi models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PengadilannegeriSearch();
+        $searchModel = new PengadilantinggiSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +45,7 @@ class PengadilannegeriController extends Controller
     }
 
     /**
-     * Displays a single PengadilanNegeri model.
+     * Displays a single PengadilanTinggi model.
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -60,65 +58,25 @@ class PengadilannegeriController extends Controller
     }
 
     /**
-     * Creates a new PengadilanNegeri model.
+     * Creates a new PengadilanTinggi model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new PengadilanNegeri();
-
-        //data kelas PN
-            $kls = new PnKelas();
-            $data = $kls->find()->all();
-
-        // if (Yii::$app->request->post()) {
-        //   $post =Yii::$app->request->post('PengadilanNegeri');
-
-        //   $pn_nama = $post['pn_nama'];
-        //   $pn_alamat = $post['pn_alamat'];
-        //   $pn_kelas = $post['pn_kelas'];
-        //   $pn_akreditasi = $post['pn_akreditasi'];
-        //   $pn_ketua = $post['pn_ketua'];
-        //   $pn_email = $post['pn_email'];
-        //   $pn_website = $post['pn_website'];
-        //   $pn_telp = $post['pn_telp'];
-        //   $pn_fax = $post['pn_fax'];
-        //   $pn_pegawai = $post['pn_pegawai'];
-        //   $pn_honorer = $post['pn_honorer'];
-
-        //   $model->attributes=array(
-        //     'pn_nama' => $pn_nama,
-        //     'pn_alamat' => $pn_alamat,
-        //     'pn_kelas' => $pn_kelas,
-        //     'pn_akreditasi' => $pn_akreditasi,
-        //     'pn_ketua' => $pn_ketua,
-        //     'pn_email' => $pn_email,
-        //     'pn_website' => $pn_website,
-        //     'pn_telp' => $pn_telp,
-        //     'pn_fax' => $pn_fax,
-        //     'pn_pegawai' => $pn_pegawai,
-        //     'pn_honorer' => $pn_honorer,
-        //   );
-
-        //   if($model->save()){
-        //     return $this->redirect(['index']);
-        //   }
-
-        // }
+        $model = new PengadilanTinggi();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->pn_id]);
+            return $this->redirect(['view', 'id' => $model->pt_id]);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'data'=>$data,
         ]);
     }
 
     /**
-     * Updates an existing PengadilanNegeri model.
+     * Updates an existing PengadilanTinggi model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -129,21 +87,16 @@ class PengadilannegeriController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->pn_id]);
+            return $this->redirect(['view', 'id' => $model->pt_id]);
         }
 
-        //data kelas PN
-            $kls = new PnKelas();
-            $data = $kls->find()->all();
-        
         return $this->render('update', [
             'model' => $model,
-            'data'=>$data,
         ]);
     }
 
     /**
-     * Deletes an existing PengadilanNegeri model.
+     * Deletes an existing PengadilanTinggi model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -157,15 +110,15 @@ class PengadilannegeriController extends Controller
     }
 
     /**
-     * Finds the PengadilanNegeri model based on its primary key value.
+     * Finds the PengadilanTinggi model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return PengadilanNegeri the loaded model
+     * @return PengadilanTinggi the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = PengadilanNegeri::findOne($id)) !== null) {
+        if (($model = PengadilanTinggi::findOne($id)) !== null) {
             return $model;
         }
 

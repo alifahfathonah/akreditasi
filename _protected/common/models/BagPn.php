@@ -49,12 +49,12 @@ class BagPn extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['pn_id', 'bg_nama'], 'required'],
+            [[ 'bg_nama'], 'required'],
             [['created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['bg_id', 'pn_id'], 'string', 'max' => 11],
             [['bg_nama'], 'string', 'max' => 250],
             [['bg_id'], 'unique'],
-            [['pn_id'], 'exist', 'skipOnError' => true, 'targetClass' => PengadilanNegeri::className(), 'targetAttribute' => ['pn_id' => 'pn_id']],
+            // [['pn_id'], 'exist', 'skipOnError' => true, 'targetClass' => PengadilanNegeri::className(), 'targetAttribute' => ['pn_id' => 'pn_id']],
         ];
     }
 
@@ -65,7 +65,7 @@ class BagPn extends \yii\db\ActiveRecord
     {
         return [
             // 'bg_id' => 'Bg ID',
-            'pn_id' => 'Pengadilan Negeri',
+            // 'pn_id' => 'Pengadilan Negeri',
             'bg_nama' => 'Nama Bagian',
             // 'created_by' => 'Created By',
             // 'created_at' => 'Created At',
@@ -77,10 +77,17 @@ class BagPn extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPn()
-    {
-        return $this->hasOne(PengadilanNegeri::className(), ['pn_id' => 'pn_id']);
-    }
+    // public function getPn()
+    // {
+    //     return $this->hasOne(PengadilanNegeri::className(), ['pn_id' => 'pn_id']);
+    // }
 
+    public function getlistBagian($id){
+            $model = BagPn::find()->where(['bg_id'=>$id])->one();
+            if(!empty($model)){
+                    return $model->bg_nama;
+            }
+            //return 'Root';
+    }
     
 }

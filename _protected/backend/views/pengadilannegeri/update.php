@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model common\models\PengadilanNegeri */
 
 $this->title = 'Update Pengadilan Negeri: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Pengadilan Negeris', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Pengadilan Negeri', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->pn_id, 'url' => ['view', 'id' => $model->pn_id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'data' => $data,
     ]) ?>
 
 </div>

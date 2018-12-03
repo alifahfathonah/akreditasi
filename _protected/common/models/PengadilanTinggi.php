@@ -27,6 +27,22 @@ class PengadilanTinggi extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
+    public function behaviors(){
+      return[
+        [
+          'class' => 'mdm\autonumber\Behavior',
+          'attribute' => 'pt_id', // required
+          'group' => 'pengadilantinggi', // required, unique
+          'value' => 'PT'.'?', // format auto number. '?' will be replaced with generated number
+          'digit' => 3 // optional, default to null.
+        ],
+        \yii\behaviors\TimestampBehavior::className(),
+        \yii\behaviors\BlameableBehavior::className(),
+
+      ];
+    }
+
     public static function tableName()
     {
         return 'pengadilan_tinggi';
@@ -38,7 +54,7 @@ class PengadilanTinggi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['pt_id'], 'required'],
+            //[['pt_id'], 'required'],
             [['pt_pegawai', 'pt_honorer', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['pt_id'], 'string', 'max' => 5],
             [['pt_nama', 'pt_alamat', 'pt_pimpinan', 'pt_website', 'pt_email', 'pt_telp', 'pt_fax'], 'string', 'max' => 255],
@@ -52,16 +68,16 @@ class PengadilanTinggi extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'pt_id' => 'Pt ID',
-            'pt_nama' => 'Pt Nama',
-            'pt_alamat' => 'Pt Alamat',
-            'pt_pimpinan' => 'Pt Pimpinan',
-            'pt_website' => 'Pt Website',
-            'pt_email' => 'Pt Email',
-            'pt_telp' => 'Pt Telp',
-            'pt_fax' => 'Pt Fax',
-            'pt_pegawai' => 'Pt Pegawai',
-            'pt_honorer' => 'Pt Honorer',
+            'pt_id' => 'ID',
+            'pt_nama' => 'Nama Pengadilan Tinggi',
+            'pt_alamat' => 'Alamat',
+            'pt_pimpinan' => 'Pimpinan',
+            'pt_website' => 'Website',
+            'pt_email' => 'Email',
+            'pt_telp' => 'Telp',
+            'pt_fax' => 'Fax',
+            'pt_pegawai' => 'Jumlah Pegawai',
+            'pt_honorer' => 'Jumlah Pegawai Honorer',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_by' => 'Updated By',

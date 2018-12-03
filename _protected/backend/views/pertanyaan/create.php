@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\PengadilanNegeri */
+/* @var $model common\models\Pertanyaan */
 
-$this->title = 'Create Pengadilan Negeri';
-$this->params['breadcrumbs'][] = ['label' => 'Pengadilan Negeris', 'url' => ['index']];
+$this->title = 'Tambah Pertanyaan';
+$this->params['breadcrumbs'][] = ['label' => 'Pertanyaan', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pengadilan-negeri-create">
+<div class="pertanyaan-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
