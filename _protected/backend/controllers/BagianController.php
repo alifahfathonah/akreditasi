@@ -3,18 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Pertanyaan;
-use backend\models\PertanyaanSearch;
+use common\models\Bagian;
+use backend\models\BagianSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\Tujuan;
-use common\models\Bagian;
 
 /**
- * PertanyaanController implements the CRUD actions for Pertanyaan model.
+ * BagianController implements the CRUD actions for Bagian model.
  */
-class PertanyaanController extends Controller
+class BagianController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,12 +31,12 @@ class PertanyaanController extends Controller
     }
 
     /**
-     * Lists all Pertanyaan models.
+     * Lists all Bagian models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PertanyaanSearch();
+        $searchModel = new BagianSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +46,7 @@ class PertanyaanController extends Controller
     }
 
     /**
-     * Displays a single Pertanyaan model.
+     * Displays a single Bagian model.
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -60,35 +59,30 @@ class PertanyaanController extends Controller
     }
 
     /**
-     * Creates a new Pertanyaan model.
+     * Creates a new Bagian model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Pertanyaan();
+        $model = new Bagian();
 
         //data Tujuan
             $tujuan = new Tujuan();
-            $data1 = $tujuan->find()->all();
-
-        //data Bagian
-            $bagian = new Bagian();
-            $data2 = $bagian->find()->all();
-
+            $data = $tujuan->find()->all();
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->tanya_id]);
+            return $this->redirect(['view', 'id' => $model->bagian_id]);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'data1'=>$data1,
-            'data2'=>$data2,
+            'data'=>$data,
         ]);
     }
 
     /**
-     * Updates an existing Pertanyaan model.
+     * Updates an existing Bagian model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -100,25 +94,20 @@ class PertanyaanController extends Controller
 
         //data Tujuan
             $tujuan = new Tujuan();
-            $data1 = $tujuan->find()->all();
-
-        //data Bagian
-            $bagian = new Bagian();
-            $data2 = $bagian->find()->all();
+            $data = $tujuan->find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->tanya_id]);
+            return $this->redirect(['view', 'id' => $model->bagian_id]);
         }
 
         return $this->render('update', [
             'model' => $model,
-            'data1'=>$data1,
-            'data2'=>$data2,
+            'data'=>$data,
         ]);
     }
 
     /**
-     * Deletes an existing Pertanyaan model.
+     * Deletes an existing Bagian model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -132,15 +121,15 @@ class PertanyaanController extends Controller
     }
 
     /**
-     * Finds the Pertanyaan model based on its primary key value.
+     * Finds the Bagian model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Pertanyaan the loaded model
+     * @return Bagian the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Pertanyaan::findOne($id)) !== null) {
+        if (($model = Bagian::findOne($id)) !== null) {
             return $model;
         }
 

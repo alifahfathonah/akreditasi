@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Pertanyaan;
+use common\models\Tujuan;
 
 /**
- * PertanyaanSearch represents the model behind the search form of `common\models\Pertanyaan`.
+ * TujuanSearch represents the model behind the search form of `common\models\Tujuan`.
  */
-class PertanyaanSearch extends Pertanyaan
+class TujuanSearch extends Tujuan
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class PertanyaanSearch extends Pertanyaan
     public function rules()
     {
         return [
-            [['tanya_id', 'pertanyaan', 'tanya_ket_a', 'tanya_ket_b', 'tanya_ket_c', 'tanya_bobot'], 'safe'],
-            [['tujuan_id', 'bagian_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
+            [['tujuan_id', 'tujuan_nama'], 'safe'],
+            [['created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
         ];
     }
 
@@ -41,7 +41,7 @@ class PertanyaanSearch extends Pertanyaan
      */
     public function search($params)
     {
-        $query = Pertanyaan::find();
+        $query = Tujuan::find();
 
         // add conditions that should always apply here
 
@@ -59,20 +59,14 @@ class PertanyaanSearch extends Pertanyaan
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'tujuan_id' => $this->tujuan_id,
-            'bagian_id' => $this->bagian_id,
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_by' => $this->updated_by,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'tanya_id', $this->tanya_id])
-            ->andFilterWhere(['like', 'pertanyaan', $this->pertanyaan])
-            ->andFilterWhere(['like', 'tanya_ket_a', $this->tanya_ket_a])
-            ->andFilterWhere(['like', 'tanya_ket_b', $this->tanya_ket_b])
-            ->andFilterWhere(['like', 'tanya_ket_c', $this->tanya_ket_c])
-            ->andFilterWhere(['like', 'tanya_bobot', $this->tanya_bobot]);
+        $query->andFilterWhere(['like', 'tujuan_id', $this->tujuan_id])
+            ->andFilterWhere(['like', 'tujuan_nama', $this->tujuan_nama]);
 
         return $dataProvider;
     }

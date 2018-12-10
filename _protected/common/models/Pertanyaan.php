@@ -5,15 +5,16 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "pertanyaan".
+ * This is the model class for table "tb_pertanyaan".
  *
  * @property string $tanya_id
+ * @property int $tujuan_id
+ * @property int $bagian_id
  * @property string $pertanyaan
  * @property string $tanya_ket_a
  * @property string $tanya_ket_b
  * @property string $tanya_ket_c
  * @property string $tanya_bobot
- * @property string $tanya_bagian
  * @property int $created_by
  * @property int $created_at
  * @property int $updated_by
@@ -24,14 +25,13 @@ class Pertanyaan extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-
     public function behaviors(){
       return[
         [
           'class' => 'mdm\autonumber\Behavior',
           'attribute' => 'tanya_id', // required
-          'group' => 'pertanyaan', // required, unique
-          'value' => 'T'.'?', // format auto number. '?' will be replaced with generated number
+          'group' => 'tanya', // required, unique
+          'value' => 'TN'.'?', // format auto number. '?' will be replaced with generated number
           'digit' => 3 // optional, default to null.
         ],
         \yii\behaviors\TimestampBehavior::className(),
@@ -42,7 +42,7 @@ class Pertanyaan extends \yii\db\ActiveRecord
 
     public static function tableName()
     {
-        return 'pertanyaan';
+        return 'tb_pertanyaan';
     }
 
     /**
@@ -51,11 +51,12 @@ class Pertanyaan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['pertanyaan', 'tanya_bagian'], 'required'],
-            [['pertanyaan', 'tanya_ket_a', 'tanya_ket_b', 'tanya_ket_c'], 'string'],
+            [['tujuan_id', 'bagian_id', 'pertanyaan', 'tanya_ket_a', 'tanya_ket_b', 'tanya_ket_c', 'tanya_bobot'], 'required'],
             [['created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['tanya_id', 'tanya_bagian'], 'string', 'max' => 5],
+            [['pertanyaan', 'tanya_ket_a', 'tanya_ket_b', 'tanya_ket_c'], 'string'],
+            [['tanya_id', 'tujuan_id', 'bagian_id'], 'string', 'max' => 5],
             [['tanya_bobot'], 'string', 'max' => 255],
+            [['tanya_id'], 'unique'],
         ];
     }
 
@@ -66,12 +67,13 @@ class Pertanyaan extends \yii\db\ActiveRecord
     {
         return [
             'tanya_id' => 'Tanya ID',
+            'tujuan_id' => 'Tujuan ID',
+            'bagian_id' => 'Bagian ID',
             'pertanyaan' => 'Pertanyaan',
-            'tanya_ket_a' => 'Keterangan Nilai A',
-            'tanya_ket_b' => 'Keterangan Nilai B',
-            'tanya_ket_c' => 'Keterangan Nilai C',
-            'tanya_bobot' => ' Bobot',
-            'tanya_bagian' => 'Sub Bagian',
+            'tanya_ket_a' => 'Tanya Ket A',
+            'tanya_ket_b' => 'Tanya Ket B',
+            'tanya_ket_c' => 'Tanya Ket C',
+            'tanya_bobot' => 'Tanya Bobot',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_by' => 'Updated By',

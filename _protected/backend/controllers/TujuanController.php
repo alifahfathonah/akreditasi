@@ -3,18 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Pertanyaan;
-use backend\models\PertanyaanSearch;
+use common\models\Tujuan;
+use backend\models\TujuanSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use common\models\Tujuan;
-use common\models\Bagian;
 
 /**
- * PertanyaanController implements the CRUD actions for Pertanyaan model.
+ * TujuanController implements the CRUD actions for Tujuan model.
  */
-class PertanyaanController extends Controller
+class TujuanController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,12 +30,12 @@ class PertanyaanController extends Controller
     }
 
     /**
-     * Lists all Pertanyaan models.
+     * Lists all Tujuan models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PertanyaanSearch();
+        $searchModel = new TujuanSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +45,7 @@ class PertanyaanController extends Controller
     }
 
     /**
-     * Displays a single Pertanyaan model.
+     * Displays a single Tujuan model.
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -60,35 +58,25 @@ class PertanyaanController extends Controller
     }
 
     /**
-     * Creates a new Pertanyaan model.
+     * Creates a new Tujuan model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Pertanyaan();
-
-        //data Tujuan
-            $tujuan = new Tujuan();
-            $data1 = $tujuan->find()->all();
-
-        //data Bagian
-            $bagian = new Bagian();
-            $data2 = $bagian->find()->all();
+        $model = new Tujuan();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->tanya_id]);
+            return $this->redirect(['view', 'id' => $model->tujuan_id]);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'data1'=>$data1,
-            'data2'=>$data2,
         ]);
     }
 
     /**
-     * Updates an existing Pertanyaan model.
+     * Updates an existing Tujuan model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -98,27 +86,17 @@ class PertanyaanController extends Controller
     {
         $model = $this->findModel($id);
 
-        //data Tujuan
-            $tujuan = new Tujuan();
-            $data1 = $tujuan->find()->all();
-
-        //data Bagian
-            $bagian = new Bagian();
-            $data2 = $bagian->find()->all();
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->tanya_id]);
+            return $this->redirect(['view', 'id' => $model->tujuan_id]);
         }
 
         return $this->render('update', [
             'model' => $model,
-            'data1'=>$data1,
-            'data2'=>$data2,
         ]);
     }
 
     /**
-     * Deletes an existing Pertanyaan model.
+     * Deletes an existing Tujuan model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -132,15 +110,15 @@ class PertanyaanController extends Controller
     }
 
     /**
-     * Finds the Pertanyaan model based on its primary key value.
+     * Finds the Tujuan model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Pertanyaan the loaded model
+     * @return Tujuan the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Pertanyaan::findOne($id)) !== null) {
+        if (($model = Tujuan::findOne($id)) !== null) {
             return $model;
         }
 

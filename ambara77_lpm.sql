@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2018 at 02:46 AM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 5.6.37
+-- Generation Time: Dec 10, 2018 at 02:49 AM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -47,17 +47,22 @@ INSERT INTO `auto_number` (`group`, `number`, `optimistic_lock`, `update_time`) 
 ('18ee96e3e91e221d97f59dec062d72a3', 7, 6, 1543253088),
 ('203a8ec3ecb5e26cc238fa34c36b6b0f', 39, 38, 1515723200),
 ('2687f28ba042fea119ea01e628433a6b', 5, 4, 1515673058),
-('36b762ee42b1941c2a003058e269769d', 4, 3, 1543418140),
+('36b762ee42b1941c2a003058e269769d', 9, 8, 1543660213),
+('3c2029bc50ed232af6a70d9da0029f07', 3, 2, 1544204226),
 ('408c709368444e811bb6beef9c8be9f7', 1, NULL, 1543424725),
 ('467115f9c0743d4e12c09c718338fb94', 12, 11, 1517152301),
+('4c0b4f0c7595e5d2358e86cc162ac317', 6, 5, 1544204678),
 ('541394299299843e2bb1b8cc6be56231', 326, 325, 1516771057),
 ('5aa243139c2d658d2b516c4af255ff1c', 48, 47, 1516913846),
+('6bf8fd4abde1f40daffc75cad1ca9afc', 1, NULL, 1544267073),
+('793b6925940c4e3937870067cd251ee4', 3, 2, 1543630622),
+('8295cb76aaea2ea01fbf0cba5bbdf079', 1, NULL, 1543636237),
 ('aec7eba25e8d6b4b933b144ae7826bf9', 7, 6, 1515439143),
 ('b024be347a91491a39c5323bd1cf80ed', 1, NULL, 1511729420),
 ('b41aabc27b9a87c0c52b1134cb752eb3', 9, 8, 1514172748),
 ('b96c589b9fdc65fb01129140b9359ba7', 15, 14, 1515207371),
 ('d35346586ee3e0c9d4c9df22df950506', 1, NULL, 1515434824),
-('f5115e7787d7b4d157e77e3ae3b460c1', 3, 2, 1543304595);
+('f5115e7787d7b4d157e77e3ae3b460c1', 9, 8, 1543673099);
 
 -- --------------------------------------------------------
 
@@ -80,10 +85,7 @@ CREATE TABLE `bag_pn` (
 --
 
 INSERT INTO `bag_pn` (`bg_id`, `pn_id`, `bg_nama`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
-('BG001', 'PN002', 'asd', 58, 1543309022, 58, 1543309134),
-('BG002', 'PN002', 'adsfa', 58, 1543309794, 58, 1543309794),
-('BG003', 'PN001', 'sda', 58, 1543309818, 58, 1543309818),
-('BG004', 'PN001', 'bagian keuangan', 58, 1543418140, 58, 1543418140);
+('BG009', '', 'Bagian keuangan', 58, 1543660213, 58, 1543660213);
 
 -- --------------------------------------------------------
 
@@ -127,9 +129,11 @@ INSERT INTO `content` (`c_id`, `c_name`, `c_icon`, `c_page`, `c_pkey`, `c_urut`,
 (26, 'struktur organisasi', 'fa fa-sitemap', 'profilestruktur/index', 2, 0, 'y'),
 (27, 'user login', 'fa fa-bell-o', 'session/index', 9, 0, 'y'),
 (28, 'pengadilan negeri', 'fa fa-gavel', NULL, 0, 0, 'y'),
-(29, 'detail', 'fa fa-asterisk', 'pengadilannegeri/index', 28, 1, 'y'),
-(30, 'sub bagian', 'fa fa-asterisk', 'bagpn/index', 28, 2, 'y'),
-(31, 'Profil PT', 'fa fa-user-circle ', 'pengadilantinggi/view?id=PT001', 0, 1, 'y');
+(29, 'daftar PN', 'fa fa-asterisk', 'pengadilannegeri/index', 28, 1, 'y'),
+(30, 'sub bagian PN', 'fa fa-asterisk', 'bagpn/index', 28, 2, 'y'),
+(31, 'Profil PT', 'fa fa-user-circle ', 'pengadilantinggi/view?id=PT001', 0, 1, 'y'),
+(32, 'kelas PN', 'fa fa-asterisk', 'pnkelas/index', 28, 3, 'y'),
+(33, 'pertanyaan', 'fa fa-question', 'pertanyaan/index', 0, 0, 'y');
 
 -- --------------------------------------------------------
 
@@ -161,8 +165,8 @@ CREATE TABLE `pengadilan_negeri` (
   `pn_id` varchar(5) NOT NULL,
   `pn_nama` varchar(255) NOT NULL,
   `pn_alamat` text NOT NULL,
-  `pn_kelas` varchar(3) DEFAULT NULL,
-  `pn_akreditasi` varchar(3) DEFAULT NULL,
+  `pn_kelas` varchar(5) DEFAULT NULL,
+  `pn_akreditasi` varchar(5) DEFAULT NULL,
   `pn_ketua` varchar(255) DEFAULT NULL,
   `pn_email` varchar(255) DEFAULT NULL,
   `pn_website` varchar(255) DEFAULT NULL,
@@ -181,9 +185,10 @@ CREATE TABLE `pengadilan_negeri` (
 --
 
 INSERT INTO `pengadilan_negeri` (`pn_id`, `pn_nama`, `pn_alamat`, `pn_kelas`, `pn_akreditasi`, `pn_ketua`, `pn_email`, `pn_website`, `pn_telp`, `pn_fax`, `pn_pegawai`, `pn_honorer`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
-('PN001', 'PN sby', 'a', '', '', '', '', '', '', '', NULL, NULL, 58, 1543297826, 58, 1543297826),
-('PN002', 'as', 'a', '', '', '', '', '', '', '', NULL, NULL, 58, 1543304136, 58, 1543304136),
-('PN003', 'ads', 'ds', '', '', '', '', '', '', '', NULL, NULL, 58, 1543304595, 58, 1543304595);
+('PN006', 'Pengadilan Negeri Surabaya', 'JI. Raya Aduno No. 16 – 18, Surabaya', 'KL001', '-', '-', '-', '-', '5343907 – 531 1523', '-', NULL, NULL, 58, 1543660389, 58, 1543660389),
+('PN007', 'Pengadilan Negeri Bangil', 'Jl. Dr. Soetomo No. 25 ', 'KL003', '-', '-', '-', '-', '7414II – 741012', '-', NULL, NULL, 58, 1543660490, 58, 1543660490),
+('PN008', 'Pengadilan Negeri Bangkalan', 'JI. Soekarno – Hatta No. 4', 'KL003', '-', '-', '-', '-', '3095317 – 3099784', '', NULL, NULL, 58, 1543660556, 58, 1543660586),
+('PN009', 'Pengadilan Negeri Bayuwangi', 'Jl. Adi Sucipto No. 26', 'KL003', '', '', '', '', '421600 – 424818', '', NULL, NULL, 58, 1543673099, 58, 1543673099);
 
 -- --------------------------------------------------------
 
@@ -218,6 +223,30 @@ INSERT INTO `pengadilan_tinggi` (`pt_id`, `pt_nama`, `pt_alamat`, `pt_pimpinan`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pn_kelas`
+--
+
+CREATE TABLE `pn_kelas` (
+  `kelas_id` varchar(5) NOT NULL,
+  `kelas_nama` varchar(255) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pn_kelas`
+--
+
+INSERT INTO `pn_kelas` (`kelas_id`, `kelas_nama`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+('KL001', 'I A', 58, 1543630547, 58, 1543630567),
+('KL002', 'I B', 58, 1543630598, 58, 1543630598),
+('KL003', 'II', 58, 1543630622, 58, 1543630622);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `session`
 --
 
@@ -234,7 +263,90 @@ CREATE TABLE `session` (
 
 INSERT INTO `session` (`id`, `expire`, `data`, `user_id`) VALUES
 ('22kiqlo70ki21s23p8i6em2qa2', 1543413330, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a35383b, 58),
-('974a4th30be6lgffh14jbbhp62', 1543457098, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a35383b, 58);
+('6n41lq910vlbpaj0aoas8h6lq4', 1544269041, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a35383b, 58),
+('974a4th30be6lgffh14jbbhp62', 1543457098, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a35383b, 58),
+('bt21mqh3n0lhga83bjspu82vq1', 1543630749, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a35383b, 58),
+('u8kf2485h2uo53o5r4hh073lj6', 1544187745, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a35383b, 58);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_bagian`
+--
+
+CREATE TABLE `tb_bagian` (
+  `bagian_id` varchar(5) NOT NULL,
+  `tujuan_id` varchar(5) NOT NULL,
+  `bagian_nama` varchar(255) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_bagian`
+--
+
+INSERT INTO `tb_bagian` (`bagian_id`, `tujuan_id`, `bagian_nama`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+('BG002', 'TJ001', 'Leadership', 58, 1544203611, 58, 1544203611),
+('BG003', 'TJ001', 'Customer Focus', 58, 1544204270, 58, 1544204270),
+('BG004', 'TJ001', 'Process Management', 58, 1544204564, 58, 1544204564),
+('BG005', 'TJ002', 'Customer Focus', 58, 1544204636, 58, 1544204636),
+('BG006', 'TJ003', 'Customer Focus', 58, 1544204678, 58, 1544204678);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pertanyaan`
+--
+
+CREATE TABLE `tb_pertanyaan` (
+  `tanya_id` varchar(5) NOT NULL,
+  `tujuan_id` varchar(5) NOT NULL,
+  `bagian_id` varchar(5) NOT NULL,
+  `pertanyaan` text NOT NULL,
+  `tanya_ket_a` text NOT NULL,
+  `tanya_ket_b` text NOT NULL,
+  `tanya_ket_c` text NOT NULL,
+  `tanya_bobot` varchar(255) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_pertanyaan`
+--
+
+INSERT INTO `tb_pertanyaan` (`tanya_id`, `tujuan_id`, `bagian_id`, `pertanyaan`, `tanya_ket_a`, `tanya_ket_b`, `tanya_ket_c`, `tanya_bobot`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+('1', '1', '1', 'Pembentukan TIM PMPN (Struktur Organisasi – TUSI)', 'Sudah ada SK, sudah disosialisasikan dan sudah di monitoring serta dievaluasi (dibuktikan dengan data dukung)', 'Sudah ada tetapi belum disosialisasikan / belum dilakukan monitoring dan evaluasi', 'Belum ada SK', '25', 1, 1, 1, 1),
+('TN001', 'TJ001', 'BG003', 'a', 'a', 'a', 'a', '1', 58, 1544267073, 58, 1544267105);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_tujuan`
+--
+
+CREATE TABLE `tb_tujuan` (
+  `tujuan_id` varchar(5) NOT NULL,
+  `tujuan_nama` varchar(255) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_tujuan`
+--
+
+INSERT INTO `tb_tujuan` (`tujuan_id`, `tujuan_nama`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+('TJ001', 'Pimpinan', 58, 1544203446, 58, 1544203446),
+('TJ002', 'Hakim Wasmat', 58, 1544204173, 58, 1544204173),
+('TJ003', 'Hakim', 58, 1544204226, 58, 1544204226);
 
 -- --------------------------------------------------------
 
@@ -349,6 +461,8 @@ INSERT INTO `user_access` (`ug_id`, `c_id`, `firstload`, `access`) VALUES
 ('01', 29, 'n', 'view'),
 ('01', 30, 'n', 'view'),
 ('01', 31, 'n', 'view'),
+('01', 32, 'n', 'view'),
+('01', 33, 'n', 'view'),
 ('02', 1, 'n', 'view'),
 ('02', 5, 'n', 'view'),
 ('02', 6, 'n', 'view'),
@@ -1165,10 +1279,34 @@ ALTER TABLE `pengadilan_tinggi`
   ADD PRIMARY KEY (`pt_id`);
 
 --
+-- Indexes for table `pn_kelas`
+--
+ALTER TABLE `pn_kelas`
+  ADD PRIMARY KEY (`kelas_id`);
+
+--
 -- Indexes for table `session`
 --
 ALTER TABLE `session`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_bagian`
+--
+ALTER TABLE `tb_bagian`
+  ADD PRIMARY KEY (`bagian_id`);
+
+--
+-- Indexes for table `tb_pertanyaan`
+--
+ALTER TABLE `tb_pertanyaan`
+  ADD PRIMARY KEY (`tanya_id`);
+
+--
+-- Indexes for table `tb_tujuan`
+--
+ALTER TABLE `tb_tujuan`
+  ADD PRIMARY KEY (`tujuan_id`);
 
 --
 -- Indexes for table `user`
@@ -1265,36 +1403,22 @@ ALTER TABLE `z_slider`
 -- AUTO_INCREMENT for table `content`
 --
 ALTER TABLE `content`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
-
 --
 -- AUTO_INCREMENT for table `z_profile_anggaran`
 --
 ALTER TABLE `z_profile_anggaran`
   MODIFY `pa_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `z_profile_struktur`
 --
 ALTER TABLE `z_profile_struktur`
-  MODIFY `ps_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `bag_pn`
---
-ALTER TABLE `bag_pn`
-  ADD CONSTRAINT `bag_pn_ibfk_1` FOREIGN KEY (`pn_id`) REFERENCES `pengadilan_negeri` (`pn_id`);
-COMMIT;
+  MODIFY `ps_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

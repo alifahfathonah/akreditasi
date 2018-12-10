@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Pertanyaan */
+/* @var $model common\models\Bagian */
 
-$this->title = $model->tanya_id;
-$this->params['breadcrumbs'][] = ['label' => 'Pertanyaans', 'url' => ['index']];
+$this->title = $model->bagian_id;
+$this->params['breadcrumbs'][] = ['label' => 'Bagians', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pertanyaan-view">
+<div class="bagian-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->tanya_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->tanya_id], [
+        <?= Html::a('Update', ['update', 'id' => $model->bagian_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->bagian_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -28,14 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'tanya_id',
-            'tujuan_id',
             'bagian_id',
-            'pertanyaan:ntext',
-            'tanya_ket_a:ntext',
-            'tanya_ket_b:ntext',
-            'tanya_ket_c:ntext',
-            'tanya_bobot',
+            'tujuan_id',
+            'bagian_nama',
             'created_by',
             'created_at',
             'updated_by',

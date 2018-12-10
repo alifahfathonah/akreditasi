@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Pertanyaan */
 
-$this->title = 'Tambah Pertanyaan';
-$this->params['breadcrumbs'][] = ['label' => 'Pertanyaan', 'url' => ['index']];
+$this->title = 'Create Pertanyaan';
+$this->params['breadcrumbs'][] = ['label' => 'Pertanyaans', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pertanyaan-create">
@@ -16,7 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
-        'data' => $data,
+            'data1'=>$data1,
+            'data2'=>$data2,
     ]) ?>
 
 </div>
