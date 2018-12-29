@@ -5,10 +5,9 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "tb_pertanyaan".
+ * This is the model class for table "tb_pertanyaan_kls1".
  *
  * @property string $tanya_id
- * @property string $kelas_id
  * @property string $tujuan_id
  * @property string $kriteria_id
  * @property string $pertanyaan
@@ -21,7 +20,7 @@ use Yii;
  * @property int $updated_by
  * @property int $updated_at
  */
-class Pertanyaan extends \yii\db\ActiveRecord
+class Pertanyaan1 extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -32,8 +31,8 @@ class Pertanyaan extends \yii\db\ActiveRecord
         [
           'class' => 'mdm\autonumber\Behavior',
           'attribute' => 'tanya_id', // required
-          'group' => 'tanya', // required, unique
-          'value' => 'T'.'?', // format auto number. '?' will be replaced with generated number
+          'group' => 'tanya1', // required, unique
+          'value' => 'T1'.'?', // format auto number. '?' will be replaced with generated number
           'digit' => 3 // optional, default to null.
         ],
         \yii\behaviors\TimestampBehavior::className(),
@@ -44,7 +43,7 @@ class Pertanyaan extends \yii\db\ActiveRecord
 
     public static function tableName()
     {
-        return 'tb_pertanyaan';
+        return 'tb_pertanyaan_kls1';
     }
 
     /**
@@ -53,10 +52,10 @@ class Pertanyaan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'kelas_id', 'tujuan_id', 'kriteria_id'], 'required'],
+            [['tujuan_id', 'kriteria_id', 'pertanyaan', 'tanya_ket_a', 'tanya_ket_b', 'tanya_ket_c'], 'required'],
             [['pertanyaan', 'tanya_ket_a', 'tanya_ket_b', 'tanya_ket_c'], 'string'],
             [['created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['tanya_id', 'kelas_id', 'tujuan_id', 'kriteria_id'], 'string', 'max' => 5],
+            [['tanya_id', 'tujuan_id', 'kriteria_id'], 'string', 'max' => 5],
             [['tanya_bobot'], 'string', 'max' => 255],
             [['tanya_id'], 'unique'],
         ];
@@ -68,8 +67,7 @@ class Pertanyaan extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'tanya_id' => 'ID',
-            'kelas_id' => 'Kelas',
+            'tanya_id' => 'Tanya ID',
             'tujuan_id' => 'Tujuan',
             'kriteria_id' => 'Kriteria',
             'pertanyaan' => 'Pertanyaan',
@@ -84,40 +82,16 @@ class Pertanyaan extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getlistPertanyaan($id){
-            $model = Pertanyaan::find()->where(['tanya_id'=>$id])->one();
+    public function getlistPertanyaan1($id){
+            $model = Pertanyaan1::find()->where(['tanya_id'=>$id])->one();
             if(!empty($model)){
                     return $model->pertanyaan;
             }
             return 'Root';
     }
 
-    public function getnilaiA($id){
-            $model = Pertanyaan::find()->where(['tanya_id'=>$id])->one();
-            if(!empty($model)){
-                    return $model->tanya_ket_a;
-            }
-            return 'Root';
-    }
-
-    public function getnilaiB($id){
-            $model = Pertanyaan::find()->where(['tanya_id'=>$id])->one();
-            if(!empty($model)){
-                    return $model->tanya_ket_b;
-            }
-            return 'Root';
-    }
-
-    public function getnilaiC($id){
-            $model = Pertanyaan::find()->where(['tanya_id'=>$id])->one();
-            if(!empty($model)){
-                    return $model->tanya_ket_c;
-            }
-            return 'Root';
-    }
-
     public function getlisttj($id){
-            $model = Pertanyaan::find()->where(['tanya_id'=>$id])->one();
+            $model = Pertanyaan1::find()->where(['tanya_id'=>$id])->one();
             $tujuan = Tujuan::find()->where(['tujuan_id'=>$model->tujuan_id])->one();
             if(!empty($model)){
                     return $tujuan->tujuan_nama;
@@ -126,7 +100,7 @@ class Pertanyaan extends \yii\db\ActiveRecord
     }
 
     public function getlistkrit($id){
-            $model = Pertanyaan::find()->where(['tanya_id'=>$id])->one();
+            $model = Pertanyaan1::find()->where(['tanya_id'=>$id])->one();
             $kriteria = Kriteria::find()->where(['kriteria_id'=>$model->kriteria_id])->one();
             if(!empty($model)){
                     return $kriteria->kriteria_nama;

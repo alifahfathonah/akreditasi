@@ -23,6 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Set Akses', ['akses','id'=>$model->c_id,'name'=>$model->c_name], 
+        ['class' => 'btn btn-warning']) ?>
     </p>
 
     <?= DetailView::widget([

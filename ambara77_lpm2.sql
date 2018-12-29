@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2018 at 02:49 AM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 5.6.31
+-- Generation Time: Dec 29, 2018 at 07:25 AM
+-- Server version: 10.1.34-MariaDB
+-- PHP Version: 5.6.37
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -45,6 +45,7 @@ INSERT INTO `auto_number` (`group`, `number`, `optimistic_lock`, `update_time`) 
 ('10599ee9b82a7ce69e552319c8d28fca', 5, 4, 1515756234),
 ('13858a01dbf59880bfb61341dba52cf4', 5, 4, 1515528199),
 ('18ee96e3e91e221d97f59dec062d72a3', 7, 6, 1543253088),
+('1ec726e5b0aba0e4abc0e3ce43762e6c', 5, 4, 1545812136),
 ('203a8ec3ecb5e26cc238fa34c36b6b0f', 39, 38, 1515723200),
 ('2687f28ba042fea119ea01e628433a6b', 5, 4, 1515673058),
 ('36b762ee42b1941c2a003058e269769d', 9, 8, 1543660213),
@@ -54,13 +55,18 @@ INSERT INTO `auto_number` (`group`, `number`, `optimistic_lock`, `update_time`) 
 ('4c0b4f0c7595e5d2358e86cc162ac317', 6, 5, 1544204678),
 ('541394299299843e2bb1b8cc6be56231', 326, 325, 1516771057),
 ('5aa243139c2d658d2b516c4af255ff1c', 48, 47, 1516913846),
+('6aaa533567e28a6f36ced0a3f1e33d2f', 33, 32, 1545985802),
 ('6bf8fd4abde1f40daffc75cad1ca9afc', 1, NULL, 1544267073),
-('793b6925940c4e3937870067cd251ee4', 3, 2, 1543630622),
+('70d3cf9ec190cc50b869236f4d089abb', 2, 1, 1545915028),
+('793b6925940c4e3937870067cd251ee4', 4, 3, 1546018231),
 ('8295cb76aaea2ea01fbf0cba5bbdf079', 1, NULL, 1543636237),
+('85f1a19076c84ef7bf2287faf81d6aa2', 3, 2, 1545759726),
+('93512536b14446eeadb2c7e8c1abfebb', 5, 4, 1545960024),
 ('aec7eba25e8d6b4b933b144ae7826bf9', 7, 6, 1515439143),
 ('b024be347a91491a39c5323bd1cf80ed', 1, NULL, 1511729420),
 ('b41aabc27b9a87c0c52b1134cb752eb3', 9, 8, 1514172748),
 ('b96c589b9fdc65fb01129140b9359ba7', 15, 14, 1515207371),
+('cf060a47d7b51fa09b8e3a290a54af3e', 8, 7, 1545741563),
 ('d35346586ee3e0c9d4c9df22df950506', 1, NULL, 1515434824),
 ('f5115e7787d7b4d157e77e3ae3b460c1', 9, 8, 1543673099);
 
@@ -110,7 +116,7 @@ CREATE TABLE `content` (
 INSERT INTO `content` (`c_id`, `c_name`, `c_icon`, `c_page`, `c_pkey`, `c_urut`, `c_status`) VALUES
 (1, 'home', 'fa fa-home', 'site/index', 0, 0, 'y'),
 (2, 'profil', 'fa fa-user-circle ', NULL, 0, 0, 'n'),
-(3, 'agenda', 'fa fa-file-text', 'agenda/index', 0, 0, 'y'),
+(3, 'agenda', 'fa fa-file-text', 'agenda/index', 0, 0, 'n'),
 (4, 'kontak', 'fa fa-phone', 'kontak/index', 0, 0, 'n'),
 (5, 'musrenbang', 'fa fa-file-o', 'musrenbang/index', 0, 0, 'n'),
 (9, 'management user', 'fa fa-id-card-o', NULL, 0, 9, 'y'),
@@ -120,7 +126,7 @@ INSERT INTO `content` (`c_id`, `c_name`, `c_icon`, `c_page`, `c_pkey`, `c_urut`,
 (15, 'management content', 'fa fa-book', 'content/index', 0, 0, 'y'),
 (17, 'kepala instansi', 'fa fa-asterisk', 'kaling/index', 19, 0, 'y'),
 (18, 'admin', 'fa fa-asterisk', 'admin/index', 19, 0, 'y'),
-(19, 'civitas', 'fa fa-address-book', NULL, 0, 0, 'y'),
+(19, 'civitas', 'fa fa-address-book', NULL, 0, 0, 'n'),
 (20, 'slider', 'fa fa-file-image-o', 'slider/index', 0, 0, 'n'),
 (22, 'instansi', 'fa fa-bandcamp', 'instansi/index', 0, 0, 'n'),
 (23, 'biodata', 'fa fa-cogs', 'biodata/index', 0, 0, 'n'),
@@ -130,10 +136,16 @@ INSERT INTO `content` (`c_id`, `c_name`, `c_icon`, `c_page`, `c_pkey`, `c_urut`,
 (27, 'user login', 'fa fa-bell-o', 'session/index', 9, 0, 'y'),
 (28, 'pengadilan negeri', 'fa fa-gavel', NULL, 0, 0, 'y'),
 (29, 'daftar PN', 'fa fa-asterisk', 'pengadilannegeri/index', 28, 1, 'y'),
-(30, 'sub bagian PN', 'fa fa-asterisk', 'bagpn/index', 28, 2, 'y'),
+(30, 'sub bagian PN', 'fa fa-asterisk', 'bagpn/index', 28, 2, 'n'),
 (31, 'Profil PT', 'fa fa-user-circle ', 'pengadilantinggi/view?id=PT001', 0, 1, 'y'),
 (32, 'kelas PN', 'fa fa-asterisk', 'pnkelas/index', 28, 3, 'y'),
-(33, 'pertanyaan', 'fa fa-question', 'pertanyaan/index', 0, 0, 'y');
+(33, 'pertanyaan', 'fa fa-question', 'pertanyaan/index', 0, 0, 'y'),
+(34, 'pegawai', 'fa fa-asterisk', 'pegawai/index', 0, NULL, 'y'),
+(35, 'tujuan', 'fa fa-asterisk', 'tujuan/index', 33, NULL, 'y'),
+(36, 'kriteria', 'fa fa-asterisk', 'kriteria/index', 33, NULL, 'y'),
+(39, 'assesment', 'fa fa-book', 'assesment/', 0, NULL, 'y'),
+(40, 'hasil audit', 'fa fa-file', 'audit/index', 0, NULL, 'y'),
+(41, 'daftar pertanyaan', 'fa fa-asterisk', 'pertanyaan/index', 33, NULL, 'y');
 
 -- --------------------------------------------------------
 
@@ -186,9 +198,9 @@ CREATE TABLE `pengadilan_negeri` (
 
 INSERT INTO `pengadilan_negeri` (`pn_id`, `pn_nama`, `pn_alamat`, `pn_kelas`, `pn_akreditasi`, `pn_ketua`, `pn_email`, `pn_website`, `pn_telp`, `pn_fax`, `pn_pegawai`, `pn_honorer`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
 ('PN006', 'Pengadilan Negeri Surabaya', 'JI. Raya Aduno No. 16 – 18, Surabaya', 'KL001', '-', '-', '-', '-', '5343907 – 531 1523', '-', NULL, NULL, 58, 1543660389, 58, 1543660389),
-('PN007', 'Pengadilan Negeri Bangil', 'Jl. Dr. Soetomo No. 25 ', 'KL003', '-', '-', '-', '-', '7414II – 741012', '-', NULL, NULL, 58, 1543660490, 58, 1543660490),
-('PN008', 'Pengadilan Negeri Bangkalan', 'JI. Soekarno – Hatta No. 4', 'KL003', '-', '-', '-', '-', '3095317 – 3099784', '', NULL, NULL, 58, 1543660556, 58, 1543660586),
-('PN009', 'Pengadilan Negeri Bayuwangi', 'Jl. Adi Sucipto No. 26', 'KL003', '', '', '', '', '421600 – 424818', '', NULL, NULL, 58, 1543673099, 58, 1543673099);
+('PN007', 'Pengadilan Negeri Bangil', 'Jl. Dr. Soetomo No. 25 ', 'KL002', '-', '-', '-', '-', '7414II – 741012', '-', NULL, NULL, 58, 1543660490, 58, 1545830679),
+('PN008', 'Pengadilan Negeri Bangkalan', 'JI. Soekarno – Hatta No. 4', 'KL001', '-', '-', '-', '-', '3095317 – 3099784', '', NULL, NULL, 58, 1543660556, 58, 1545830695),
+('PN009', 'Pengadilan Negeri Bayuwangi', 'Jl. Adi Sucipto No. 26', 'KL001', '', '', '', '', '421600 – 424818', '', NULL, NULL, 58, 1543673099, 58, 1545830705);
 
 -- --------------------------------------------------------
 
@@ -240,9 +252,9 @@ CREATE TABLE `pn_kelas` (
 --
 
 INSERT INTO `pn_kelas` (`kelas_id`, `kelas_nama`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
-('KL001', 'I A', 58, 1543630547, 58, 1543630567),
-('KL002', 'I B', 58, 1543630598, 58, 1543630598),
-('KL003', 'II', 58, 1543630622, 58, 1543630622);
+('KL001', 'I', 58, 1543630547, 58, 1545739473),
+('KL002', 'II', 58, 1543630598, 58, 1545739488),
+('KL004', 'CUSTOM', 58, 1546018231, 58, 1546018231);
 
 -- --------------------------------------------------------
 
@@ -262,11 +274,70 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`id`, `expire`, `data`, `user_id`) VALUES
-('22kiqlo70ki21s23p8i6em2qa2', 1543413330, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a35383b, 58),
-('6n41lq910vlbpaj0aoas8h6lq4', 1544269041, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a35383b, 58),
-('974a4th30be6lgffh14jbbhp62', 1543457098, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a35383b, 58),
-('bt21mqh3n0lhga83bjspu82vq1', 1543630749, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a35383b, 58),
-('u8kf2485h2uo53o5r4hh073lj6', 1544187745, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a35383b, 58);
+('620v6nimsjbmv096e3v3cpo2f1', 1546020677, 0x5f5f666c6173687c613a303a7b7d5f5f69647c693a35383b, 58);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_assesment`
+--
+
+CREATE TABLE `tb_assesment` (
+  `assesment_id` varchar(5) NOT NULL,
+  `assesment_surat` varchar(55) NOT NULL,
+  `assesment_tanggal_mulai` date DEFAULT NULL,
+  `assesment_tanggal_selesai` date DEFAULT NULL,
+  `assesment_ketua` varchar(55) DEFAULT NULL,
+  `assesment_anggota` varchar(255) DEFAULT NULL,
+  `kelas_id` varchar(5) DEFAULT NULL,
+  `pn_id` varchar(5) DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_assesment`
+--
+
+INSERT INTO `tb_assesment` (`assesment_id`, `assesment_surat`, `assesment_tanggal_mulai`, `assesment_tanggal_selesai`, `assesment_ketua`, `assesment_anggota`, `kelas_id`, `pn_id`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+('AS032', 'A.1-2018.9012', '2018-12-01', NULL, 'PG001', 'PG001', 'KL001', 'PN006', 58, 1545985777, 58, 1545985777),
+('AS033', 'A.1-asasa', '2018-12-01', NULL, 'PG001', 'PG001', 'KL002', 'PN007', 58, 1545985802, 58, 1545985802);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_audit`
+--
+
+CREATE TABLE `tb_audit` (
+  `audit_id` int(11) NOT NULL,
+  `assesment_id` varchar(5) DEFAULT NULL,
+  `pertanyaan_id` varchar(5) DEFAULT NULL,
+  `audit_nilai` varchar(5) DEFAULT NULL,
+  `audit_temuan` varchar(255) DEFAULT NULL,
+  `audit_keterangan` text,
+  `created_by` int(11) DEFAULT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_audit`
+--
+
+INSERT INTO `tb_audit` (`audit_id`, `assesment_id`, `pertanyaan_id`, `audit_nilai`, `audit_temuan`, `audit_keterangan`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+(52, 'AS032', 'T001', 'A', 'minor', 'test', NULL, NULL, NULL, NULL),
+(53, 'AS032', 'T002', 'A', 'minor', NULL, NULL, NULL, NULL, NULL),
+(54, 'AS032', 'T003', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(55, 'AS033', 'T004', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(56, 'AS033', 'T005', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(57, NULL, NULL, 'a', NULL, NULL, NULL, NULL, NULL, NULL),
+(58, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(59, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(60, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -298,13 +369,99 @@ INSERT INTO `tb_bagian` (`bagian_id`, `tujuan_id`, `bagian_nama`, `created_by`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_kriteria`
+--
+
+CREATE TABLE `tb_kriteria` (
+  `kriteria_id` varchar(5) NOT NULL,
+  `kriteria_nama` varchar(255) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_kriteria`
+--
+
+INSERT INTO `tb_kriteria` (`kriteria_id`, `kriteria_nama`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+('K001', 'Leadership', 58, 1545756450, 58, 1545756450),
+('K002', 'Customer Focus', 58, 1545756475, 58, 1545756475),
+('K003', 'Process Management', 58, 1545759726, 58, 1545759726);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pegawai`
+--
+
+CREATE TABLE `tb_pegawai` (
+  `pegawai_id` varchar(5) NOT NULL,
+  `pegawai_nama` varchar(255) NOT NULL,
+  `pegawai_nip` varchar(255) DEFAULT NULL,
+  `pegawai_alamat` varchar(255) DEFAULT NULL,
+  `pegawai_status` varchar(255) DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_pegawai`
+--
+
+INSERT INTO `tb_pegawai` (`pegawai_id`, `pegawai_nama`, `pegawai_nip`, `pegawai_alamat`, `pegawai_status`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+('PG001', 'pegawai1', '', '', 'Pegawai Tetap', 58, 1545740372, 58, 1545741552),
+('PG002', 'pegawai2', '', '', 'Pegawai Tetap', 58, 1545740553, 58, 1545741546),
+('PG004', 'pegawai3', '', '', 'Pegawai Tetap', 58, 1545740651, 58, 1545741490),
+('PG007', 'pegawai4', '', '', 'Pegawai Honorer', 58, 1545741394, 58, 1545741443),
+('PG008', 'pegawai5', '', '', 'Pegawai Honorer', 58, 1545741563, 58, 1545741563);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_pertanyaan`
 --
 
 CREATE TABLE `tb_pertanyaan` (
   `tanya_id` varchar(5) NOT NULL,
+  `kelas_id` varchar(5) NOT NULL,
   `tujuan_id` varchar(5) NOT NULL,
-  `bagian_id` varchar(5) NOT NULL,
+  `kriteria_id` varchar(5) NOT NULL,
+  `pertanyaan` text NOT NULL,
+  `tanya_ket_a` text,
+  `tanya_ket_b` text,
+  `tanya_ket_c` text,
+  `tanya_bobot` varchar(255) DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_pertanyaan`
+--
+
+INSERT INTO `tb_pertanyaan` (`tanya_id`, `kelas_id`, `tujuan_id`, `kriteria_id`, `pertanyaan`, `tanya_ket_a`, `tanya_ket_b`, `tanya_ket_c`, `tanya_bobot`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+('T001', 'KL001', 'TJ001', 'K001', 'Pembentukan TIM PMPN (Struktur Organisasi – TUSI)', 'Sudah ada SK, sudah disosialisasikan dan sudah di monitoring serta dievaluasi (dibuktikan dengan data dukung)', 'Sudah ada tetapi belum disosialisasikan / belum dilakukan monitoring dan evaluasi', 'Belum ada SK', '25', 58, 1545959708, 58, 1545959708),
+('T002', 'KL001', 'TJ001', 'K001', 'Pedoman Kerja / Manual Mutu:\r\na. Visi dan Misi\r\nb. Budaya Kerja\r\nc. Motto Pengadilan\r\nd. Profil Pengadilan\r\ne. Struktur Penjamin Mutu\r\nf. Komitmen Bersama\r\ng. Rincian Tugas Struktur PMPN', 'Sudah tepat, sudah disosialisasikan dan sudah dimonitoring serta dievaluasi (dibuktikan dengan data dukung)', 'Sudah ada tetapi belum tepat / belum disosialisasikan/ belum dilakukan monitoring dan evaluasi', 'Belum ada', '45', 58, 1545959766, 58, 1545959766),
+('T003', 'KL001', 'TJ002', 'K002', 'Hakim Pengawas yang telah ditunjuk telah melaksanakan tugas pengawasan dan telah memberi petunjuk serta bimbingan yang di perlukan bagi para pejabat struktura maupun pejabat fungsional dan petugas yang terkait ( SK KMA / 080/SK/VII/2006 ), dengan Data dukung :\r\na. Ada SK Penunjukan Hakim Pengawas Bidang\r\nb. Ada Jadwal Pengawasan\r\nc. Ada bukti laporan pengawasan', 'Telah Terpenuhi semuanya (dibuktikan dengan data dukung)', 'b. Telah Terpenuhi sebagian (dibuktikan dengan data dukung)', 'c. Tidak ada', '5', 58, 1545959838, 58, 1545959838),
+('T004', 'KL002', 'TJ001', 'K001', 'Pembentukan TIM PMPN (Struktur Organisasi – TUSI)', 'Sudah ada SK, sudah disosialisasikan dan sudah di monitoring serta dievaluasi (dibuktikan dengan data dukung)', 'Sudah ada tetapi belum disosialisasikan / belum dilakukan monitoring dan evaluasi', 'Belum ada SK', '25', 58, 1545959947, 58, 1545959947),
+('T005', 'KL002', 'TJ003', 'K002', 'Hakim Bertanggung Jawab Terhadap Minutasi Perkara', 'Minutasi Tepat Waktu Sesuai SOP', 'Minutasi Tepat Tetapi Belum Waktu Sesuai SOP', 'Minutasi Tidak Tepat Waktu Sesuai SOP', '7', 58, 1545960024, 58, 1545960024);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pertanyaan_kls1`
+--
+
+CREATE TABLE `tb_pertanyaan_kls1` (
+  `tanya_id` varchar(5) NOT NULL,
+  `tujuan_id` varchar(5) NOT NULL,
+  `kriteria_id` varchar(5) NOT NULL,
   `pertanyaan` text NOT NULL,
   `tanya_ket_a` text NOT NULL,
   `tanya_ket_b` text NOT NULL,
@@ -317,12 +474,44 @@ CREATE TABLE `tb_pertanyaan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_pertanyaan`
+-- Dumping data for table `tb_pertanyaan_kls1`
 --
 
-INSERT INTO `tb_pertanyaan` (`tanya_id`, `tujuan_id`, `bagian_id`, `pertanyaan`, `tanya_ket_a`, `tanya_ket_b`, `tanya_ket_c`, `tanya_bobot`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
-('1', '1', '1', 'Pembentukan TIM PMPN (Struktur Organisasi – TUSI)', 'Sudah ada SK, sudah disosialisasikan dan sudah di monitoring serta dievaluasi (dibuktikan dengan data dukung)', 'Sudah ada tetapi belum disosialisasikan / belum dilakukan monitoring dan evaluasi', 'Belum ada SK', '25', 1, 1, 1, 1),
-('TN001', 'TJ001', 'BG003', 'a', 'a', 'a', 'a', '1', 58, 1544267073, 58, 1544267105);
+INSERT INTO `tb_pertanyaan_kls1` (`tanya_id`, `tujuan_id`, `kriteria_id`, `pertanyaan`, `tanya_ket_a`, `tanya_ket_b`, `tanya_ket_c`, `tanya_bobot`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+('T1001', 'TJ001', 'K001', 'Pembentukan TIM PMPN (Struktur Organisasi – TUSI)', 'Sudah ada SK, sudah disosialisasikan dan sudah di monitoring serta dievaluasi (dibuktikan dengan data dukung)', 'Sudah ada tetapi belum disosialisasikan / belum dilakukan monitoring dan evaluasi', 'Belum ada SK', '25', 58, 1545764706, 58, 1545810264),
+('T1002', 'TJ001', 'K001', 'Pedoman Kerja / Manual Mutu:\r\na. Visi dan Misi\r\nb. Budaya Kerja\r\nc. Motto Pengadilan\r\nd. Profil Pengadilan\r\ne. Struktur Penjamin Mutu\r\nf. Komitmen Bersama\r\ng. Rincian Tugas Struktur PMPN', 'Sudah tepat, sudah disosialisasikan dan sudah dimonitoring serta dievaluasi (dibuktikan dengan data dukung)', 'Sudah ada tetapi belum tepat / belum disosialisasikan/ belum dilakukan monitoring dan evaluasi', 'Belum ada', '45', 58, 1545810413, 58, 1545810413),
+('T1003', 'TJ001', 'K002', 'Maklumat Pelayanan', 'Maklumat pelayanan sudah dideklarasikan sesuai dengan isi PERMENPAN No. 15 Tahun 2014 Tentang Pedoman Standar Pelayanan dan sudah disosialisasikan', 'Maklumat pelayanan sudah dideklarasikan sesuai dengan isi PERMENPAN No. 15 Tahun 2014 Tentang Pedoman Standar Pelayanan dan belum disosialisasikan', 'Belum ada maklumat pelayanan', '2', 58, 1545810501, 58, 1545810501),
+('T1004', 'TJ002', 'K002', 'Hakim Pengawas yang telah ditunjuk telah melaksanakan tugas pengawasan dan telah memberi petunjuk serta bimbingan yang di perlukan bagi para pejabat struktura maupun pejabat fungsional dan petugas yang terkait ( SK KMA / 080/SK/VII/2006 ), dengan Data dukung :\r\na. Ada SK Penunjukan Hakim Pengawas Bidang\r\nb. Ada Jadwal Pengawasan\r\nc. Ada bukti laporan pengawasan', 'Telah Terpenuhi semuanya (dibuktikan dengan data dukung)', 'b. Telah Terpenuhi sebagian (dibuktikan dengan data dukung)', 'c. Tidak ada', '5', 58, 1545812017, 58, 1545812017),
+('T1005', 'TJ001', 'K002', 'Standar Pelayanan Pengadilan (SKKMA No. 026/KMA/SK/II/2012)', 'Standar pelayanan sudah ditetapkan, disosialisasikan dan sudah dilaksanakan', 'Standar Pelayanan sudah ditetapkan tetapi belum disosialisasikan dan belum dilaksanakan', 'Standar pelayanan belum ditetapkan', '3', 58, 1545812136, 58, 1545812136);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pertanyaan_kls2`
+--
+
+CREATE TABLE `tb_pertanyaan_kls2` (
+  `tanya_id` varchar(5) NOT NULL,
+  `tujuan_id` varchar(5) NOT NULL,
+  `kriteria_id` varchar(5) NOT NULL,
+  `pertanyaan` text NOT NULL,
+  `tanya_ket_a` text NOT NULL,
+  `tanya_ket_b` text NOT NULL,
+  `tanya_ket_c` text NOT NULL,
+  `tanya_bobot` varchar(255) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_pertanyaan_kls2`
+--
+
+INSERT INTO `tb_pertanyaan_kls2` (`tanya_id`, `tujuan_id`, `kriteria_id`, `pertanyaan`, `tanya_ket_a`, `tanya_ket_b`, `tanya_ket_c`, `tanya_bobot`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+('T2001', 'TJ001', 'K002', 'a', 'a', 'a', 'a', '12', 58, 1545765231, 58, 1545765231),
+('T2002', 'TJ001', 'K001', 'adsda', 'asd', 'asd', 'asd', '12', 58, 1545915028, 58, 1545915028);
 
 -- --------------------------------------------------------
 
@@ -463,6 +652,14 @@ INSERT INTO `user_access` (`ug_id`, `c_id`, `firstload`, `access`) VALUES
 ('01', 31, 'n', 'view'),
 ('01', 32, 'n', 'view'),
 ('01', 33, 'n', 'view'),
+('01', 34, 'n', 'view'),
+('01', 35, 'n', 'view'),
+('01', 36, 'n', 'view'),
+('01', 37, 'n', 'view'),
+('01', 38, 'n', 'view'),
+('01', 39, 'n', 'view'),
+('01', 40, 'n', 'view'),
+('01', 41, 'n', 'view'),
 ('02', 1, 'n', 'view'),
 ('02', 5, 'n', 'view'),
 ('02', 6, 'n', 'view'),
@@ -1291,15 +1488,51 @@ ALTER TABLE `session`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tb_assesment`
+--
+ALTER TABLE `tb_assesment`
+  ADD PRIMARY KEY (`assesment_id`);
+
+--
+-- Indexes for table `tb_audit`
+--
+ALTER TABLE `tb_audit`
+  ADD PRIMARY KEY (`audit_id`);
+
+--
 -- Indexes for table `tb_bagian`
 --
 ALTER TABLE `tb_bagian`
   ADD PRIMARY KEY (`bagian_id`);
 
 --
+-- Indexes for table `tb_kriteria`
+--
+ALTER TABLE `tb_kriteria`
+  ADD PRIMARY KEY (`kriteria_id`);
+
+--
+-- Indexes for table `tb_pegawai`
+--
+ALTER TABLE `tb_pegawai`
+  ADD PRIMARY KEY (`pegawai_id`);
+
+--
 -- Indexes for table `tb_pertanyaan`
 --
 ALTER TABLE `tb_pertanyaan`
+  ADD PRIMARY KEY (`tanya_id`);
+
+--
+-- Indexes for table `tb_pertanyaan_kls1`
+--
+ALTER TABLE `tb_pertanyaan_kls1`
+  ADD PRIMARY KEY (`tanya_id`);
+
+--
+-- Indexes for table `tb_pertanyaan_kls2`
+--
+ALTER TABLE `tb_pertanyaan_kls2`
   ADD PRIMARY KEY (`tanya_id`);
 
 --
@@ -1403,22 +1636,32 @@ ALTER TABLE `z_slider`
 -- AUTO_INCREMENT for table `content`
 --
 ALTER TABLE `content`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT for table `tb_audit`
+--
+ALTER TABLE `tb_audit`
+  MODIFY `audit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+
 --
 -- AUTO_INCREMENT for table `z_profile_anggaran`
 --
 ALTER TABLE `z_profile_anggaran`
   MODIFY `pa_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `z_profile_struktur`
 --
 ALTER TABLE `z_profile_struktur`
-  MODIFY `ps_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
+  MODIFY `ps_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

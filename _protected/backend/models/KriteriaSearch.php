@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Pertanyaan;
+use common\models\Kriteria;
 
 /**
- * PertanyaanSearch represents the model behind the search form of `common\models\Pertanyaan`.
+ * KriteriaSearch represents the model behind the search form of `common\models\Kriteria`.
  */
-class PertanyaanSearch extends Pertanyaan
+class KriteriaSearch extends Kriteria
 {
     /**
      * @inheritdoc
@@ -18,7 +18,7 @@ class PertanyaanSearch extends Pertanyaan
     public function rules()
     {
         return [
-            [['tanya_id', 'kelas_id', 'tujuan_id', 'kriteria_id', 'pertanyaan', 'tanya_ket_a', 'tanya_ket_b', 'tanya_ket_c', 'tanya_bobot'], 'safe'],
+            [['kriteria_id', 'kriteria_nama'], 'safe'],
             [['created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
         ];
     }
@@ -41,7 +41,7 @@ class PertanyaanSearch extends Pertanyaan
      */
     public function search($params)
     {
-        $query = Pertanyaan::find();
+        $query = Kriteria::find();
 
         // add conditions that should always apply here
 
@@ -65,15 +65,8 @@ class PertanyaanSearch extends Pertanyaan
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'tanya_id', $this->tanya_id])
-            ->andFilterWhere(['like', 'kelas_id', $this->kelas_id])
-            ->andFilterWhere(['like', 'tujuan_id', $this->tujuan_id])
-            ->andFilterWhere(['like', 'kriteria_id', $this->kriteria_id])
-            ->andFilterWhere(['like', 'pertanyaan', $this->pertanyaan])
-            ->andFilterWhere(['like', 'tanya_ket_a', $this->tanya_ket_a])
-            ->andFilterWhere(['like', 'tanya_ket_b', $this->tanya_ket_b])
-            ->andFilterWhere(['like', 'tanya_ket_c', $this->tanya_ket_c])
-            ->andFilterWhere(['like', 'tanya_bobot', $this->tanya_bobot]);
+        $query->andFilterWhere(['like', 'kriteria_id', $this->kriteria_id])
+            ->andFilterWhere(['like', 'kriteria_nama', $this->kriteria_nama]);
 
         return $dataProvider;
     }

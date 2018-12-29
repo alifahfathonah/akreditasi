@@ -4,18 +4,20 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use common\models\Tujuan;
 use common\models\Kriteria;
-use common\models\PnKelas;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
+// use yii\widgets\Pjax;
+// use yii\helpers\Url;
+// use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\PertanyaanSearch */
+/* @var $searchModel backend\models\Pertanyaan1Search */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pertanyaan';
+$this->title = 'Pertanyaan PN Kelas 1';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pertanyaan-index">
+<div class="pertanyaan1-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -38,18 +40,13 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
     <div class="col-md-2">
-      <?= $form->field($searchModel, 'kelas_id',['horizontalCssClasses'=>['wrapper'=>'col-sm-12']])->dropDownList(
-        ArrayHelper::map($datakls,'kelas_id','kelas_nama'),['prompt'=>'Semua Kelas','class' => 'form-control input-sm']
-      ) ?>
-    </div>
-    <div class="col-md-2">
       <?= $form->field($searchModel, 'tujuan_id',['horizontalCssClasses'=>['wrapper'=>'col-sm-12']])->dropDownList(
-        ArrayHelper::map($datatjn,'tujuan_id','tujuan_nama'),['prompt'=>'Semua Tujuan','class' => 'form-control input-sm']
+        ArrayHelper::map($data1,'tujuan_id','tujuan_nama'),['prompt'=>'Semua Tujuan','class' => 'form-control input-sm']
       ) ?>
     </div>
     <div class="col-md-2">
       <?= $form->field($searchModel, 'kriteria_id',['horizontalCssClasses'=>['wrapper'=>'col-sm-12']])->dropDownList(
-        ArrayHelper::map($datakrit,'kriteria_id','kriteria_nama'),['prompt'=>'Semua Kriteria','class' => 'form-control input-sm']
+        ArrayHelper::map($data2,'kriteria_id','kriteria_nama'),['prompt'=>'Semua Kriteria','class' => 'form-control input-sm']
       ) ?>
     </div>
     <div class="col-md-4">
@@ -70,14 +67,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             // 'tanya_id',
-            [
-              'attribute'=>'kelas_id',
-              'format' => 'text',
-              'value' => function($data){
-                    $c = new PnKelas;
-                   return $c->getlistkelas($data->kelas_id);
-               },
-            ],
             [
               'attribute'=>'tujuan_id',
               'format' => 'text',

@@ -4,34 +4,26 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\PertanyaanSearch */
+/* @var $model backend\models\PegawaiSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="pertanyaan-search">
+<div class="pegawai-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'tanya_id') ?>
+    <?= $form->field($model, 'pegawai_id') ?>
 
-    <?= $form->field($model, 'kelas_id') ?>
+    <?= $form->field($model, 'pegawai_nama') ?>
 
-    <?= $form->field($model, 'tujuan_id') ?>
+    <?= $form->field($model, 'pegawai_nip') ?>
 
-    <?= $form->field($model, 'kriteria_id') ?>
+    <?= $form->field($model, 'pegawai_alamat') ?>
 
-    <?= $form->field($model, 'pertanyaan') ?>
-
-    <?php // echo $form->field($model, 'tanya_ket_a') ?>
-
-    <?php // echo $form->field($model, 'tanya_ket_b') ?>
-
-    <?php // echo $form->field($model, 'tanya_ket_c') ?>
-
-    <?php // echo $form->field($model, 'tanya_bobot') ?>
+    <?= $form->field($model, 'pegawai_status') ?>
 
     <?php // echo $form->field($model, 'created_by') ?>
 

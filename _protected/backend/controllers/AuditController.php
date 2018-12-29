@@ -3,19 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Pertanyaan;
-use backend\models\PertanyaanSearch;
+use common\models\Audit;
+use backend\models\AuditSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use common\models\PnKelas;
-use common\models\Tujuan;
-use common\models\Kriteria;
 
 /**
- * PertanyaanController implements the CRUD actions for Pertanyaan model.
+ * AuditController implements the CRUD actions for Audit model.
  */
-class PertanyaanController extends Controller
+class AuditController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,38 +30,23 @@ class PertanyaanController extends Controller
     }
 
     /**
-     * Lists all Pertanyaan models.
+     * Lists all Audit models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PertanyaanSearch();
+        $searchModel = new AuditSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        //data Tujuan
-            $kelas = new PnKelas();
-            $datakls = $kelas->find()->all();
-
-        //data Tujuan
-            $tujuan = new Tujuan();
-            $datatjn = $tujuan->find()->all();
-
-        //data Tujuan
-            $kriteria = new Kriteria();
-            $datakrit = $kriteria->find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'datakls'=>$datakls,
-            'datatjn'=>$datatjn,
-            'datakrit'=>$datakrit,
         ]);
     }
 
     /**
-     * Displays a single Pertanyaan model.
-     * @param string $id
+     * Displays a single Audit model.
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -76,43 +58,27 @@ class PertanyaanController extends Controller
     }
 
     /**
-     * Creates a new Pertanyaan model.
+     * Creates a new Audit model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Pertanyaan();
-
-        //data Tujuan
-            $kelas = new PnKelas();
-            $datakls = $kelas->find()->all();
-
-        //data Tujuan
-            $tujuan = new Tujuan();
-            $datatjn = $tujuan->find()->all();
-
-        //data Tujuan
-            $kriteria = new Kriteria();
-            $datakrit = $kriteria->find()->all();
+        $model = new Audit();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->tanya_id]);
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->audit_id]);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'datakls'=>$datakls,
-            'datatjn'=>$datatjn,
-            'datakrit'=>$datakrit,
         ]);
     }
 
     /**
-     * Updates an existing Pertanyaan model.
+     * Updates an existing Audit model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -120,34 +86,19 @@ class PertanyaanController extends Controller
     {
         $model = $this->findModel($id);
 
-        //data Tujuan
-            $kelas = new PnKelas();
-            $datakls = $kelas->find()->all();
-
-        //data Tujuan
-            $tujuan = new Tujuan();
-            $datatjn = $tujuan->find()->all();
-
-        //data Tujuan
-            $kriteria = new Kriteria();
-            $datakrit = $kriteria->find()->all();
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->tanya_id]);
+            return $this->redirect(['view', 'id' => $model->audit_id]);
         }
 
         return $this->render('update', [
             'model' => $model,
-            'datakls'=>$datakls,
-            'datatjn'=>$datatjn,
-            'datakrit'=>$datakrit,
         ]);
     }
 
     /**
-     * Deletes an existing Pertanyaan model.
+     * Deletes an existing Audit model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -159,15 +110,15 @@ class PertanyaanController extends Controller
     }
 
     /**
-     * Finds the Pertanyaan model based on its primary key value.
+     * Finds the Audit model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return Pertanyaan the loaded model
+     * @param integer $id
+     * @return Audit the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Pertanyaan::findOne($id)) !== null) {
+        if (($model = Audit::findOne($id)) !== null) {
             return $model;
         }
 

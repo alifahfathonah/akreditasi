@@ -3,19 +3,18 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Pertanyaan;
-use backend\models\PertanyaanSearch;
+use common\models\Pertanyaan2;
+use backend\models\Pertanyaan2Search;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use common\models\PnKelas;
 use common\models\Tujuan;
 use common\models\Kriteria;
 
 /**
- * PertanyaanController implements the CRUD actions for Pertanyaan model.
+ * Pertanyaan2Controller implements the CRUD actions for Pertanyaan2 model.
  */
-class PertanyaanController extends Controller
+class Pertanyaan2Controller extends Controller
 {
     /**
      * @inheritdoc
@@ -33,37 +32,22 @@ class PertanyaanController extends Controller
     }
 
     /**
-     * Lists all Pertanyaan models.
+     * Lists all Pertanyaan2 models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PertanyaanSearch();
+        $searchModel = new Pertanyaan2Search();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        //data Tujuan
-            $kelas = new PnKelas();
-            $datakls = $kelas->find()->all();
-
-        //data Tujuan
-            $tujuan = new Tujuan();
-            $datatjn = $tujuan->find()->all();
-
-        //data Tujuan
-            $kriteria = new Kriteria();
-            $datakrit = $kriteria->find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'datakls'=>$datakls,
-            'datatjn'=>$datatjn,
-            'datakrit'=>$datakrit,
         ]);
     }
 
     /**
-     * Displays a single Pertanyaan model.
+     * Displays a single Pertanyaan2 model.
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -76,25 +60,21 @@ class PertanyaanController extends Controller
     }
 
     /**
-     * Creates a new Pertanyaan model.
+     * Creates a new Pertanyaan2 model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Pertanyaan();
-
-        //data Tujuan
-            $kelas = new PnKelas();
-            $datakls = $kelas->find()->all();
+        $model = new Pertanyaan2();
 
         //data Tujuan
             $tujuan = new Tujuan();
-            $datatjn = $tujuan->find()->all();
+            $data1 = $tujuan->find()->all();
 
-        //data Tujuan
+        //data Kriteria
             $kriteria = new Kriteria();
-            $datakrit = $kriteria->find()->all();
+            $data2 = $kriteria->find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             //return $this->redirect(['view', 'id' => $model->tanya_id]);
@@ -103,14 +83,13 @@ class PertanyaanController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'datakls'=>$datakls,
-            'datatjn'=>$datatjn,
-            'datakrit'=>$datakrit,
+            'data1'=>$data1,
+            'data2'=>$data2,
         ]);
     }
 
     /**
-     * Updates an existing Pertanyaan model.
+     * Updates an existing Pertanyaan2 model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -121,16 +100,12 @@ class PertanyaanController extends Controller
         $model = $this->findModel($id);
 
         //data Tujuan
-            $kelas = new PnKelas();
-            $datakls = $kelas->find()->all();
-
-        //data Tujuan
             $tujuan = new Tujuan();
-            $datatjn = $tujuan->find()->all();
+            $data1 = $tujuan->find()->all();
 
-        //data Tujuan
+        //data Kriteria
             $kriteria = new Kriteria();
-            $datakrit = $kriteria->find()->all();
+            $data2 = $kriteria->find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->tanya_id]);
@@ -138,14 +113,13 @@ class PertanyaanController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'datakls'=>$datakls,
-            'datatjn'=>$datatjn,
-            'datakrit'=>$datakrit,
+            'data1'=>$data1,
+            'data2'=>$data2,
         ]);
     }
 
     /**
-     * Deletes an existing Pertanyaan model.
+     * Deletes an existing Pertanyaan2 model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -159,15 +133,15 @@ class PertanyaanController extends Controller
     }
 
     /**
-     * Finds the Pertanyaan model based on its primary key value.
+     * Finds the Pertanyaan2 model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Pertanyaan the loaded model
+     * @return Pertanyaan2 the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Pertanyaan::findOne($id)) !== null) {
+        if (($model = Pertanyaan2::findOne($id)) !== null) {
             return $model;
         }
 

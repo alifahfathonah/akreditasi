@@ -67,7 +67,8 @@ class TujuanController extends Controller
         $model = new Tujuan();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->tujuan_id]);
+            //return $this->redirect(['view', 'id' => $model->tujuan_id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [

@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Pertanyaan;
+use common\models\Pertanyaan2;
 
 /**
- * PertanyaanSearch represents the model behind the search form of `common\models\Pertanyaan`.
+ * Pertanyaan2Search represents the model behind the search form of `common\models\Pertanyaan2`.
  */
-class PertanyaanSearch extends Pertanyaan
+class Pertanyaan2Search extends Pertanyaan2
 {
     /**
      * @inheritdoc
@@ -18,7 +18,7 @@ class PertanyaanSearch extends Pertanyaan
     public function rules()
     {
         return [
-            [['tanya_id', 'kelas_id', 'tujuan_id', 'kriteria_id', 'pertanyaan', 'tanya_ket_a', 'tanya_ket_b', 'tanya_ket_c', 'tanya_bobot'], 'safe'],
+            [['tanya_id', 'tujuan_id', 'kriteria_id', 'pertanyaan', 'tanya_ket_a', 'tanya_ket_b', 'tanya_ket_c', 'tanya_bobot'], 'safe'],
             [['created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
         ];
     }
@@ -41,7 +41,7 @@ class PertanyaanSearch extends Pertanyaan
      */
     public function search($params)
     {
-        $query = Pertanyaan::find();
+        $query = Pertanyaan2::find();
 
         // add conditions that should always apply here
 
@@ -66,7 +66,6 @@ class PertanyaanSearch extends Pertanyaan
         ]);
 
         $query->andFilterWhere(['like', 'tanya_id', $this->tanya_id])
-            ->andFilterWhere(['like', 'kelas_id', $this->kelas_id])
             ->andFilterWhere(['like', 'tujuan_id', $this->tujuan_id])
             ->andFilterWhere(['like', 'kriteria_id', $this->kriteria_id])
             ->andFilterWhere(['like', 'pertanyaan', $this->pertanyaan])

@@ -5,26 +5,22 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Pertanyaan */
+/* @var $model common\models\Pertanyaan1 */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="pertanyaan-form">
+<div class="pertanyaan1-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <!-- <?= $form->field($model, 'tanya_id')->textInput(['maxlength' => true]) ?> -->
 
-    <?= $form->field($model, 'kelas_id')->dropDownList(
-        ArrayHelper::map($datakls,'kelas_id','kelas_nama')
-    ) ?>
-
     <?= $form->field($model, 'tujuan_id')->dropDownList(
-        ArrayHelper::map($datatjn,'tujuan_id','tujuan_nama')
+        ArrayHelper::map($data1,'tujuan_id','tujuan_nama')
     ) ?>
 
     <?= $form->field($model, 'kriteria_id')->dropDownList(
-        ArrayHelper::map($datakrit,'kriteria_id','kriteria_nama')
+        ArrayHelper::map($data2,'kriteria_id','kriteria_nama')
     ) ?>
 
     <?= $form->field($model, 'pertanyaan')->textarea(['rows' => 6]) ?>
