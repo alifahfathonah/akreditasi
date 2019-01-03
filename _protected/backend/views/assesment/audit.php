@@ -13,7 +13,8 @@ use yii\bootstrap\Modal;
 /* @var $searchModel backend\models\AuditSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Audits';
+$this->title = 'Audit';
+//$this->pn = $model->pn_nama;
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJs("
@@ -35,6 +36,9 @@ $this->registerJs("
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <h3><?php echo $model->pn_nama ?></h3>
+    <!-- <p><?php echo 'bobot total = '.$bobotTotal ?></p>
+    <p><?php echo 'Nilai = '.$bobotNilai ?></p> -->
 
 <!-- . -->
 <div class="row">
@@ -71,7 +75,7 @@ $this->registerJs("
     <?php ActiveForm::end(); ?>
 <!-- . -->
     <p>
-        <?= Html::a('Tambah Pertanyaan', ['tambah'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Tambah Pertanyaan', ['tambah','id'=>$_GET['id']], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -85,34 +89,31 @@ $this->registerJs("
             //'assesment_id',
             //'pertanyaan_id',
             [
-              'label'=>'tujuan',
-              'attribute'=>'pertanyaan_id',
-              //'format' => 'text',
-              'value' => function($data){
-                    $c = new Pertanyaan;
-                   return $c->getlisttj($data->pertanyaan_id);
-               },
-            ],
-            [
-              'label'=>'Kriteria',
-              'attribute'=>'pertanyaan_id',
-              //'format' => 'text',
-              'value' => function($data){
-                    $c = new Pertanyaan;
-                   return $c->getlistkrit($data->pertanyaan_id);
-               },
-            ],
-            [
-              'attribute'=>'pertanyaan_id',
+              'attribute'=>'tujuan_id',
               'format' => 'text',
               'value' => function($data){
-                    $c = new Pertanyaan;
-                   return $c->getlistPertanyaan($data->pertanyaan_id);
+                    $c = new Tujuan;
+                   return $c->getlistTujuan($data->tujuan_id);
                },
             ],
+            [
+              'attribute'=>'kriteria_id',
+              'format' => 'text',
+              'value' => function($data){
+                    $c = new Kriteria;
+                   return $c->getlistKriteria($data->kriteria_id);
+               },
+            ],
+            'pertanyaan',
+            'nilai_a',
+            'nilai_b',
+            'nilai_c',
+            'bobot',
             'audit_nilai',
+            'audit_nilai_angka',
             'audit_temuan',
             'audit_keterangan:ntext',
+            'audit_penyelesaian',
             //'created_by',
             //'created_at',
             //'updated_by',
@@ -125,7 +126,9 @@ $this->registerJs("
               'buttons' => [
                   'nilai' => function($url,$model,$key){
                       return  Html::a(Html::tag('i','',['class'=>'fa fa-edit']),
-                        ['nilai','id'=>$model->audit_id,'pertanyaan_id'=>$model->pertanyaan_id,'assesment_id'=>$model->assesment_id],['data-toggle'=>'modal','data-target'=>'#myModal','data-title'=>'Ganti Password',]);
+                        ['nilai','id'=>$model->audit_id,
+                        //'pertanyaan_id'=>$model->pertanyaan_id,
+                        'assesment_id'=>$model->assesment_id],['data-toggle'=>'modal','data-target'=>'#myModal','data-title'=>'Penilaian',]);
                   },
               ],
             ],

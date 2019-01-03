@@ -6,7 +6,6 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Audit;
-use common\models\Pertanyaan;
 
 /**
  * AuditSearch represents the model behind the search form of `common\models\Audit`.
@@ -16,15 +15,11 @@ class AuditSearch extends Audit
     /**
      * @inheritdoc
      */
-
-    public $tujuan_id;
-    public $kriteria_id;
-
     public function rules()
     {
         return [
-            [['audit_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['assesment_id', 'pertanyaan_id', 'audit_nilai', 'audit_temuan', 'audit_keterangan','tujuan_id','kriteria_id'], 'safe'],
+            [['audit_id', 'assesment_id', 'tujuan_id', 'kriteria_id', 'bobot', 'audit_nilai_angka', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
+            [['pertanyaan', 'nilai_a', 'nilai_b', 'nilai_c', 'audit_nilai', 'audit_temuan', 'audit_keterangan', 'audit_penyelesaian'], 'safe'],
         ];
     }
 
@@ -65,27 +60,32 @@ class AuditSearch extends Audit
         // grid filtering conditions
         $query->andFilterWhere([
             'audit_id' => $this->audit_id,
+            'assesment_id' => $this->assesment_id,
+            'tujuan_id' => $this->tujuan_id,
+            'kriteria_id' => $this->kriteria_id,
+            'bobot' => $this->bobot,
+            'audit_nilai_angka' => $this->audit_nilai_angka,
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_by' => $this->updated_by,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'assesment_id', $this->assesment_id])
-            ->andFilterWhere(['like', 'pertanyaan_id', $this->pertanyaan_id])
+        $query->andFilterWhere(['like', 'pertanyaan', $this->pertanyaan])
+            ->andFilterWhere(['like', 'nilai_a', $this->nilai_a])
+            ->andFilterWhere(['like', 'nilai_b', $this->nilai_b])
+            ->andFilterWhere(['like', 'nilai_c', $this->nilai_c])
             ->andFilterWhere(['like', 'audit_nilai', $this->audit_nilai])
             ->andFilterWhere(['like', 'audit_temuan', $this->audit_temuan])
-            ->andFilterWhere(['like', 'audit_keterangan', $this->audit_keterangan]);
+            ->andFilterWhere(['like', 'audit_keterangan', $this->audit_keterangan])
+            ->andFilterWhere(['like', 'audit_penyelesaian', $this->audit_penyelesaian]);
 
         return $dataProvider;
     }
 
     public function search2($params,$id)
     {
-        $query = Audit::find()->join('INNER JOIN', 
-            'tb_pertanyaan',
-            'tb_pertanyaan.tanya_id = tb_audit.pertanyaan_id'
-        )->where(['assesment_id'=>$id]);
+        $query = Audit::find()->where(['assesment_id'=>$id]);
 
         // add conditions that should always apply here
 
@@ -104,19 +104,25 @@ class AuditSearch extends Audit
         // grid filtering conditions
         $query->andFilterWhere([
             'audit_id' => $this->audit_id,
+            'assesment_id' => $this->assesment_id,
+            'tujuan_id' => $this->tujuan_id,
+            'kriteria_id' => $this->kriteria_id,
+            'bobot' => $this->bobot,
+            'audit_nilai_angka' => $this->audit_nilai_angka,
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_by' => $this->updated_by,
             'updated_at' => $this->updated_at,
-            'tujuan_id' => $this->tujuan_id,
-            'kriteria_id' => $this->kriteria_id,
         ]);
 
-        $query->andFilterWhere(['like', 'assesment_id', $this->assesment_id])
-            ->andFilterWhere(['like', 'pertanyaan_id', $this->pertanyaan_id])
+        $query->andFilterWhere(['like', 'pertanyaan', $this->pertanyaan])
+            ->andFilterWhere(['like', 'nilai_a', $this->nilai_a])
+            ->andFilterWhere(['like', 'nilai_b', $this->nilai_b])
+            ->andFilterWhere(['like', 'nilai_c', $this->nilai_c])
             ->andFilterWhere(['like', 'audit_nilai', $this->audit_nilai])
             ->andFilterWhere(['like', 'audit_temuan', $this->audit_temuan])
-            ->andFilterWhere(['like', 'audit_keterangan', $this->audit_keterangan]);
+            ->andFilterWhere(['like', 'audit_keterangan', $this->audit_keterangan])
+            ->andFilterWhere(['like', 'audit_penyelesaian', $this->audit_penyelesaian]);
 
         return $dataProvider;
     }

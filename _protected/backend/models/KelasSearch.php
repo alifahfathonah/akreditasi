@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Assesment;
+use common\models\Kelas;
 
 /**
- * AssesmentSearch represents the model behind the search form of `common\models\Assesment`.
+ * KelasSearch represents the model behind the search form of `common\models\Kelas`.
  */
-class AssesmentSearch extends Assesment
+class KelasSearch extends Kelas
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class AssesmentSearch extends Assesment
     public function rules()
     {
         return [
-            [['assesment_id', 'pn_id', 'assesment_ketua', 'assesment_anggota', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['assesment_surat', 'assesment_surat_tanggal', 'assesment_jenis', 'assesment_tanggal_mulai', 'assesment_tanggal_selesai'], 'safe'],
+            [['kelas_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
+            [['kelas_nama'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class AssesmentSearch extends Assesment
      */
     public function search($params)
     {
-        $query = Assesment::find();
+        $query = Kelas::find();
 
         // add conditions that should always apply here
 
@@ -59,21 +59,14 @@ class AssesmentSearch extends Assesment
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'assesment_id' => $this->assesment_id,
-            'assesment_surat_tanggal' => $this->assesment_surat_tanggal,
-            'pn_id' => $this->pn_id,
-            'assesment_tanggal_mulai' => $this->assesment_tanggal_mulai,
-            'assesment_tanggal_selesai' => $this->assesment_tanggal_selesai,
-            'assesment_ketua' => $this->assesment_ketua,
-            'assesment_anggota' => $this->assesment_anggota,
+            'kelas_id' => $this->kelas_id,
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_by' => $this->updated_by,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'assesment_surat', $this->assesment_surat])
-            ->andFilterWhere(['like', 'assesment_jenis', $this->assesment_jenis]);
+        $query->andFilterWhere(['like', 'kelas_nama', $this->kelas_nama]);
 
         return $dataProvider;
     }

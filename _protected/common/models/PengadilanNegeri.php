@@ -30,24 +30,9 @@ class PengadilanNegeri extends \yii\db\ActiveRecord
      * @inheritdoc
      */
 
-    public function behaviors(){
-      return[
-        [
-          'class' => 'mdm\autonumber\Behavior',
-          'attribute' => 'pn_id', // required
-          'group' => 'pengadilannegeri', // required, unique
-          'value' => 'PN'.'?', // format auto number. '?' will be replaced with generated number
-          'digit' => 3 // optional, default to null.
-        ],
-        \yii\behaviors\TimestampBehavior::className(),
-        \yii\behaviors\BlameableBehavior::className(),
-
-      ];
-    }
-
     public static function tableName()
     {
-        return 'pengadilan_negeri';
+        return 'tb_pengadilan_negeri';
     }
 
     /**
@@ -64,7 +49,7 @@ class PengadilanNegeri extends \yii\db\ActiveRecord
             [['pn_nama', 'pn_ketua', 'pn_email', 'pn_website'], 'string', 'max' => 255],
             [['pn_kelas', 'pn_akreditasi'], 'string', 'max' => 5],
             [['pn_telp', 'pn_fax'], 'string', 'max' => 50],
-            [['pn_id'], 'unique'],
+            //[['pn_id'], 'unique'],
         ];
     }
 

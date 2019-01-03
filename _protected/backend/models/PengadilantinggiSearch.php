@@ -18,7 +18,7 @@ class PengadilantinggiSearch extends PengadilanTinggi
     public function rules()
     {
         return [
-            [['pt_id', 'pt_nama', 'pt_alamat', 'pt_pimpinan', 'pt_website', 'pt_email', 'pt_telp', 'pt_fax'], 'safe'],
+            [['pt_id', 'pt_nama', 'pt_alamat', 'pt_pimpinan', 'pt_website', 'pt_email', 'pt_telp', 'pt_fax', 'pt_logo'], 'safe'],
             [['pt_pegawai', 'pt_honorer', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
         ];
     }

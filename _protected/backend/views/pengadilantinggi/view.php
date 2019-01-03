@@ -39,6 +39,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'pt_fax',
             'pt_pegawai',
             'pt_honorer',
+            
+            [
+              'attribute' => 'pt_logo',
+              'format' => 'raw',
+              'value' => function ($data) {
+                if(!is_null($data->pt_logo)){
+                  return Html::img(Yii::$app->params['backendUrl'].'img2/'.$data->pt_logo,
+                    ['style'=>'width:50px; height:auto;']
+                  );
+                }else{
+                  return NULL;
+                }
+              },
+            ],
             // 'created_by',
             // 'created_at',
             // 'updated_by',

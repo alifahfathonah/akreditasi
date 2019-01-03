@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "pengadilan_tinggi".
@@ -27,6 +28,7 @@ class PengadilanTinggi extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $image;
 
     public function behaviors(){
       return[
@@ -45,7 +47,7 @@ class PengadilanTinggi extends \yii\db\ActiveRecord
 
     public static function tableName()
     {
-        return 'pengadilan_tinggi';
+        return 'tb_pengadilan_tinggi';
     }
 
     /**
@@ -57,8 +59,9 @@ class PengadilanTinggi extends \yii\db\ActiveRecord
             //[['pt_id'], 'required'],
             [['pt_pegawai', 'pt_honorer', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['pt_id'], 'string', 'max' => 5],
-            [['pt_nama', 'pt_alamat', 'pt_pimpinan', 'pt_website', 'pt_email', 'pt_telp', 'pt_fax'], 'string', 'max' => 255],
+            [['pt_nama', 'pt_alamat', 'pt_pimpinan', 'pt_website', 'pt_email', 'pt_telp', 'pt_fax', 'pt_logo'], 'string', 'max' => 255],
             [['pt_id'], 'unique'],
+            [['image'], 'file', 'extensions'=>'jpg, jpeg, png, jpeg'],
         ];
     }
 
@@ -78,6 +81,7 @@ class PengadilanTinggi extends \yii\db\ActiveRecord
             'pt_fax' => 'Fax',
             'pt_pegawai' => 'Jumlah Pegawai',
             'pt_honorer' => 'Jumlah Pegawai Honorer',
+            'pt_logo' => 'Logo',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_by' => 'Updated By',

@@ -9,7 +9,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use common\models\PnKelas;
+use common\models\Kelas;
 
 /**
  * PengadilannegeriController implements the CRUD actions for PengadilanNegeri model.
@@ -69,7 +69,7 @@ class PengadilannegeriController extends Controller
         $model = new PengadilanNegeri();
 
         //data kelas PN
-            $kls = new PnKelas();
+            $kls = new Kelas();
             $data = $kls->find()->all();
 
         // if (Yii::$app->request->post()) {
@@ -133,7 +133,7 @@ class PengadilannegeriController extends Controller
         }
 
         //data kelas PN
-            $kls = new PnKelas();
+            $kls = new Kelas();
             $data = $kls->find()->all();
         
         return $this->render('update', [

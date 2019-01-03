@@ -19,20 +19,6 @@ class Tujuan extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function behaviors(){
-      return[
-        [
-          'class' => 'mdm\autonumber\Behavior',
-          'attribute' => 'tujuan_id', // required
-          'group' => 'tujuan', // required, unique
-          'value' => 'TJ'.'?', // format auto number. '?' will be replaced with generated number
-          'digit' => 3 // optional, default to null.
-        ],
-        \yii\behaviors\TimestampBehavior::className(),
-        \yii\behaviors\BlameableBehavior::className(),
-
-      ];
-    }
 
     public static function tableName()
     {
@@ -49,7 +35,7 @@ class Tujuan extends \yii\db\ActiveRecord
             [['created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['tujuan_id'], 'string', 'max' => 5],
             [['tujuan_nama'], 'string', 'max' => 255],
-            [['tujuan_id'], 'unique'],
+            //[['tujuan_id'], 'unique'],
         ];
     }
 

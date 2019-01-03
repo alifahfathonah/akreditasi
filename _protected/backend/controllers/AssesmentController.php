@@ -9,16 +9,13 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\PengadilanNegeri;
-use common\models\PnKelas;
 use common\models\Pegawai;
 use common\models\Audit;
 use common\models\Tujuan;
 use common\models\Kriteria;
 use common\models\Pertanyaan;
-use common\models\Pertanyaan1;
-use common\models\Pertanyaan2;
 use backend\models\AuditSearch;
-use backend\models\Pertanyaan1Search;
+use yii\helpers\VarDumper;
 
 /**
  * AssesmentController implements the CRUD actions for Assesment model.
@@ -49,9 +46,14 @@ class AssesmentController extends Controller
         $searchModel = new AssesmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        //data PN
+            $pn = new PengadilanNegeri();
+            $datapn = $pn->find()->all();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'datapn' => $datapn,
         ]);
     }
 
@@ -70,6 +72,18 @@ class AssesmentController extends Controller
 
     public function actionAudit($id)
     {
+        $model2 = $this->findModel($id);
+        $model = PengadilanNegeri::find()->where(['pn_id'=>$model2->pn_id])->one();
+
+        //$total = Audit::find()->where(['assesment_id'=>$model2->assesment_id])->all()->sum('bobot');
+
+        // $command = Yii::$app->db->createCommand("SELECT sum(bobot), sum(audit_nilai_angka) FROM tb_audit where assesment_id=".$id);
+        // $bobotTotal = $command->queryScalar();
+
+        $query = (new \yii\db\Query())->from('tb_audit')->where(['assesment_id'=>$id]);
+        $bobotTotal = $query->sum('bobot');
+        $bobotNilai = $query->sum('audit_nilai_angka');
+
         $searchModel = new AuditSearch();
         $dataProvider = $searchModel->search2(Yii::$app->request->queryParams,$id);
 
@@ -83,10 +97,13 @@ class AssesmentController extends Controller
 
 
         return $this->render('audit', [
+            'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'datatj' => $datatj,
             'datakrit' => $datakrit,
+            'bobotTotal' => $bobotTotal,
+            'bobotNilai' => $bobotNilai,
         ]);
     }
 
@@ -101,6 +118,7 @@ class AssesmentController extends Controller
 
             $data=$model2->findOne($post['audit_id']);
             $data->audit_nilai=$post['audit_nilai'];
+            $data->audit_nilai_angka=$post['audit_nilai_angka'];
             $data->audit_temuan=$post['audit_temuan'];
             $data->audit_keterangan=$post['audit_keterangan'];
             
@@ -118,6 +136,34 @@ class AssesmentController extends Controller
         ]);
     }
 
+    public function actionTambah($id)
+    {
+        $model = new Audit();
+
+        //data Tujuan
+            $tujuan = new Tujuan();
+            $datatjn = $tujuan->find()->all();
+
+        //data Tujuan
+            $kriteria = new Kriteria();
+            $datakrit = $kriteria->find()->all();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            // $contact = new Audit();
+            // $contact->assesment_id=$id;
+            // $contact->pertanyaan_id=$model->tanya_id;
+            // $contact->save();
+            return $this->redirect(['audit', 'id' => $id]);
+            //return $this->redirect(['index']);
+        }
+
+        return $this->render('tambah', [
+            'model' => $model,
+            'datatjn'=>$datatjn,
+            'datakrit'=>$datakrit,
+        ]);
+    }
+
     /**
      * Creates a new Assesment model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -131,10 +177,6 @@ class AssesmentController extends Controller
             $pn = new PengadilanNegeri();
             $dataPN = $pn->find()->all();
 
-        //data kelas PN
-            $kls = new PnKelas();
-            $dataKLS = $kls->find()->all();
-
         //data Pegawai
             $pg = new Pegawai();
             $dataPG = $pg->find()->all();
@@ -143,20 +185,26 @@ class AssesmentController extends Controller
             //return $this->redirect(['view', 'id' => $model->assesment_id]);
 
             //$detPertanyaan;
-
             // if ($model->kelas_id=='KL001'){
             //     $detPertanyaan=Pertanyaan1::find()->all();
             // }else{
             //     $detPertanyaan=Pertanyaan2::find()->all();
             // }
 
-            $detPertanyaan=Pertanyaan::find()->where(['kelas_id'=>$model->kelas_id])->all();
+            $kelas = PengadilanNegeri::find()->where(['pn_id'=>$model->pn_id])->one();
+            $detPertanyaan=Pertanyaan::find()->where(['kelas_id'=>$kelas->pn_kelas])->all();
 
             foreach ($detPertanyaan as $key => $value) {
-                $contact = new Audit();
-                $contact->assesment_id=$model->assesment_id;
-                $contact->pertanyaan_id=$value['tanya_id'];
-                $contact->save();
+                $audit = new Audit();
+                $audit->assesment_id=$model->assesment_id;
+                $audit->tujuan_id=$value['tujuan_id'];
+                $audit->kriteria_id=$value['kriteria_id'];
+                $audit->pertanyaan=$value['pertanyaan'];
+                $audit->nilai_a=$value['tanya_ket_a'];
+                $audit->nilai_b=$value['tanya_ket_b'];
+                $audit->nilai_c=$value['tanya_ket_c'];
+                $audit->bobot=$value['tanya_bobot'];
+                $audit->save();
             }
 
             return $this->redirect(['index']);
@@ -165,37 +213,7 @@ class AssesmentController extends Controller
         return $this->render('create', [
             'model' => $model,
             'dataPN' => $dataPN,
-            'dataKLS' => $dataKLS,
             'dataPG' => $dataPG,
-        ]);
-    }
-
-    public function actionTambah()
-    {
-        $model = new Pertanyaan();
-
-        //data Tujuan
-            $kelas = new PnKelas();
-            $datakls = $kelas->find()->all();
-
-        //data Tujuan
-            $tujuan = new Tujuan();
-            $datatjn = $tujuan->find()->all();
-
-        //data Tujuan
-            $kriteria = new Kriteria();
-            $datakrit = $kriteria->find()->all();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->tanya_id]);
-            return $this->redirect(['index']);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-            'datakls'=>$datakls,
-            'datatjn'=>$datatjn,
-            'datakrit'=>$datakrit,
         ]);
     }
 
@@ -213,10 +231,6 @@ class AssesmentController extends Controller
         //data PN
             $pn = new PengadilanNegeri();
             $dataPN = $pn->find()->all();
-
-        //data kelas PN
-            $kls = new PnKelas();
-            $dataKLS = $kls->find()->all();
 
         //data Pegawai
             $pg = new Pegawai();

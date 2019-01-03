@@ -22,21 +22,6 @@ class Pegawai extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-
-    public function behaviors(){
-      return[
-        [
-          'class' => 'mdm\autonumber\Behavior',
-          'attribute' => 'pegawai_id', // required
-          'group' => 'pegawai', // required, unique
-          'value' => 'PG'.'?', // format auto number. '?' will be replaced with generated number
-          'digit' => 3 // optional, default to null.
-        ],
-        \yii\behaviors\TimestampBehavior::className(),
-        \yii\behaviors\BlameableBehavior::className(),
-
-      ];
-    }
     
     public static function tableName()
     {
@@ -53,7 +38,7 @@ class Pegawai extends \yii\db\ActiveRecord
             [['created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['pegawai_id'], 'string', 'max' => 5],
             [['pegawai_nama', 'pegawai_nip', 'pegawai_alamat', 'pegawai_status'], 'string', 'max' => 255],
-            [['pegawai_id'], 'unique'],
+            //[['pegawai_id'], 'unique'],
         ];
     }
 
@@ -82,5 +67,4 @@ class Pegawai extends \yii\db\ActiveRecord
             }
             return 'Root';
     }
-
 }

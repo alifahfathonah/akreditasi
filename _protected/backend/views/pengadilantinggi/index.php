@@ -30,11 +30,25 @@ $this->params['breadcrumbs'][] = $this->title;
             'pt_alamat',
             'pt_pimpinan',
             'pt_website',
-            //'pt_email:email',
-            //'pt_telp',
-            //'pt_fax',
-            //'pt_pegawai',
-            //'pt_honorer',
+            'pt_email:email',
+            'pt_telp',
+            'pt_fax',
+            'pt_pegawai',
+            'pt_honorer',
+            //'pt_logo',
+            [
+              'attribute' => 'pt_logo',
+              'format' => 'raw',
+              'value' => function ($data) {
+                if(!is_null($data->pt_logo)){
+                  return Html::img(Yii::$app->params['backendUrl'].'img2/'.$data->pt_logo,
+                    ['style'=>'width:50px; height:auto;']
+                  );
+                }else{
+                  return NULL;
+                }
+              },
+            ],
             //'created_by',
             //'created_at',
             //'updated_by',

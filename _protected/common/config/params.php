@@ -3,7 +3,7 @@ return [
     'adminEmail' => 'admin@example.com',
     'supportEmail' => 'support@example.com',
     'user.passwordResetTokenExpire' => 3600,
-    'backendUrl' => 'http://lpmbenoa.org/_protected/backend/web/uploads/',
+    'backendUrl' => 'http://localhost/akreditasi/_protected/backend/web/uploads/',
     'backendAss' => 'http://lpmbenoa.org/admin/tmptest/',
     'backendLogin' => 'http://localhost/akreditasi',
     'backendLogout' => 'http://localhost/akreditasi/site/logout',

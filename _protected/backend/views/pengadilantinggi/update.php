@@ -9,6 +9,7 @@ $this->title = 'Update Pengadilan Tinggi: {nameAttribute}';
 $this->params['breadcrumbs'][] = ['label' => 'Pengadilan Tinggis', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->pt_id, 'url' => ['view', 'id' => $model->pt_id]];
 $this->params['breadcrumbs'][] = 'Update';
+$status='update';
 ?>
 <div class="pengadilan-tinggi-update">
 
@@ -16,6 +17,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'status' => $status,
     ]) ?>
 
 </div>

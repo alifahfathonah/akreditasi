@@ -7,15 +7,15 @@ use Yii;
 /**
  * This is the model class for table "tb_pertanyaan".
  *
- * @property string $tanya_id
- * @property string $kelas_id
- * @property string $tujuan_id
- * @property string $kriteria_id
+ * @property int $tanya_id
+ * @property int $kelas_id
+ * @property int $tujuan_id
+ * @property int $kriteria_id
  * @property string $pertanyaan
  * @property string $tanya_ket_a
  * @property string $tanya_ket_b
  * @property string $tanya_ket_c
- * @property string $tanya_bobot
+ * @property int $tanya_bobot
  * @property int $created_by
  * @property int $created_at
  * @property int $updated_by
@@ -26,22 +26,6 @@ class Pertanyaan extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-
-    public function behaviors(){
-      return[
-        [
-          'class' => 'mdm\autonumber\Behavior',
-          'attribute' => 'tanya_id', // required
-          'group' => 'tanya', // required, unique
-          'value' => 'T'.'?', // format auto number. '?' will be replaced with generated number
-          'digit' => 3 // optional, default to null.
-        ],
-        \yii\behaviors\TimestampBehavior::className(),
-        \yii\behaviors\BlameableBehavior::className(),
-
-      ];
-    }
-
     public static function tableName()
     {
         return 'tb_pertanyaan';
@@ -53,12 +37,9 @@ class Pertanyaan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'kelas_id', 'tujuan_id', 'kriteria_id'], 'required'],
+            [['kelas_id', 'tujuan_id', 'kriteria_id', 'pertanyaan'], 'required'],
+            [['kelas_id', 'tujuan_id', 'kriteria_id', 'tanya_bobot', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['pertanyaan', 'tanya_ket_a', 'tanya_ket_b', 'tanya_ket_c'], 'string'],
-            [['created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['tanya_id', 'kelas_id', 'tujuan_id', 'kriteria_id'], 'string', 'max' => 5],
-            [['tanya_bobot'], 'string', 'max' => 255],
-            [['tanya_id'], 'unique'],
         ];
     }
 
@@ -92,44 +73,18 @@ class Pertanyaan extends \yii\db\ActiveRecord
             return 'Root';
     }
 
-    public function getnilaiA($id){
-            $model = Pertanyaan::find()->where(['tanya_id'=>$id])->one();
-            if(!empty($model)){
-                    return $model->tanya_ket_a;
-            }
-            return 'Root';
-    }
-
-    public function getnilaiB($id){
-            $model = Pertanyaan::find()->where(['tanya_id'=>$id])->one();
-            if(!empty($model)){
-                    return $model->tanya_ket_b;
-            }
-            return 'Root';
-    }
-
-    public function getnilaiC($id){
-            $model = Pertanyaan::find()->where(['tanya_id'=>$id])->one();
-            if(!empty($model)){
-                    return $model->tanya_ket_c;
-            }
-            return 'Root';
-    }
-
     public function getlisttj($id){
             $model = Pertanyaan::find()->where(['tanya_id'=>$id])->one();
-            $tujuan = Tujuan::find()->where(['tujuan_id'=>$model->tujuan_id])->one();
             if(!empty($model)){
-                    return $tujuan->tujuan_nama;
+                    return $model->tujuan_id;
             }
             return 'Root';
     }
 
     public function getlistkrit($id){
             $model = Pertanyaan::find()->where(['tanya_id'=>$id])->one();
-            $kriteria = Kriteria::find()->where(['kriteria_id'=>$model->kriteria_id])->one();
             if(!empty($model)){
-                    return $kriteria->kriteria_nama;
+                    return $model->kriteria_id;
             }
             return 'Root';
     }

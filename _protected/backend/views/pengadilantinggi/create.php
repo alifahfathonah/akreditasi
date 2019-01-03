@@ -9,6 +9,7 @@ use yii\helpers\Html;
 $this->title = 'Create Pengadilan Tinggi';
 $this->params['breadcrumbs'][] = ['label' => 'Pengadilan Tinggis', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$status='create';
 ?>
 <div class="pengadilan-tinggi-create">
 
@@ -16,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'status' => $status,
     ]) ?>
 
 </div>

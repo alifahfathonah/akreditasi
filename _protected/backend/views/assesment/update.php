@@ -17,7 +17,6 @@ $this->params['breadcrumbs'][] = 'Update';
     <?= $this->render('_form', [
         'model' => $model,
         'dataPN' => $dataPN,
-        'dataKLS' => $dataKLS,
         'dataPG' => $dataPG,
     ]) ?>
 

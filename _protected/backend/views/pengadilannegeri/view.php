@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use common\models\PnKelas;
+use common\models\Kelas;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\PengadilanNegeri */
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'attribute'=>'pn_kelas',
               'format' => 'text',
               'value' => function($data){
-                    $c = new PnKelas;
+                    $c = new Kelas;
                    return $c->getlistKelas($data->pn_kelas);
                },
             ],

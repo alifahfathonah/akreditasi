@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use common\models\PnKelas;
+use common\models\Kelas;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\PengadilannegeriSearch */
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'attribute'=>'pn_kelas',
               'format' => 'text',
               'value' => function($data){
-                    $c = new PnKelas;
+                    $c = new Kelas;
                    return $c->getlistKelas($data->pn_kelas);
                },
             ],

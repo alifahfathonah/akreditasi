@@ -19,13 +19,29 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'assesment_id') ?>
 
-    <?= $form->field($model, 'pertanyaan_id') ?>
+    <?= $form->field($model, 'tujuan_id') ?>
 
-    <?= $form->field($model, 'audit_nilai') ?>
+    <?= $form->field($model, 'kriteria_id') ?>
 
-    <?= $form->field($model, 'audit_temuan') ?>
+    <?= $form->field($model, 'pertanyaan') ?>
+
+    <?php // echo $form->field($model, 'nilai_a') ?>
+
+    <?php // echo $form->field($model, 'nilai_b') ?>
+
+    <?php // echo $form->field($model, 'nilai_c') ?>
+
+    <?php // echo $form->field($model, 'bobot') ?>
+
+    <?php // echo $form->field($model, 'audit_nilai') ?>
+
+    <?php // echo $form->field($model, 'audit_nilai_angka') ?>
+
+    <?php // echo $form->field($model, 'audit_temuan') ?>
 
     <?php // echo $form->field($model, 'audit_keterangan') ?>
+
+    <?php // echo $form->field($model, 'audit_penyelesaian') ?>
 
     <?php // echo $form->field($model, 'created_by') ?>
 

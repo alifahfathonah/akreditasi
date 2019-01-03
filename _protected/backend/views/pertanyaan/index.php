@@ -2,9 +2,9 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Kelas;
 use common\models\Tujuan;
 use common\models\Kriteria;
-use common\models\PnKelas;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 
@@ -59,23 +59,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php ActiveForm::end(); ?>
 <!-- . -->
     <p>
-        <?= Html::a('Create Pertanyaan', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Tambah Pertanyaan', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        //'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'options' => ['class' => 'grid-view2','style'=>'font-size:11px; overflow:auto; height:400px; max-width:100%; word-wrap:break-word;'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            // 'tanya_id',
+            //'tanya_id',
             [
               'attribute'=>'kelas_id',
               'format' => 'text',
               'value' => function($data){
-                    $c = new PnKelas;
-                   return $c->getlistkelas($data->kelas_id);
+                    $c = new Kelas;
+                   return $c->getlistKelas($data->tujuan_id);
                },
             ],
             [

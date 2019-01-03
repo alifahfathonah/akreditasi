@@ -20,21 +20,6 @@ class Kriteria extends \yii\db\ActiveRecord
      * @inheritdoc
      */
 
-    public function behaviors(){
-      return[
-        [
-          'class' => 'mdm\autonumber\Behavior',
-          'attribute' => 'kriteria_id', // required
-          'group' => 'kriteria', // required, unique
-          'value' => 'K'.'?', // format auto number. '?' will be replaced with generated number
-          'digit' => 3 // optional, default to null.
-        ],
-        \yii\behaviors\TimestampBehavior::className(),
-        \yii\behaviors\BlameableBehavior::className(),
-
-      ];
-    }
-
     public static function tableName()
     {
         return 'tb_kriteria';
@@ -50,7 +35,7 @@ class Kriteria extends \yii\db\ActiveRecord
             [['created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['kriteria_id'], 'string', 'max' => 5],
             [['kriteria_nama'], 'string', 'max' => 255],
-            [['kriteria_id'], 'unique'],
+            //[['kriteria_id'], 'unique'],
         ];
     }
 
