@@ -11,11 +11,14 @@ use yii\filters\VerbFilter;
 use common\models\PengadilanNegeri;
 use common\models\Pegawai;
 use common\models\Audit;
+use common\models\AuditUpload;
 use common\models\Tujuan;
 use common\models\Kriteria;
 use common\models\Pertanyaan;
 use backend\models\AuditSearch;
 use yii\helpers\VarDumper;
+use yii\web\UploadedFile;
+use kartik\mpdf\Pdf;
 
 /**
  * AssesmentController implements the CRUD actions for Assesment model.
@@ -43,8 +46,17 @@ class AssesmentController extends Controller
      */
     public function actionIndex()
     {
+        $uug = Yii::$app->user->identity->ug_id;
+        $pkey = Yii::$app->user->identity->pkey;
+
         $searchModel = new AssesmentSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+        if($uug=='01'){
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        }else{
+            $model = PengadilanNegeri::findOne($pkey);
+            $dataProvider = $searchModel->search2(Yii::$app->request->queryParams,$pkey);
+        }
 
         //data PN
             $pn = new PengadilanNegeri();
@@ -136,6 +148,36 @@ class AssesmentController extends Controller
         ]);
     }
 
+    public function actionNilaiuser($id)
+    {
+        $model = Audit::findOne($id);
+        
+        if($model->load(Yii::$app->request->post())){
+            $audit_upload=UploadedFile::getInstances($model, 'audit_upload');
+
+            foreach ($audit_upload as $file) {
+
+                $contact = new AuditUpload();
+                $contact->audit_id=$model->audit_id;
+                $contact->audit_upload=$model->audit_id .'-'. $file->baseName . '.' . $file->extension;
+                $contact->save();
+
+                 Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/web/uploads/file/';
+                  $path = Yii::$app->params['uploadPath'] .$model->audit_id .'-'. $file->baseName . '.' . $file->extension;
+                  $file->saveAs($path);
+            }
+
+            // $data = new Audit();
+            // $data->upload($audit_upload);
+            $model->save();
+            return $this->redirect(['audit', 'id' => $model->assesment_id]);
+        }
+        
+        return $this->render('nilaiuser', [
+            'model' => $model,
+        ]);
+    }
+
     public function actionTambah($id)
     {
         $model = new Audit();
@@ -162,6 +204,26 @@ class AssesmentController extends Controller
             'datatjn'=>$datatjn,
             'datakrit'=>$datakrit,
         ]);
+    }
+
+    public function actionFileuser($id)
+    {
+        $model = new AuditUpload();
+        $tanya = Audit::findOne($id);
+        return $this->render('fileuser', [
+            'model' => $model->find()->where(['audit_id'=>$id])->all(),
+            'tanya' => $tanya,
+        ]);
+    }
+
+    public function actionDeletefile($id,$audit_id)
+    {
+
+        $data = AuditUpload::findOne($id);
+        unlink(Yii::$app->basePath . '/web/uploads/file/' . $data->audit_upload);
+        $delete= AuditUpload::findOne($id)->delete();
+
+        return $this->redirect(['fileuser', 'id' => $audit_id]);
     }
 
     /**
@@ -300,5 +362,58 @@ class AssesmentController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionReport() {
+    // get your HTML raw content without any layouts or scripts
+    //$content = $this->renderPartial('_reportView');
+     $aa = 'asasa';
+     $ab = 'aba';
+    // setup kartik\mpdf\Pdf component
+    $pdf = new Pdf([
+        // set to use core fonts only
+        'mode' => Pdf::MODE_CORE, 
+        // A4 paper format
+        'format' => Pdf::FORMAT_A4, 
+        // portrait orientation
+        'orientation' => Pdf::ORIENT_PORTRAIT, 
+        // stream to browser inline
+        'destination' => Pdf::DEST_BROWSER, 
+        // your html content input
+        'content' => 
+        ($aa.'<br> aaaa'),
+        // format content from your own css file if needed or use the
+        // enhanced bootstrap css built by Krajee for mPDF formatting 
+         'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
+        // // any css to be embedded if required
+         'cssInline' => '.kv-heading-1{font-size:18px}', 
+         // set mPDF properties on the fly
+        'options' => ['title' => 'Krajee Report Title'],
+         // call mPDF methods on the fly
+        'methods' => [ 
+            'SetHeader'=>['asdas'.'aaaaaaaaaaaaa'], 
+            'SetFooter'=>['{PAGENO}'],
+        ]
+    ]);
+
+        echo 'aa';
+    
+    // return the pdf output as per the destination setting
+    return $pdf->render(); 
+    }
+
+    public function actionUnduh($id) 
+    { 
+        $download =  AuditUpload::findOne($id);
+        //$download = AuditUpload::findOne()->where(['audit_id'=>$id]);
+        // foreach ($download as $value) {
+            $path = Yii::$app->basePath.'/web/uploads/file/'.$download['audit_upload'];
+
+            if (file_exists($path)) {
+                return Yii::$app->response->sendFile($path);
+            }
+        // }
+        //$download = PstkIdentifikasi::findOne($id); 
+        
     }
 }

@@ -16,7 +16,6 @@ use yii\bootstrap\Modal;
 $this->title = 'Audit';
 //$this->pn = $model->pn_nama;
 $this->params['breadcrumbs'][] = $this->title;
-
 $this->registerJs("
     $('#myModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)
@@ -31,14 +30,18 @@ $this->registerJs("
             });
         })
 ");
+$uug = Yii::$app->user->identity->ug_id;
 ?>
 <div class="audit-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <div class="col-md-9">
     <h3><?php echo $model->pn_nama ?></h3>
-    <!-- <p><?php echo 'bobot total = '.$bobotTotal ?></p>
-    <p><?php echo 'Nilai = '.$bobotNilai ?></p> -->
+  </div><div class="col-md-3">
+    <p><?php echo 'bobot total = '.$bobotTotal ?></p>
+    <p><?php echo 'Nilai = '.$bobotNilai ?></p>
+  </div>
 
 <!-- . -->
 <div class="row">
@@ -48,13 +51,6 @@ $this->registerJs("
         'method' => 'get',
         'fieldConfig' => [
             'template' => "{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
-            //'horizontalCssClasses' => [
-            //    'label' => 'col-sm-3',
-                //'offset' => 'col-sm-offset-4',
-            //    'wrapper' => 'col-sm-9',
-            //    'error' => '',
-            //    'hint' => '',
-            //],
         ],
     ]); ?>
 
@@ -74,10 +70,22 @@ $this->registerJs("
 </div>
     <?php ActiveForm::end(); ?>
 <!-- . -->
-    <p>
-        <?= Html::a('Tambah Pertanyaan', ['tambah','id'=>$_GET['id']], ['class' => 'btn btn-success']) ?>
-    </p>
 
+    <p>
+      <?php
+        if($uug=='01'){
+            echo Html::a('Tambah Pertanyaan', ['tambah','id'=>$_GET['id']], ['class' => 'btn btn-success']) ;
+            echo ' '; 
+            echo Html::a('Report', ['report'], ['class' => 'btn btn-danger']) ;
+            echo ' '; 
+          }
+          echo Html::a('Kembali', ['index'], ['class' => 'btn btn-primary']);
+    ?>
+    </p>
+    
+<?php
+        if($uug=='01'){ 
+?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
@@ -105,35 +113,88 @@ $this->registerJs("
                },
             ],
             'pertanyaan',
-            'nilai_a',
-            'nilai_b',
-            'nilai_c',
+            // 'nilai_a',
+            // 'nilai_b',
+            // 'nilai_c',
+            'audit_ket_user',
             'bobot',
             'audit_nilai',
             'audit_nilai_angka',
             'audit_temuan',
             'audit_keterangan:ntext',
-            'audit_penyelesaian',
-            //'created_by',
-            //'created_at',
-            //'updated_by',
-            //'updated_at',
-
-            //['class' => 'yii\grid\ActionColumn'],
+            //'audit_penyelesaian',
             [
               'class' => 'yii\grid\ActionColumn',
-              'template' => '{nilai}',
+              'template' => '{nilai}{fileuser}',
               'buttons' => [
                   'nilai' => function($url,$model,$key){
-                      return  Html::a(Html::tag('i','',['class'=>'fa fa-edit']),
+                      return  Html::a(Html::tag('i','nilai',['class'=>'fa fa-edit','style' => 'height: 30px;']),
                         ['nilai','id'=>$model->audit_id,
-                        //'pertanyaan_id'=>$model->pertanyaan_id,
                         'assesment_id'=>$model->assesment_id],['data-toggle'=>'modal','data-target'=>'#myModal','data-title'=>'Penilaian',]);
+                  },
+                  'fileuser' => function($url,$model,$key){
+                      return  Html::a(Html::tag('i','lihat file',['class'=>'fa fa-edit','style' => 'height: 30px;']),
+                        ['fileuser','id'=>$model->audit_id]);
                   },
               ],
             ],
         ],
-    ]); ?>
+    ]); } else {
+
+      echo GridView::widget([
+        'dataProvider' => $dataProvider,
+        //'filterModel' => $searchModel,
+        'options' => ['class' => 'grid-view2','style'=>'font-size:11px; overflow:auto; height:400px; max-width:100%; word-wrap:break-word;'],
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            //'audit_id',
+            //'assesment_id',
+            //'pertanyaan_id',
+            [
+              'attribute'=>'tujuan_id',
+              'format' => 'text',
+              'value' => function($data){
+                    $c = new Tujuan;
+                   return $c->getlistTujuan($data->tujuan_id);
+               },
+            ],
+            [
+              'attribute'=>'kriteria_id',
+              'format' => 'text',
+              'value' => function($data){
+                    $c = new Kriteria;
+                   return $c->getlistKriteria($data->kriteria_id);
+               },
+            ],
+            'pertanyaan',
+            // 'nilai_a',
+            // 'nilai_b',
+            // 'nilai_c',
+            'bobot',
+            // 'audit_nilai',
+            // 'audit_nilai_angka',
+            // 'audit_temuan',
+            'audit_ket_user:ntext',
+            // 'audit_penyelesaian',
+            [
+              'class' => 'yii\grid\ActionColumn',
+              'template' => '{nilaiuser}{fileuser}',
+              'buttons' => [
+                  'nilaiuser' => function($url,$model,$key){
+                      return  Html::a(Html::tag('i','nilai',['class'=>'fa fa-edit','style' => 'height: 30px;']),
+                        ['nilaiuser','id'=>$model->audit_id,
+                        'assesment_id'=>$model->assesment_id]);
+                  },
+                  'fileuser' => function($url,$model,$key){
+                      return  Html::a(Html::tag('i','lihat file',['class'=>'fa fa-edit','style' => 'height: 30px;']),
+                        ['fileuser','id'=>$model->audit_id]);
+                  },
+              ],
+            ],
+        ],
+    ]); }
+    ?>
 
     <?php
       Modal::begin([

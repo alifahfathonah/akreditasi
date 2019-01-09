@@ -14,16 +14,22 @@ use yii\helpers\ArrayHelper;
 
 $this->title = 'Assesments';
 $this->params['breadcrumbs'][] = $this->title;
+
+$uug = Yii::$app->user->identity->ug_id;
 ?>
 <div class="assesment-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <!-- <?php // echo $this->render('_search', ['model' => $searchModel]); ?> -->
     
-    <p>
-        <?= Html::a('Create Assesment', ['create'], ['class' => 'btn btn-success']) ?>
+    <p><?php
+        if($uug=='01'){
+             echo Html::a('Create Assesment', ['create'], ['class' => 'btn btn-success']) ;
+        }
+    ?>
     </p>
 
+<?php if($uug=='01'){ ?>
 <div class="row">
   <?php $form = ActiveForm::begin([
         'layout' => 'horizontal',
@@ -52,9 +58,11 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
     <?php ActiveForm::end(); ?>
 <!-- . -->
+<?php }?>
     
 
-    <?= GridView::widget([
+    <?php if($uug=='01'){
+    echo GridView::widget([
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
         'columns' => [
@@ -72,38 +80,82 @@ $this->params['breadcrumbs'][] = $this->title;
                },
             ],
             'assesment_jenis',
-            // [
-            //   'attribute'=>'assesment_ketua',
-            //   'format' => 'text',
-            //   'value' => function($data){
-            //         $c = new Pegawai;
-            //        return $c->getlistPeg($data->assesment_ketua);
-            //    },
-            // ],
-            // [
-            //   'attribute'=>'assesment_anggota',
-            //   'format' => 'text',
-            //   'value' => function($data){
-            //         $c = new Pegawai;
-            //        return $c->getlistPeg($data->assesment_anggota);
-            //    },
-            // ],
+            [
+              'attribute'=>'assesment_ketua',
+              'format' => 'text',
+              'value' => function($data){
+                    $c = new Pegawai;
+                   return $c->getlistPeg($data->assesment_ketua);
+               },
+            ],
+            [
+              'attribute'=>'assesment_anggota',
+              'format' => 'text',
+              'value' => function($data){
+                    $c = new Pegawai;
+                   return $c->getlistPeg($data->assesment_anggota);
+               },
+            ],
             'assesment_tanggal_mulai',
             'assesment_tanggal_selesai',
             //'created_by',
             //'created_at',
             //'updated_by',
             //'updated_at',
-
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {audit}',
+                'template' => '{audit} {update} {delete} ',
                 'buttons' => [
                     'audit' => function($url,$model,$key){
-                        return  Html::a(Html::tag('i','',['class'=>'fa fa-check-square', 'title'=>'Audit']), ['audit','id'=>$model->assesment_id]);
+                        return  
+                        //Html::a('Audit', ['audit','id'=>$model->assesment_id], ['class' => 'btn btn-success']);
+                         Html::a(Html::tag('i','',['class'=>'fa fa-file', 'title'=>'Audit']), ['audit','id'=>$model->assesment_id]);
                     },
                 ],
-              ],
+            ],
         ],
-    ]); ?>
+    ]);
+  }else{
+      echo GridView::widget([
+        'dataProvider' => $dataProvider,
+        // 'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            // 'assesment_id',
+            'assesment_surat',
+            'assesment_surat_tanggal',
+            'assesment_jenis',
+            [
+              'attribute'=>'assesment_ketua',
+              'format' => 'text',
+              'value' => function($data){
+                    $c = new Pegawai;
+                   return $c->getlistPeg($data->assesment_ketua);
+               },
+            ],
+            [
+              'attribute'=>'assesment_anggota',
+              'format' => 'text',
+              'value' => function($data){
+                    $c = new Pegawai;
+                   return $c->getlistPeg($data->assesment_anggota);
+               },
+            ],
+            'assesment_tanggal_mulai',
+            'assesment_tanggal_selesai',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{audit}',
+                'buttons' => [
+                    'audit' => function($url,$model,$key){
+                        return  
+                        //Html::a('View', ['audit','id'=>$model->assesment_id], ['class' => 'btn btn-success']);
+                         Html::a(Html::tag('i','',['class'=>'fa fa-file', 'title'=>'Audit']), ['audit','id'=>$model->assesment_id]);
+                    },
+                ],
+            ],
+        ],
+    ]);
+  } ?>
 </div>

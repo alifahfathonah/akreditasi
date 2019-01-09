@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "tb_audit".
@@ -31,6 +32,16 @@ class Audit extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $audit_upload;
+    
+    public function behaviors(){
+        return[
+            \yii\behaviors\TimestampBehavior::className(),
+            \yii\behaviors\BlameableBehavior::className(),
+        ];
+    }
+    
+
     public static function tableName()
     {
         return 'tb_audit';
@@ -46,7 +57,8 @@ class Audit extends \yii\db\ActiveRecord
             [['pertanyaan', 'nilai_a', 'nilai_b', 'nilai_c', 'audit_keterangan'], 'string'],
             [['audit_nilai'], 'string', 'max' => 5],
             [['audit_temuan', 'audit_penyelesaian'], 'string', 'max' => 255],
-            [['audit_keterangan','audit_temuan','audit_nilai','audit_nilai_angka','audit_penyelesaian'], 'default', 'value'=>null]
+            [['audit_keterangan','audit_temuan','audit_nilai','audit_nilai_angka','audit_penyelesaian','audit_ket_user'], 'default', 'value'=>null],
+            [['audit_upload'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, jpeg, png, jpeg, doc, docx, pdf, xlsx, xls, rar', 'maxFiles' => 10],
         ];
     }
 
@@ -57,9 +69,9 @@ class Audit extends \yii\db\ActiveRecord
     {
         return [
             'audit_id' => 'Audit ID',
-            'assesment_id' => 'Assesment ID',
-            'tujuan_id' => 'Tujuan ID',
-            'kriteria_id' => 'Kriteria ID',
+            'assesment_id' => 'Assesment',
+            'tujuan_id' => 'Tujuan',
+            'kriteria_id' => 'Kriteria',
             'pertanyaan' => 'Pertanyaan',
             'nilai_a' => 'Nilai A',
             'nilai_b' => 'Nilai B',
@@ -68,6 +80,7 @@ class Audit extends \yii\db\ActiveRecord
             'audit_nilai' => 'Audit Nilai',
             'audit_nilai_angka' => 'Audit Nilai Angka',
             'audit_temuan' => 'Audit Temuan',
+            'audit_ket_user' => 'Keterangan PN',
             'audit_keterangan' => 'Audit Keterangan',
             'audit_penyelesaian' => 'Audit Penyelesaian',
             'created_by' => 'Created By',

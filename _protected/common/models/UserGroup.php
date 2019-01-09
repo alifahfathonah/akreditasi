@@ -61,4 +61,12 @@ class UserGroup extends \yii\db\ActiveRecord
             'ug_pkey_relation' => 'Pkey Relation',
         ];
     }
+
+    public function getlistGroup($id){
+            $model = UserGroup::find()->where(['ug_id'=>$id])->one();
+            if(!empty($model)){
+                    return $model->ug_nama;
+            }
+            return 'Root';
+    }
 }

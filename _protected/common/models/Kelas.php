@@ -19,6 +19,13 @@ class Kelas extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors(){
+        return[
+            \yii\behaviors\TimestampBehavior::className(),
+            \yii\behaviors\BlameableBehavior::className(),
+        ];
+    }
+    
     public static function tableName()
     {
         return 'tb_kelas';

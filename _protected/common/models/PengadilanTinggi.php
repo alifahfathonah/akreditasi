@@ -30,20 +30,14 @@ class PengadilanTinggi extends \yii\db\ActiveRecord
      */
     public $image;
 
+    
     public function behaviors(){
-      return[
-        [
-          'class' => 'mdm\autonumber\Behavior',
-          'attribute' => 'pt_id', // required
-          'group' => 'pengadilantinggi', // required, unique
-          'value' => 'PT'.'?', // format auto number. '?' will be replaced with generated number
-          'digit' => 3 // optional, default to null.
-        ],
-        \yii\behaviors\TimestampBehavior::className(),
-        \yii\behaviors\BlameableBehavior::className(),
-
-      ];
+        return[
+            \yii\behaviors\TimestampBehavior::className(),
+            \yii\behaviors\BlameableBehavior::className(),
+        ];
     }
+    
 
     public static function tableName()
     {
