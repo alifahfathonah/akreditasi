@@ -19,7 +19,7 @@ class AuditSearch extends Audit
     {
         return [
             [['audit_id', 'assesment_id', 'tujuan_id', 'kriteria_id', 'bobot', 'audit_nilai_angka', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['pertanyaan', 'nilai_a', 'nilai_b', 'nilai_c', 'audit_nilai', 'audit_temuan', 'audit_keterangan', 'audit_penyelesaian'], 'safe'],
+            [['pertanyaan', 'nilai_a', 'nilai_b', 'nilai_c', 'audit_nilai', 'audit_temuan', 'audit_keterangan'], 'safe'],
         ];
     }
 
@@ -77,8 +77,7 @@ class AuditSearch extends Audit
             ->andFilterWhere(['like', 'nilai_c', $this->nilai_c])
             ->andFilterWhere(['like', 'audit_nilai', $this->audit_nilai])
             ->andFilterWhere(['like', 'audit_temuan', $this->audit_temuan])
-            ->andFilterWhere(['like', 'audit_keterangan', $this->audit_keterangan])
-            ->andFilterWhere(['like', 'audit_penyelesaian', $this->audit_penyelesaian]);
+            ->andFilterWhere(['like', 'audit_keterangan', $this->audit_keterangan]);
 
         return $dataProvider;
     }
@@ -121,8 +120,7 @@ class AuditSearch extends Audit
             ->andFilterWhere(['like', 'nilai_c', $this->nilai_c])
             ->andFilterWhere(['like', 'audit_nilai', $this->audit_nilai])
             ->andFilterWhere(['like', 'audit_temuan', $this->audit_temuan])
-            ->andFilterWhere(['like', 'audit_keterangan', $this->audit_keterangan])
-            ->andFilterWhere(['like', 'audit_penyelesaian', $this->audit_penyelesaian]);
+            ->andFilterWhere(['like', 'audit_keterangan', $this->audit_keterangan]);
 
         return $dataProvider;
     }

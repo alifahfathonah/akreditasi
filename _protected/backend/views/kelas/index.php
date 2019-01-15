@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             // 'kelas_id',
             'kelas_nama',
+            'kelas_pkey',
             // 'created_by',
             // 'created_at',
             // 'updated_by',

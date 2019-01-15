@@ -43,7 +43,7 @@ class PertanyaanController extends Controller
 
         //data Kelas
             $kelas = new Kelas();
-            $datakls = $kelas->find()->all();
+            $datakls = $kelas->find()->where(['kelas_pkey'=>0])->all();
 
         //data Tujuan
             $tujuan = new Tujuan();
@@ -53,13 +53,23 @@ class PertanyaanController extends Controller
             $kriteria = new Kriteria();
             $datakrit = $kriteria->find()->all();
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'datakls'=>$datakls,
-            'datatjn'=>$datatjn,
-            'datakrit'=>$datakrit,
-        ]);
+            $query = (new \yii\db\Query())->from('tb_pertanyaan');
+            $bobotkls1 = $query->where(['kelas_id'=>1])->sum('tanya_bobot');
+            $bobotkls2 = $query->where(['kelas_id'=>2])->sum('tanya_bobot');
+
+        $uug = Yii::$app->user->identity->ug_id;
+        
+        if ($uug!='06'){
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'datakls'=>$datakls,
+                'datatjn'=>$datatjn,
+                'datakrit'=>$datakrit,
+                'bobotkls1'=>$bobotkls1,
+                'bobotkls2'=>$bobotkls2,
+            ]);
+        }
     }
 
     /**
@@ -86,7 +96,7 @@ class PertanyaanController extends Controller
 
         //data Kelas
             $kelas = new Kelas();
-            $datakls = $kelas->find()->all();
+            $datakls = $kelas->find()->where(['kelas_pkey'=>0])->all();
 
         //data Tujuan
             $tujuan = new Tujuan();
@@ -122,7 +132,7 @@ class PertanyaanController extends Controller
 
         //data Kelas
             $kelas = new Kelas();
-            $datakls = $kelas->find()->all();
+            $datakls = $kelas->find()->where(['kelas_pkey'=>0])->all();
 
         //data Tujuan
             $tujuan = new Tujuan();

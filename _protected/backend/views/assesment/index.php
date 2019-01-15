@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use common\models\Pegawai;
 use common\models\PengadilanNegeri;
 use common\models\Kelas;
+use common\models\Jenis;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 
@@ -23,13 +24,13 @@ $uug = Yii::$app->user->identity->ug_id;
     <!-- <?php // echo $this->render('_search', ['model' => $searchModel]); ?> -->
     
     <p><?php
-        if($uug=='01'){
+        if($uug=='01' or $uug=='07'){
              echo Html::a('Create Assesment', ['create'], ['class' => 'btn btn-success']) ;
         }
     ?>
     </p>
 
-<?php if($uug=='01'){ ?>
+<?php if($uug=='01'or $uug=='07'){ ?>
 <div class="row">
   <?php $form = ActiveForm::begin([
         'layout' => 'horizontal',
@@ -37,13 +38,6 @@ $uug = Yii::$app->user->identity->ug_id;
         'method' => 'get',
         'fieldConfig' => [
             'template' => "{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
-            //'horizontalCssClasses' => [
-            //    'label' => 'col-sm-3',
-                //'offset' => 'col-sm-offset-4',
-            //    'wrapper' => 'col-sm-9',
-            //    'error' => '',
-            //    'hint' => '',
-            //],
         ],
     ]); ?>
 
@@ -61,7 +55,7 @@ $uug = Yii::$app->user->identity->ug_id;
 <?php }?>
     
 
-    <?php if($uug=='01'){
+    <?php if($uug=='01' or $uug=='07'){
     echo GridView::widget([
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
@@ -79,7 +73,23 @@ $uug = Yii::$app->user->identity->ug_id;
                    return $c->getlistPN($data->pn_id);
                },
             ],
-            'assesment_jenis',
+            //'pn_kelas_type',
+            [
+              'attribute'=>'pn_kelas_type',
+              'format' => 'text',
+              'value' => function($data){
+                    $c = new Kelas;
+                   return $c->getlistKelas($data->pn_kelas_type);
+               },
+            ],
+            [
+              'attribute'=>'assesment_jenis',
+              'format' => 'text',
+              'value' => function($data){
+                    $c = new Jenis;
+                   return $c->getlistJenis($data->assesment_jenis);
+               },
+            ],
             [
               'attribute'=>'assesment_ketua',
               'format' => 'text',
@@ -88,20 +98,8 @@ $uug = Yii::$app->user->identity->ug_id;
                    return $c->getlistPeg($data->assesment_ketua);
                },
             ],
-            [
-              'attribute'=>'assesment_anggota',
-              'format' => 'text',
-              'value' => function($data){
-                    $c = new Pegawai;
-                   return $c->getlistPeg($data->assesment_anggota);
-               },
-            ],
             'assesment_tanggal_mulai',
             'assesment_tanggal_selesai',
-            //'created_by',
-            //'created_at',
-            //'updated_by',
-            //'updated_at',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{audit} {update} {delete} ',
@@ -125,7 +123,14 @@ $uug = Yii::$app->user->identity->ug_id;
             // 'assesment_id',
             'assesment_surat',
             'assesment_surat_tanggal',
-            'assesment_jenis',
+            [
+              'attribute'=>'assesment_jenis',
+              'format' => 'text',
+              'value' => function($data){
+                    $c = new Jenis;
+                   return $c->getlistJenis($data->assesment_jenis);
+               },
+            ],
             [
               'attribute'=>'assesment_ketua',
               'format' => 'text',
@@ -134,24 +139,21 @@ $uug = Yii::$app->user->identity->ug_id;
                    return $c->getlistPeg($data->assesment_ketua);
                },
             ],
-            [
-              'attribute'=>'assesment_anggota',
-              'format' => 'text',
-              'value' => function($data){
-                    $c = new Pegawai;
-                   return $c->getlistPeg($data->assesment_anggota);
-               },
-            ],
             'assesment_tanggal_mulai',
             'assesment_tanggal_selesai',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{audit}',
+                'template' => '{audit}  {pasca}',
                 'buttons' => [
                     'audit' => function($url,$model,$key){
                         return  
                         //Html::a('View', ['audit','id'=>$model->assesment_id], ['class' => 'btn btn-success']);
-                         Html::a(Html::tag('i','',['class'=>'fa fa-file', 'title'=>'Audit']), ['audit','id'=>$model->assesment_id]);
+                         Html::a(Html::tag('i','pra audit',['class'=>'fa fa-arrow-up', 'title'=>'Audit']), ['audit','id'=>$model->assesment_id]);
+                    },
+                    'pasca' => function($url,$model,$key){
+                        return  
+                        //Html::a('View', ['audit','id'=>$model->assesment_id], ['class' => 'btn btn-success']);
+                         Html::a(Html::tag('i','pasca audit',['class'=>'fa fa-arrow-down', 'title'=>'Pasca Audit']), ['auditpasca','id'=>$model->assesment_id]);
                     },
                 ],
             ],

@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                },
             ],
             'pn_akreditasi',
-            'pn_ketua',
+            // 'pn_ketua',
             'pn_email:email',
             'pn_website',
             'pn_telp',

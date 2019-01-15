@@ -40,7 +40,6 @@ class Kriteria extends \yii\db\ActiveRecord
         return [
             [['kriteria_nama'], 'required'],
             [['created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['kriteria_id'], 'string', 'max' => 5],
             [['kriteria_nama'], 'string', 'max' => 255],
             //[['kriteria_id'], 'unique'],
         ];

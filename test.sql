@@ -1,7 +1,7 @@
 
 INSERT INTO t (pertanyaan, jawaban_a, jawaban_b, jawaban_c ) VALUES ();
 
-=CONCATENATE("INSERT INTO t (pertanyaan, jawaban_a, jawaban_b, jawaban_c ) VALUES ('",B4,"','",E4,"','",F4,"','",G4,"');")
+=CONCATENATE("INSERT INTO tb_pertanyaan (kelas_id, tujuan_id, kriteria_id, pertanyaan, tanya_ket_a, tanya_ket_b, tanya_ket_b, tanya_bobot ) VALUES ('",B4,"','",U4,"','",V4,"','",W4,"','",D4,"');")
 
 DROP TABLE if exists t; 
 CREATE TABLE t (

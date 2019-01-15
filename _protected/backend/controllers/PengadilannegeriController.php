@@ -10,6 +10,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\Kelas;
+use common\models\Akreditasi;
+use backend\models\AkreditasiSearch;
 
 /**
  * PengadilannegeriController implements the CRUD actions for PengadilanNegeri model.
@@ -29,6 +31,54 @@ class PengadilannegeriController extends Controller
                 ],
             ],
         ];
+    }
+
+    public function actionAkreditasi($id)
+    {
+        $model2 = $this->findModel($id);
+        $model = PengadilanNegeri::find()->where(['pn_id'=>$model2->pn_id])->one();
+
+        $searchModel = new AkreditasiSearch();
+        $dataProvider = $searchModel->search2(Yii::$app->request->queryParams,$id);
+
+        return $this->render('akreditasi', [
+            'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionAkreditasiadd($id)
+    {
+        $model = new Akreditasi();
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            
+            $pn = Akreditasi::find()->where(['pn_id'=>$id])->orderBy(['akreditasi_tgl_sk' => SORT_DESC])->asArray()->one();
+            $model2 = new PengadilanNegeri();
+            $data = $model2->findOne($id);
+            $data->pn_akreditasi=$pn['akreditasi'];
+            $data->save();
+
+            return $this->redirect(['akreditasi', 'id' => $id]);
+        }
+
+        return $this->render('akreditasiadd', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionAkreditasidelete($id,$pn_id)
+    {
+        $delete= Akreditasi::findOne($id)->delete();
+
+        $pn = Akreditasi::find()->where(['pn_id'=>$pn_id])->orderBy(['akreditasi_tgl_sk' => SORT_DESC])->asArray()->one();
+            $model2 = new PengadilanNegeri();
+            $data = $model2->findOne($pn_id);
+            $data->pn_akreditasi=$pn['akreditasi'];
+            $data->save();
+
+        return $this->redirect(['akreditasi', 'id' => $pn_id]);
     }
 
     /**
@@ -70,42 +120,8 @@ class PengadilannegeriController extends Controller
 
         //data kelas PN
             $kls = new Kelas();
-            $data = $kls->find()->all();
-
-        // if (Yii::$app->request->post()) {
-        //   $post =Yii::$app->request->post('PengadilanNegeri');
-
-        //   $pn_nama = $post['pn_nama'];
-        //   $pn_alamat = $post['pn_alamat'];
-        //   $pn_kelas = $post['pn_kelas'];
-        //   $pn_akreditasi = $post['pn_akreditasi'];
-        //   $pn_ketua = $post['pn_ketua'];
-        //   $pn_email = $post['pn_email'];
-        //   $pn_website = $post['pn_website'];
-        //   $pn_telp = $post['pn_telp'];
-        //   $pn_fax = $post['pn_fax'];
-        //   $pn_pegawai = $post['pn_pegawai'];
-        //   $pn_honorer = $post['pn_honorer'];
-
-        //   $model->attributes=array(
-        //     'pn_nama' => $pn_nama,
-        //     'pn_alamat' => $pn_alamat,
-        //     'pn_kelas' => $pn_kelas,
-        //     'pn_akreditasi' => $pn_akreditasi,
-        //     'pn_ketua' => $pn_ketua,
-        //     'pn_email' => $pn_email,
-        //     'pn_website' => $pn_website,
-        //     'pn_telp' => $pn_telp,
-        //     'pn_fax' => $pn_fax,
-        //     'pn_pegawai' => $pn_pegawai,
-        //     'pn_honorer' => $pn_honorer,
-        //   );
-
-        //   if($model->save()){
-        //     return $this->redirect(['index']);
-        //   }
-
-        // }
+            $data = $kls->find()->where(['kelas_pkey'=>0])->all();
+            $data2 = $kls->find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->pn_id]);
@@ -114,6 +130,7 @@ class PengadilannegeriController extends Controller
         return $this->render('create', [
             'model' => $model,
             'data'=>$data,
+            'data2'=>$data2,
         ]);
     }
 
@@ -134,11 +151,13 @@ class PengadilannegeriController extends Controller
 
         //data kelas PN
             $kls = new Kelas();
-            $data = $kls->find()->all();
+            $data = $kls->find()->where(['kelas_pkey'=>0])->all();
+            $data2 = $kls->find()->all();
         
         return $this->render('update', [
             'model' => $model,
             'data'=>$data,
+            'data2'=>$data2,
         ]);
     }
 
@@ -170,5 +189,26 @@ class PengadilannegeriController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionLists($id)
+    {
+        $countPosts = Kelas::find()
+        ->where(['kelas_pkey' => $id])
+        ->count();
+
+        $posts = Kelas::find()
+        ->where(['kelas_pkey' => $id])
+        ->all();
+
+        if($countPosts>0){
+            foreach($posts as $post){
+            echo "<option value='".$post->kelas_id."'>".$post->kelas_nama."</option>";
+            }
+        }
+            else{
+            echo "<option>-</option>";
+        }
+ 
     }
 }

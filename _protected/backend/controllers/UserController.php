@@ -28,7 +28,7 @@ class UserController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index','view','create','update','delete'],
+                        'actions' => ['index','view','create','update','delete','tambah'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -47,6 +47,15 @@ class UserController extends Controller
      * Lists all Kaling models.
      * @return mixed
      */
+
+    public function actionTambah()
+    {
+        return $this->renderAjax('tambah', [
+            'id'=>'1',
+        ]);
+        // return 'success';
+    }
+
     public function actionIndex()
     {
         // $dataProviderK = new ActiveDataProvider([
@@ -55,12 +64,14 @@ class UserController extends Controller
         // $dataProviderA = new ActiveDataProvider([
         //     'query' => Admin::find(),
         // ]);
+        $uug = Yii::$app->user->identity->ug_id;
 
         $usergroup = Usergroup::find()->all();
-
-        return $this->render('index', [
-            'usergroup' => $usergroup,
-        ]);
+        if ($uug!='06'){
+            return $this->render('index', [
+                'usergroup' => $usergroup,
+            ]);
+        }
     }
 
     /**

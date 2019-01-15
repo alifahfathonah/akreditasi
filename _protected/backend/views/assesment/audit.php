@@ -7,6 +7,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 use common\models\Tujuan;
 use common\models\Kriteria;
+use common\models\Kelas;
 use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
@@ -37,10 +38,10 @@ $uug = Yii::$app->user->identity->ug_id;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
     <div class="col-md-9">
-    <h3><?php echo $model->pn_nama ?></h3>
+    <h3><?php echo $model->pn_nama.' ('.$kelas->kelas_nama.')' ?></h3>
   </div><div class="col-md-3">
     <p><?php echo 'bobot total = '.$bobotTotal ?></p>
-    <p><?php echo 'Nilai = '.$bobotNilai ?></p>
+    <p><?php if ($uug!='06'){echo 'Nilai = '.$bobotNilai; } echo '&nbsp;';?></p>
   </div>
 
 <!-- . -->
@@ -76,7 +77,7 @@ $uug = Yii::$app->user->identity->ug_id;
         if($uug=='01'){
             echo Html::a('Tambah Pertanyaan', ['tambah','id'=>$_GET['id']], ['class' => 'btn btn-success']) ;
             echo ' '; 
-            echo Html::a('Report', ['report'], ['class' => 'btn btn-danger']) ;
+            echo Html::a('Report', ['report','id'=>$_GET['id']], ['class' => 'btn btn-danger']) ;
             echo ' '; 
           }
           echo Html::a('Kembali', ['index'], ['class' => 'btn btn-primary']);
@@ -116,13 +117,13 @@ $uug = Yii::$app->user->identity->ug_id;
             // 'nilai_a',
             // 'nilai_b',
             // 'nilai_c',
-            'audit_ket_user',
+            'audit_ket_praaudit',
             'bobot',
             'audit_nilai',
             'audit_nilai_angka',
             'audit_temuan',
             'audit_keterangan:ntext',
-            //'audit_penyelesaian',
+            'audit_ket_pascaaudit',
             [
               'class' => 'yii\grid\ActionColumn',
               'template' => '{nilai}{fileuser}',
@@ -168,15 +169,8 @@ $uug = Yii::$app->user->identity->ug_id;
                },
             ],
             'pertanyaan',
-            // 'nilai_a',
-            // 'nilai_b',
-            // 'nilai_c',
             'bobot',
-            // 'audit_nilai',
-            // 'audit_nilai_angka',
-            // 'audit_temuan',
-            'audit_ket_user:ntext',
-            // 'audit_penyelesaian',
+            'audit_ket_praaudit:ntext',
             [
               'class' => 'yii\grid\ActionColumn',
               'template' => '{nilaiuser}{fileuser}',

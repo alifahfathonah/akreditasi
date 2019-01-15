@@ -66,9 +66,9 @@ class PertanyaanSearch extends Pertanyaan
         ]);
 
         $query->andFilterWhere(['like', 'tanya_id', $this->tanya_id])
-            ->andFilterWhere(['like', 'kelas_id', $this->kelas_id])
-            ->andFilterWhere(['like', 'tujuan_id', $this->tujuan_id])
-            ->andFilterWhere(['like', 'kriteria_id', $this->kriteria_id])
+            ->andFilterWhere([ 'kelas_id'=> $this->kelas_id])
+            ->andFilterWhere([ 'tujuan_id'=> $this->tujuan_id])
+            ->andFilterWhere([ 'kriteria_id'=> $this->kriteria_id])
             ->andFilterWhere(['like', 'pertanyaan', $this->pertanyaan])
             ->andFilterWhere(['like', 'tanya_ket_a', $this->tanya_ket_a])
             ->andFilterWhere(['like', 'tanya_ket_b', $this->tanya_ket_b])

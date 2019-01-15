@@ -44,7 +44,7 @@ class Assesment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['assesment_surat', 'assesment_surat_tanggal', 'pn_id', 'assesment_jenis', 'assesment_tanggal_mulai', 'assesment_tanggal_selesai'], 'required'],
+            [['assesment_surat', 'assesment_surat_tanggal', 'pn_id', 'assesment_jenis', 'assesment_tanggal_mulai', 'assesment_tanggal_selesai','pn_kelas_type'], 'required'],
             [['assesment_surat_tanggal', 'assesment_tanggal_mulai', 'assesment_tanggal_selesai'], 'safe'],
             [['pn_id', 'assesment_ketua', 'assesment_anggota', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['assesment_surat', 'assesment_jenis'], 'string', 'max' => 55],
@@ -61,6 +61,7 @@ class Assesment extends \yii\db\ActiveRecord
             'assesment_surat' => 'No Surat',
             'assesment_surat_tanggal' => 'Tanggal Surat',
             'pn_id' => 'Pengadilan Negeri',
+            'pn_kelas_type' => 'Kelas',
             'assesment_jenis' => 'Jenis',
             'assesment_tanggal_mulai' => 'Tanggal Mulai',
             'assesment_tanggal_selesai' => 'Tanggal Selesai',

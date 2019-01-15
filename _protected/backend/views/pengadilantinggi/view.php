@@ -37,8 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'pt_email:email',
             'pt_telp',
             'pt_fax',
-            'pt_pegawai',
-            'pt_honorer',
+            // 'pt_pegawai',
+            // 'pt_honorer',
             
             [
               'attribute' => 'pt_logo',

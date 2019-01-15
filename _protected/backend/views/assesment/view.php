@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'assesment_tanggal_mulai',
             'assesment_tanggal_selesai',
             'assesment_ketua',
-            'assesment_anggota',
+            //'assesment_anggota',
             'kelas_id',
             'pn_id',
             'created_by',

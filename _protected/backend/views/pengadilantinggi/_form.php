@@ -38,9 +38,9 @@ $honorer = Pegawai::find()
 
     <?= $form->field($model, 'pt_fax')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'pt_pegawai')->textInput(['readonly' => true, 'value' => $peg]) ?>
+    <!-- <?= $form->field($model, 'pt_pegawai')->textInput(['readonly' => true, 'value' => $peg]) ?>
 
-    <?= $form->field($model, 'pt_honorer')->textInput(['readonly' => true, 'value' => $honorer]) ?>
+    <?= $form->field($model, 'pt_honorer')->textInput(['readonly' => true, 'value' => $honorer]) ?> -->
 
     <?php if($status=="create" || is_null($model->pt_logo)) {?>
       <?= $form->field($model, 'image')->widget(FileInput::classname(), [

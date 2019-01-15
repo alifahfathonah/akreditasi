@@ -67,7 +67,8 @@ class KelasController extends Controller
         $model = new Kelas();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->kelas_id]);
+            return $this->redirect(['index']);
+            //return $this->redirect(['view', 'id' => $model->kelas_id]);
         }
 
         return $this->render('create', [

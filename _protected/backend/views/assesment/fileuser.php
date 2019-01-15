@@ -2,12 +2,16 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\bootstrap\ActiveForm;
 use yii\grid\GridView;
 use yii\widgets\linkPager;
 
 ?>
 <h1>File unggah Pengadilan Negeri</h1>
-<h5><?=$tanya->pertanyaan?></h5>
+<?php $form = ActiveForm::begin(); ?>
+  <?= $form->field($tanya, 'pertanyaan')->textarea(['value'=>$tanya->pertanyaan, 'readonly'=>true, 'style'=>'font-size:12px; overflow:auto; max-width:100%; height:100px; word-wrap:break-word;']) ?>
+  <?= $form->field($tanya, 'audit_ket_praaudit')->textarea(['value'=>$tanya->audit_ket_praaudit, 'readonly'=>true, 'style'=>'font-size:12px; overflow:auto; max-width:100%; height:100px; word-wrap:break-word;']) ?>
+<?php ActiveForm::end(); ?>
 
 <div class="form-group" >
         <?= Html::a('Kembali', ['audit','id'=>$tanya->assesment_id], 

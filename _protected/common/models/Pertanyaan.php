@@ -45,8 +45,9 @@ class Pertanyaan extends \yii\db\ActiveRecord
     {
         return [
             [['kelas_id', 'tujuan_id', 'kriteria_id', 'pertanyaan'], 'required'],
-            [['kelas_id', 'tujuan_id', 'kriteria_id', 'tanya_bobot', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
+            [['kelas_id', 'tujuan_id', 'kriteria_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['pertanyaan', 'tanya_ket_a', 'tanya_ket_b', 'tanya_ket_c'], 'string'],
+            [['tanya_bobot'], 'number'],
         ];
     }
 

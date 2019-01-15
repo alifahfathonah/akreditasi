@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'pkey')->dropDownList(
         ArrayHelper::map($datapn,'pn_id','pn_nama')
-    ) ?>
+    )->label('Pengadilan Negeri') ?>
 
     <?= $form->field($model, 'username')->textInput() ?>
 

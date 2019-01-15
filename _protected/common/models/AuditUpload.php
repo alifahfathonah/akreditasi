@@ -29,7 +29,7 @@ class AuditUpload extends \yii\db\ActiveRecord
         return [
             [['audit_id', 'audit_upload'], 'required'],
             [['audit_id'], 'integer'],
-            [['audit_upload'], 'string', 'max' => 255],
+            [['audit_upload','upload_status'], 'string', 'max' => 255],
             //[['audit_upload'], 'file', 'skipOnEmpty' => false, 'extensions' => 'jpg, jpeg, png, jpeg, doc, docx, pdf, xlsx, xls, rar', 'maxFiles' => 10],
             //[['files'], 'file', 'skipOnEmpty' => false, 'extensions' => 'jpg, jpeg, png, jpeg, doc, docx, pdf, xlsx, xls, rar', 'maxFiles' => 10],
             //[['upload'], 'file', 'extensions'=>'jpg, jpeg, png, jpeg, doc, docx, pdf, xlsx, xls, rar'],
@@ -45,6 +45,7 @@ class AuditUpload extends \yii\db\ActiveRecord
             'upload_id' => 'Upload ID',
             'audit_id' => 'Audit ID',
             'audit_upload' => 'Audit Upload',
+            'upload_status'=> 'status',
         ];
     }
 }

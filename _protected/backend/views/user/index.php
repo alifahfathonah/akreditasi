@@ -6,27 +6,44 @@ use yii\bootstrap\Tabs;
 use yii\data\ActiveDataProvider;
 use common\models\User;
 use common\models\UserGroup;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
+$this->registerJs("
+    $('#myModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var modal = $(this)
+        var title = button.data('title')
+        var href = button.attr('href')
+        modal.find('.modal-title').html(title)
+        modal.find('.modal-body').html('<i class=\"fa fa-spinner fa-spin\"></i>')
+        $.post(href)
+            .done(function( data ) {
+                modal.find('.modal-body').html(data)
+            });
+        })
+");
 $ug;
 ?>
 <div class="kaling-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <!-- <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
-    </p> -->
+      <p >
+        <?= Html::a('Create User', ['tambah'], ['class' => 'btn btn-success','align'=>'center','data-toggle'=>'modal','data-target'=>'#myModal','data-title'=>'Create User',]); 
+        ?>
+    </p>  
 
     <?php
         $i=0;
         foreach($usergroup as $row){
             if($i==0){$active=true;}else{$active=false;}
             $dataProvider = new ActiveDataProvider(['query' => User::find()->where(['ug_id'=>$row->ug_id])]);
+
             $ug[]=[
               'label'=>$row->ug_nama,
               'content'=> GridView::widget([
@@ -58,7 +75,7 @@ $ug;
 
                     [
                       'class' => 'yii\grid\ActionColumn',
-                      //'template' => '{update} {delete}'
+                      'template' => '{delete}'
                     ],
                   ],
               ]),
@@ -68,6 +85,13 @@ $ug;
         }
     ?>
 
+    <?php
+      Modal::begin([
+        'id' =>'myModal',
+        'header' => '<h4 class="modal-title">...</h4>',
+      ]);
+      Modal::end();
+    ?>
 
     <?= Tabs::widget([
         'items' => $ug,

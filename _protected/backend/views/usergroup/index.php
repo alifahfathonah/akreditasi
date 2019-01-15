@@ -24,8 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'ug_id',
             'ug_nama',
-            'ug_table_relation',
-            'ug_pkey_relation',
+            // 'ug_table_relation',
+            // 'ug_pkey_relation',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

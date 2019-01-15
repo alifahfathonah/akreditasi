@@ -58,9 +58,12 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
     <?php ActiveForm::end(); ?>
 <!-- . -->
-    <p>
-        <?= Html::a('Tambah Pertanyaan', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+  <div class="col-sm-9">
+    <p><?= Html::a('Tambah Pertanyaan', ['create'], ['class' => 'btn btn-success']) ?></p>
+  </div><div class="">
+    <p><?php echo 'bobot kelas 1 = '.$bobotkls1 ?></p>
+    <p><?php echo 'bobot kelas 2 = '.$bobotkls2 ?></p>
+  </div>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -75,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'format' => 'text',
               'value' => function($data){
                     $c = new Kelas;
-                   return $c->getlistKelas($data->tujuan_id);
+                   return $c->getlistKelas($data->kelas_id);
                },
             ],
             [

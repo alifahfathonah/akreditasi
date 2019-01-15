@@ -80,10 +80,13 @@ class ManageuserController extends Controller
 
         if ($post=Yii::$app->request->post('User')) {
             
+            $email = PengadilanNegeri::find()->where(['pn_id'=>$post['pkey']])->one();
+
             $model->username=$post['username'];
             $model->setPassword($post['password_hash']);
             $model->pkey=$post['pkey'];
             $model->ug_id='06';
+            $model->email=$email->pn_email;
             $model->generateAuthKey();
             $model->save();
 
@@ -94,13 +97,43 @@ class ManageuserController extends Controller
 
             //return $this->redirect(['view', 'id' => $model->id]);
             
-            return $this->redirect(['index']);
+            return $this->redirect(['user/index']);
 
         }
 
         return $this->render('create', [
             'model' => $model,
             'datapn' => $datapn,
+        ]);
+    }
+
+    public function actionCreateassesor()
+    {
+        $model = new User();
+
+        if ($post=Yii::$app->request->post('User')) {
+            
+            $model->username=$post['username'];
+            $model->setPassword($post['password_hash']);
+            //$model->pkey=$post['pkey'];
+            $model->ug_id='07';
+            $model->email=$post['email'];
+            $model->generateAuthKey();
+            $model->save();
+
+            $userusergroup = new UserUsergroup();
+            $userusergroup->ug_id = $model->ug_id;
+            $userusergroup->id = $model->id;
+            $userusergroup->save();
+
+            //return $this->redirect(['view', 'id' => $model->id]);
+            
+            return $this->redirect(['user/index']);
+
+        }
+
+        return $this->render('createassesor', [
+            'model' => $model,
         ]);
     }
 

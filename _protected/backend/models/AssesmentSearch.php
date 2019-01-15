@@ -41,7 +41,7 @@ class AssesmentSearch extends Assesment
      */
     public function search($params)
     {
-        $query = Assesment::find();
+        $query = Assesment::find()->orderBy(['assesment_surat_tanggal' => SORT_DESC]);
 
         // add conditions that should always apply here
 
@@ -80,7 +80,7 @@ class AssesmentSearch extends Assesment
 
     public function search2($params,$pkey)
     {
-        $query = Assesment::find()->where(['pn_id'=>$pkey]);
+        $query = Assesment::find()->where(['pn_id'=>$pkey])->orderBy(['assesment_surat_tanggal' => SORT_DESC]);
 
         // add conditions that should always apply here
 

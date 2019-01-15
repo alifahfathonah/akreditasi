@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "tb_tujuan".
  *
- * @property string $tujuan_id
+ * @property int $tujuan_id
  * @property string $tujuan_nama
  * @property int $created_by
  * @property int $created_at
@@ -26,7 +26,7 @@ class Tujuan extends \yii\db\ActiveRecord
             \yii\behaviors\BlameableBehavior::className(),
         ];
     }
-    
+
     public static function tableName()
     {
         return 'tb_tujuan';
@@ -40,9 +40,7 @@ class Tujuan extends \yii\db\ActiveRecord
         return [
             [['tujuan_nama'], 'required'],
             [['created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['tujuan_id'], 'string', 'max' => 5],
             [['tujuan_nama'], 'string', 'max' => 255],
-            //[['tujuan_id'], 'unique'],
         ];
     }
 
@@ -52,8 +50,8 @@ class Tujuan extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'tujuan_id' => 'ID',
-            'tujuan_nama' => 'Tujuan',
+            'tujuan_id' => 'Tujuan ID',
+            'tujuan_nama' => 'Nama',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_by' => 'Updated By',

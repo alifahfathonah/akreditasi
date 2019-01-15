@@ -14,7 +14,9 @@ class ComposerStaticInit5de4ad48d20c9bea06135fa26640a980
     public static $prefixLengthsPsr4 = array (
         'k' => 
         array (
+            'kartik\\select2\\' => 15,
             'kartik\\mpdf\\' => 12,
+            'kartik\\base\\' => 12,
         ),
         'P' => 
         array (
@@ -31,9 +33,17 @@ class ComposerStaticInit5de4ad48d20c9bea06135fa26640a980
     );
 
     public static $prefixDirsPsr4 = array (
+        'kartik\\select2\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-select2/src',
+        ),
         'kartik\\mpdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-mpdf/src',
+        ),
+        'kartik\\base\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-krajee-base/src',
         ),
         'Psr\\Log\\' => 
         array (

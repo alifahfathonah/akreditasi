@@ -38,10 +38,14 @@ class PegawaiController extends Controller
         $searchModel = new PegawaiSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        $uug = Yii::$app->user->identity->ug_id;
+        
+        if ($uug!='06'){
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**

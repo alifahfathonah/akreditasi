@@ -2,10 +2,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use common\models\Kelas;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Kelas */
 /* @var $form yii\widgets\ActiveForm */
+$kelas = Kelas::find()->where(['kelas_pkey'=>0])->all();
 ?>
 
 <div class="kelas-form">
@@ -13,6 +16,10 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'kelas_nama')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'kelas_pkey')->dropDownList(
+        ArrayHelper::map($kelas,'kelas_id','kelas_nama'),['prompt' => '-Select parent-']
+    ) ?>
 
     <!-- <?= $form->field($model, 'created_by')->textInput() ?>
 

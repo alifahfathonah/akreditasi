@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
@@ -49,7 +49,7 @@ use yii\helpers\ArrayHelper;
 				<p class="announcement-heading" style="font-size:25px;"><?= $ins; ?></p>
 			  </div>
 			</div>
-		  </div>
+		  </div> -->
 		  <!-- <a href="#">
 			<div class="panel-footer announcement-bottom">
 			  <div class="row">
@@ -62,7 +62,7 @@ use yii\helpers\ArrayHelper;
 			  </div>
 			</div>
 		  </a> -->
-	  </div>
+	  <!-- </div>
   </div>
   <div class="col-lg-3">
 	  <div class="panel panel-info">
@@ -76,7 +76,7 @@ use yii\helpers\ArrayHelper;
 				<p class="announcement-heading" style="font-size:25px;"><?= $baru; ?></p>
 			  </div>
 			</div>
-		  </div>
+		  </div> -->
 		  <!-- <a href="#">
 			<div class="panel-footer announcement-bottom">
 			  <div class="row">
@@ -89,7 +89,7 @@ use yii\helpers\ArrayHelper;
 			  </div>
 			</div>
 		  </a> -->
-	  </div>
+	  <!-- </div>
   </div>
   <div class="col-lg-3">
 	  <div class="panel panel-info">
@@ -103,7 +103,7 @@ use yii\helpers\ArrayHelper;
 				<p class="announcement-heading" style="font-size:25px;"><?= $lanjutan; ?></p>
 			  </div>
 			</div>
-		  </div>
+		  </div> -->
 		  <!-- <a href="#">
 			<div class="panel-footer announcement-bottom">
 			  <div class="row">
@@ -116,7 +116,7 @@ use yii\helpers\ArrayHelper;
 			  </div>
 			</div>
 		  </a> -->
-	  </div>
+	  <!-- </div>
   </div>
   <div class="col-lg-3">
 	  <div class="panel panel-info">
@@ -130,7 +130,7 @@ use yii\helpers\ArrayHelper;
 				<p class="announcement-heading" style="font-size:25px;"><?= $rehab; ?></p>
 			  </div>
 			</div>
-		  </div>
+		  </div> -->
 		  <!-- <a href="#">
 			<div class="panel-footer announcement-bottom">
 			  <div class="row">
@@ -143,7 +143,7 @@ use yii\helpers\ArrayHelper;
 			  </div>
 			</div>
 		  </a> -->
-	  </div>
+	  <!-- </div>
   </div>
   <div class="col-lg-3">
 	  <div class="panel panel-info">
@@ -157,7 +157,7 @@ use yii\helpers\ArrayHelper;
 				<p class="announcement-heading" style="font-size:25px;"><?= $perluasan; ?></p>
 			  </div>
 			</div>
-		  </div>
+		  </div> -->
 		  <!-- <a href="#">
 			<div class="panel-footer announcement-bottom">
 			  <div class="row">
@@ -170,7 +170,7 @@ use yii\helpers\ArrayHelper;
 			  </div>
 			</div>
 		  </a> -->
-	  </div>
+	  <!-- </div>
   </div>
   <div class="col-lg-3">
 	  <div class="panel panel-info">
@@ -184,7 +184,7 @@ use yii\helpers\ArrayHelper;
 				<p class="announcement-heading" style="font-size:25px;"><?= $eko; ?></p>
 			  </div>
 			</div>
-		  </div>
+		  </div> -->
 		  <!-- <a href="#">
 			<div class="panel-footer announcement-bottom">
 			  <div class="row">
@@ -197,7 +197,7 @@ use yii\helpers\ArrayHelper;
 			  </div>
 			</div>
 		  </a> -->
-	  </div>
+	  <!-- </div>
   </div>
   <div class="col-lg-3">
 	  <div class="panel panel-info">
@@ -211,7 +211,7 @@ use yii\helpers\ArrayHelper;
 				<p class="announcement-heading" style="font-size:25px;"><?= $kembang; ?></p>
 			  </div>
 			</div>
-		  </div>
+		  </div> -->
 		  <!-- <a href="#">
 			<div class="panel-footer announcement-bottom">
 			  <div class="row">
@@ -224,7 +224,7 @@ use yii\helpers\ArrayHelper;
 			  </div>
 			</div>
 		  </a> -->
-	  </div>
+	  <!-- </div>
   </div>
   <div class="col-lg-3">
 	  <div class="panel panel-info">
@@ -238,7 +238,7 @@ use yii\helpers\ArrayHelper;
 				<p class="announcement-heading" style="font-size:25px;"><?= $sarana; ?></p>
 			  </div>
 			</div>
-		  </div>
+		  </div> -->
 		  <!-- <a href="#">
 			<div class="panel-footer announcement-bottom">
 			  <div class="row">
@@ -251,7 +251,7 @@ use yii\helpers\ArrayHelper;
 			  </div>
 			</div>
 		  </a> -->
-	  </div>
+	  <!-- </div>
   </div>
   <div class="col-lg-3">
 	  <div class="panel panel-info">
@@ -265,7 +265,7 @@ use yii\helpers\ArrayHelper;
 				<p class="announcement-heading" style="font-size:25px;"><?= $sosbud; ?></p>
 			  </div>
 			</div>
-		  </div>
+		  </div> -->
 		  <!-- <a href="#">
 			<div class="panel-footer announcement-bottom">
 			  <div class="row">
@@ -278,6 +278,6 @@ use yii\helpers\ArrayHelper;
 			  </div>
 			</div>
 		  </a> -->
-	  </div>
+	  <!-- </div>
   </div>
-</div><!-- /.row -->
+</div> --><!-- /.row -->

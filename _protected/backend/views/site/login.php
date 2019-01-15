@@ -14,7 +14,7 @@ use yii\bootstrap\ActiveForm;
 					<div class="left">
 						<div class="content">
 							<div class="header">
-								<p class="lead"><?= Html::img(Yii::$app->params['backendUrl'].'/login_icon.png',['style'=>'height:40px; width:auto;']) ?> <b>LPM Benoa</b></p>
+								<p class="lead"><?= Html::img(Yii::$app->params['backendUrl'].'/login_icon.png',['style'=>'height:40px; width:auto;']) ?> <b>Akreditasi Pengadilan Negeri</b></p>
 							</div>
 							<?php $form = ActiveForm::begin(['id' => 'login-form','class'=>'form-auth-small']); ?>
 
@@ -22,7 +22,7 @@ use yii\bootstrap\ActiveForm;
 
 								<?= $form->field($model, 'password')->passwordInput() ?>
 
-								<?= $form->field($model, 'rememberMe')->checkbox() ?>
+								<!-- <?= $form->field($model, 'rememberMe')->checkbox() ?> -->
 
 								<div class="form-group">
 									<?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-lg btn-block', 'name' => 'login-button']) ?>

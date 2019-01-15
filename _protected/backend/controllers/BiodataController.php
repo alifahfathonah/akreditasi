@@ -6,6 +6,7 @@ use Yii;
 use common\models\Kaling;
 use common\models\Admin;
 use common\models\User;
+use common\models\PengadilanNegeri;
 use yii\widgets\ActiveForm;
 use common\models\Instansi;
 use common\models\UserUsergroup;
@@ -63,7 +64,7 @@ class BiodataController extends Controller
 				]);
 			}
 		}else{
-			$model = Kaling::findOne($pkey);
+			$model = PengadilanNegeri::findOne($pkey);
 			if($model != NULL){
 				return $this->render('indexk', [
 					'model' => $model,
