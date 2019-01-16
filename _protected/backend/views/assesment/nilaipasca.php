@@ -27,7 +27,8 @@ use common\models\Pertanyaan;
   <?= $form->field($model, 'bobot')->textInput(['value'=>$model->bobot, 'readonly'=>true]) ?>
   <?= $form->field($model, 'audit_keterangan')->textInput(['value'=>$model->audit_keterangan, 'readonly'=>true, 'style'=>'font-size:11px; overflow:auto; max-width:100%; height:50px; word-wrap:break-word;']) ?> 
   
-  <?= $form->field($model, 'audit_ket_pascaaudit')->textarea(['style'=>'font-size:11px; overflow:auto; max-width:100%; height:75px; word-wrap:break-word;']) ?>
+  <?= $form->field($model, 'audit_analisa')->textarea(['style'=>'font-size:11px; overflow:auto; max-width:100%; height:75px; word-wrap:break-word;']) ?>
+  <?= $form->field($model, 'audit_solusi')->textarea(['style'=>'font-size:11px; overflow:auto; max-width:100%; height:75px; word-wrap:break-word;']) ?>
   <?= $form->field($model, 'audit_pencegahan')->textarea(['style'=>'font-size:11px; overflow:auto; max-width:100%; height:75px; word-wrap:break-word;']) ?>
   <?= $form->field($model, 'audit_upload[]')->fileInput(['multiple' => true])->label('Upload') ?>
 

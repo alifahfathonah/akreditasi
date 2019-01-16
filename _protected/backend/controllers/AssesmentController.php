@@ -433,6 +433,11 @@ class AssesmentController extends Controller
         $model2 = PengadilanNegeri::find()->where(['pn_id'=>$model->pn_id])->one();
         $pt = PengadilanTinggi::find()->where(['pt_id'=>'PT001'])->one();
         $audit = Audit::find()->where(['assesment_id'=>$id])->all();
+        $kelas = Kelas::find()->where(['kelas_id'=>$model2->pn_kelas_type])->one();
+        $jenis = Jenis::find()->where(['jenis_id'=>$model->assesment_jenis])->one();
+        $pegawai = Pegawai::find()->where(['pegawai_id'=>$model->assesment_ketua])->one();
+        $temuan = Audit::find()->where(['assesment_id'=>$id])->andWhere(['not', ['audit_temuan' => null]])->andWhere(['not', ['audit_temuan' => 'observasi']])->all();
+        $observasi = Audit::find()->where(['assesment_id'=>$id])->andWhere(['audit_temuan'=>'observasi'])->all();
 
         $this->layout = false;
 
@@ -441,9 +446,28 @@ class AssesmentController extends Controller
             'model2' => $model2,
             'pt'=>$pt,
             'audit'=>$audit,
-            //'nilai'=>$nilai,
+            'kelas'=>$kelas,
+            'jenis'=>$jenis,
+            'pegawai'=>$pegawai,
+            'temuan'=>$temuan,
+            'observasi'=>$observasi,
+        ]);
+        $header = $this->renderPartial('rheader',[
+            'model' => $model,
+            'model2' => $model2,
+            'pt'=>$pt,
+            'audit'=>$audit,
         ]);
         $mpdf = new \Mpdf\Mpdf();
+        $mpdf->SetHTMLHeader($header);
+        $mpdf->AddPage('', // L - landscape, P - portrait 
+        '', '', '', '',
+        20, // margin_left
+        20, // margin right
+       45, // margin top
+       20, // margin bottom
+        10, // margin header
+        0); // margin footer
         $mpdf->WriteHTML($pdf_content);
         $mpdf->Output('report.pdf', 'I');
     }

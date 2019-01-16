@@ -54,10 +54,10 @@ class Audit extends \yii\db\ActiveRecord
     {
         return [
             [['assesment_id', 'tujuan_id', 'kriteria_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['pertanyaan', 'nilai_a', 'nilai_b', 'nilai_c', 'audit_keterangan','audit_ket_praaudit','audit_ket_pascaaudit','audit_pencegahan'], 'string'],
+            [['pertanyaan', 'nilai_a', 'nilai_b', 'nilai_c', 'audit_keterangan','audit_ket_praaudit','audit_analisa','audit_solusi','audit_pencegahan'], 'string'],
             [['audit_nilai'], 'string', 'max' => 5],
             [['audit_temuan'], 'string', 'max' => 255],
-            [['audit_keterangan','audit_temuan','audit_nilai','audit_nilai_angka','audit_ket_praaudit','audit_ket_pascaaudit','audit_pencegahan'], 'default', 'value'=>null],
+            [['audit_keterangan','audit_temuan','audit_nilai','audit_nilai_angka','audit_ket_praaudit','audit_analisa','audit_solusi','audit_pencegahan'], 'default', 'value'=>null],
             [['audit_upload'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, jpeg, png, jpeg, doc, docx, pdf, xlsx, xls, rar', 'maxFiles' => 10],
             [['bobot'], 'number'],
             //[[ 'audit_nilai_angka'], 'integer', 'max'=>'bobot'],
@@ -84,7 +84,8 @@ class Audit extends \yii\db\ActiveRecord
             'audit_temuan' => 'Audit Temuan',
             'audit_ket_praaudit' => 'Keterangan Pra audit',
             'audit_keterangan' => 'Keterangan Audit',
-            'audit_ket_pascaaudit' => 'Keterangan Pasca audit',
+            'audit_analisa' => 'Analisa',
+            'audit_solusi' => 'Solusi',
             'audit_pencegahan' => 'Tindakan Pencegahan',
             'created_by' => 'Created By',
             'created_at' => 'Created At',

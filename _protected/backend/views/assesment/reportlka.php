@@ -59,6 +59,24 @@ $no=1;
 			<td style="background-color: #81BE56;">KATEGORI</td>
 			<td>'.strtoupper($audit->audit_temuan).'</td>
 		</tr>
+		<tr>
+			<td colspan="2" style="background-color: #81BE56;">ANALISA  PENYEBAB TIMBULNYA KETIDAKSESUAIAN</td>
+		</tr>
+		<tr>
+			<td colspan="2" height="100px">'.$audit->audit_analisa.'</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="background-color: #81BE56;">TINDAKAN PERBAIKAN / SOLUSI KETIDAKSESUAIAN</td>
+		</tr>
+		<tr>
+			<td colspan="2" height="100px">'.$audit->audit_solusi.'</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="background-color: #81BE56;">TINDAKAN PENCEGAHAN</td>
+		</tr>
+		<tr>
+			<td colspan="2" height="100px">'.$audit->audit_pencegahan.'</td>
+		</tr>
 	</table>';
 
 

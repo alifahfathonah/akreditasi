@@ -123,7 +123,6 @@ $uug = Yii::$app->user->identity->ug_id;
             'audit_nilai_angka',
             'audit_temuan',
             'audit_keterangan:ntext',
-            'audit_ket_pascaaudit',
             [
               'class' => 'yii\grid\ActionColumn',
               'template' => '{nilai}{fileuser}',

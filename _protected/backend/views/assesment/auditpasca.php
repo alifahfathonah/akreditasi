@@ -95,7 +95,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'audit_nilai_angka',
             'audit_temuan',
             'audit_keterangan:ntext',
-            'audit_ket_pascaaudit',
+            'audit_analisa',
+            'audit_solusi',
             'audit_pencegahan',
             [
               'class' => 'yii\grid\ActionColumn',
