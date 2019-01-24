@@ -95,12 +95,16 @@ $nooo=1;
 		<tr>
 			<td width="20%"><b>Ketua Tim</b></td>
 			<td>'.$pegawai->pegawai_nama.'</td>
-		</tr>
-		<tr>
-			<td width="20%"><b>Anggota Tim</b></td>
-			<td>'.$pegawai->pegawai_nama.'</td>
-		</tr>
-		<tr>
+		</tr>';
+		// <tr>
+		// 	<td width="20%"><b>Anggota Tim</b></td>
+		// 	<td>';
+		// 	foreach ($anggota as $a) {
+		// 		$html .=''.$a->assesment_anggota.'<br>';
+		// 	}
+		// 	$html .='</td>
+		// </tr>
+		$html .='<tr>
 			<td width="20%"><b>Acuan Assesment</b></td>
 			<td>
 				1.	Standar sertifikasi ISO 9001 : 2015. <br>
@@ -169,7 +173,7 @@ $nooo=1;
 	foreach ($temuan as $d) {
 		$html .='<tr>
 					<td valign="top">'.$noo++.'.</td>
-				 	<td>'.$d->audit_keterangan.' ('.$d->audit_temuan.')</td>
+				 	<td>'.$d->pertanyaan.' <br>'.$d->audit_keterangan.' ('.$d->audit_temuan.')</td>
 				 </tr>';
 	}
 
@@ -189,7 +193,7 @@ $nooo=1;
 	foreach ($observasi as $d) {
 		$html .='<tr>
 					<td valign="top">'.$nooo++.'.</td>
-				 	<td>'.$d->audit_keterangan.'; ('.$d->audit_temuan.')</td>
+				 	<td>'.$d->pertanyaan.' <br>'.$d->audit_keterangan.'; ('.$d->audit_temuan.')</td>
 				 </tr>';
 	}
 
@@ -240,80 +244,80 @@ $nooo=1;
 	</table><pagebreak>';
 	}
 
-	$html .='<b>RANGKUMAN TEMUAN ASSESMENT</b>
-	<table id="table1"><b></b>
-		<tr id="table1">
-			<td rowspan="2" id="table1"><b>NO</b></td>
-			<td rowspan="2" id="table1" align="center"><b>BAGIAN YANG DI ASSESMENT</b></td>
-			<td rowspan="2" id="table1" align="center" width="20%"><b>TEMUAN ASSESMENT </b></td>
-			<td colspan="3" id="table1" align="center"><b>KATEGORI</b></td>
-		</tr>
-		<tr id="table1">
-			<td id="table1" width="10%" align="center">MAJOR</td>
-			<td id="table1" width="10%" align="center">MINOR</td>
-			<td id="table1" width="10%" align="center">OBSERVASI</td>
-		</tr>
-		<tr id="table1">
-			<td id="table1"><b>1.</b></td>
-			<td id="table1"><b>TOP MANAJEMEN /PIMPINAN PUNCAK</b></td>
-			<td id="table1"><b>Sebagaimana tersebut diatas</b></td>
-			<td id="table1"><b></b></td>
-			<td id="table1"><b></b></td>
-			<td id="table1"><b></b></td>
-		</tr>
-		<tr id="table1">
-			<td id="table1"><b>2.</b></td>
-			<td id="table1"><b>DOCUMENT CONTROL (DC)</b></td>
-			<td id="table1"><b>Sebagaimana tersebut diatas</b></td>
-			<td id="table1"><b></b></td>
-			<td id="table1"><b></b></td>
-			<td id="table1"><b></b></td>
-		</tr>
-		<tr id="table1">
-			<td id="table1"><b>3.</b></td>
-			<td id="table1"><b>INTERNAL AUDIT</b></td>
-			<td id="table1"><b>Sebagaimana tersebut diatas</b></td>
-			<td id="table1"><b></b></td>
-			<td id="table1"><b></b></td>
-			<td id="table1"><b></b></td>
-		</tr>
-		<tr id="table1">
-			<td id="table1"><b>4.</b></td>
-			<td id="table1"><b>SURVEY KEPUASAN PELANGGAN</b></td>
-			<td id="table1"><b>Sebagaimana tersebut diatas</b></td>
-			<td id="table1"><b></b></td>
-			<td id="table1"><b></b></td>
-			<td id="table1"><b></b></td>
-		</tr>
-		<tr id="table1">
-			<td id="table1"><b>5.</b></td>
-			<td id="table1"><b>PROSES LAYANAN UTAMA</b></td>
-			<td id="table1"><b>Sebagaimana tersebut diatas</b></td>
-			<td id="table1"><b></b></td>
-			<td id="table1"><b></b></td>
-			<td id="table1"><b></b></td>
-		</tr>
-		<tr id="table1">
-			<td id="table1"><b>6.</b></td>
-			<td id="table1"><b>PROSES LAYANAN PENDUKUNG dan INFRASTRUKTUR</b></td>
-			<td id="table1"><b>Sebagaimana tersebut diatas</b></td>
-			<td id="table1"><b></b></td>
-			<td id="table1"><b></b></td>
-			<td id="table1"><b></b></td>
-		</tr>
-		<tr id="table1">
-			<td id="table1"><b></b></td>
-			<td id="table1" colspan="2"><b>JUMLAH TEMUAN ASSESMENT</b></td>
-			<td id="table1"><b></b></td>
-			<td id="table1"><b></b></td>
-			<td id="table1"><b></b></td>
-		</tr>
-		<tr id="table1">
-			<td id="table1"><b></b></td>
-			<td id="table1" colspan="2"><b>Waktu Perbaikan</b></td>
-			<td id="table1" colspan="3"><b>1 (satu) bulan</b></td>
-		</tr>
-	</table><pagebreak>';
+	// $html .='<b>RANGKUMAN TEMUAN ASSESMENT</b>
+	// <table id="table1"><b></b>
+	// 	<tr id="table1">
+	// 		<td rowspan="2" id="table1"><b>NO</b></td>
+	// 		<td rowspan="2" id="table1" align="center"><b>BAGIAN YANG DI ASSESMENT</b></td>
+	// 		<td rowspan="2" id="table1" align="center" width="20%"><b>TEMUAN ASSESMENT </b></td>
+	// 		<td colspan="3" id="table1" align="center"><b>KATEGORI</b></td>
+	// 	</tr>
+	// 	<tr id="table1">
+	// 		<td id="table1" width="10%" align="center">MINOR</td>
+	// 		<td id="table1" width="10%" align="center">MAJOR</td>
+	// 		<td id="table1" width="10%" align="center">OBSERVASI</td>
+	// 	</tr>
+	// 	<tr id="table1">
+	// 		<td id="table1"><b>1.</b></td>
+	// 		<td id="table1"><b>TOP MANAJEMEN /PIMPINAN PUNCAK</b></td>
+	// 		<td id="table1"><b>Sebagaimana tersebut diatas</b></td>
+	// 		<td id="table1" align="center"><b>'.$min1.'</b></td>
+	// 		<td id="table1" align="center"><b>'.$may1.'</b></td>
+	// 		<td id="table1" align="center"><b>'.$obs1.'</b></td>
+	// 	</tr>
+	// 	<tr id="table1">
+	// 		<td id="table1"><b>2.</b></td>
+	// 		<td id="table1"><b>DOCUMENT CONTROL (DC)</b></td>
+	// 		<td id="table1"><b>Sebagaimana tersebut diatas</b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 	</tr>
+	// 	<tr id="table1">
+	// 		<td id="table1"><b>3.</b></td>
+	// 		<td id="table1"><b>INTERNAL AUDIT</b></td>
+	// 		<td id="table1"><b>Sebagaimana tersebut diatas</b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 	</tr>
+	// 	<tr id="table1">
+	// 		<td id="table1"><b>4.</b></td>
+	// 		<td id="table1"><b>SURVEY KEPUASAN PELANGGAN</b></td>
+	// 		<td id="table1"><b>Sebagaimana tersebut diatas</b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 	</tr>
+	// 	<tr id="table1">
+	// 		<td id="table1"><b>5.</b></td>
+	// 		<td id="table1"><b>PROSES LAYANAN UTAMA</b></td>
+	// 		<td id="table1"><b>Sebagaimana tersebut diatas</b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 	</tr>
+	// 	<tr id="table1">
+	// 		<td id="table1"><b>6.</b></td>
+	// 		<td id="table1"><b>PROSES LAYANAN PENDUKUNG dan INFRASTRUKTUR</b></td>
+	// 		<td id="table1"><b>Sebagaimana tersebut diatas</b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 	</tr>
+	// 	<tr id="table1">
+	// 		<td id="table1"><b></b></td>
+	// 		<td id="table1" colspan="2"><b>JUMLAH TEMUAN ASSESMENT</b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 		<td id="table1" align="center"><b></b></td>
+	// 	</tr>
+	// 	<tr id="table1">
+	// 		<td id="table1"><b></b></td>
+	// 		<td id="table1" colspan="2"><b>Waktu Perbaikan</b></td>
+	// 		<td id="table1" colspan="3"><b>1 (satu) bulan</b></td>
+	// 	</tr>
+	// </table><pagebreak>';
 
 	$html .='<b>KETIDAK SESUAIAN ASSESMENT</b><br><br>
 	Tindakan perbaikan dan pencegahan terhadap ketidak sesuaian harus ditindak lanjuti sesuai dengan persyaratan relevan<br>
@@ -321,9 +325,37 @@ $nooo=1;
 	Assessor TAPM Jawa Timur akan melakukan tindak kunjungan dalam waktu 14 hari untuk mengkonfirmasi tindakan yang diambil, evaluasi terhadap keefektifan mereka, dan menetukan apakah sertifikasi dapat diberikan atau dilanjutkan.<br>
 	Tindakan perbaikan dan pencegahan untuk mengatasi ketidak sesuaian MINOR harus sgera dilakukan identifikasi dan catatan dengan bukti pendukung yang dikirim ke Auditor TAPM PT Pengadilan Tinggi Jawa Timur untuk close-out dalam waktu 30 hari.<br>
 	Pada kunjungan Assessor jadwal berikutnya, Tim Assessor TAPM Pengadilan Tinggi Jawa Timur akan menindak lanjuti semua ketidak sesuaian diidentifikasi untuk mengkonfirmasi efektifitas tindakan perbaikan dan pencegahan yang diambil.
+	<pagebreak>
 
-	';
-
+	<table width="100%">
+		<tr>
+			<td style="font-size: 16pt;" colspan="2"><b>4. REKOMENDASI</b></td>
+		</tr>
+		<tr>
+			<td style="font-size: 14pt; background-color: #81BE56;" colspan="2"><b>REKOMENDASI  TIM ASSESMENT</b></td>
+		</tr>
+		<tr>
+			<td style="background-color: #81BE56;" colspan="2">Setelah dilakukan Assesment dari Tim Assesment Akreditasi Penjaminan Mutu Pengadilan Tinggi Jawa Timur selanjutnya merekomendasikan untuk diberikan penilaian Akreditasi kepada '.$model2->pn_nama.', melalui Tim Rapat Komite Keputusan Akreditasi (KEKA) Pengadilan Tinggi Jawa  Timur.</td>
+		</tr>
+		<tr>
+			<td width="30%">Akreditasi Penjaminan Mutu</td>
+			<td>[]	Diberikan <br>
+				[]	Lanjut <br>
+				[]	Ditangguhkan sampai Tindakan Korektif yang memuaskan selesai.
+			</td>
+		</tr>
+		<tr>
+			<td>Klasifikasi Kelas Pengadilan Negeri</td>
+			<td>'.$kelas->kelas_nama.'</td>
+		</tr>
+		<tr>
+			<td colspan="2">Laporan ini bersifat <b>RAHASIA</b> dan didistribusikan terbatas kepada Pengadilan Negeri terkait, Tim Assesment dan Direktorat Jenderal Badan Peradilan Umum Republik Indonesia</td>
+		</tr>
+		<tr>
+			<td align="center">Dibuat Oleh,<br><br><br><br>
+			'.$pegawai->pegawai_nama.'<br> Lead Assessor</td>
+		</tr>
+	</table>';
 
  	echo $html;
 ?> 

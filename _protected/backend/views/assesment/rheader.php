@@ -30,19 +30,15 @@ $no=1;
 			</td>
 			<td style="font-size: 8pt;" rowspan="2" align="left">
 				Nomor dokumen<br>
-				Tanggal Pembuatan<br>
-				Tanggal Revisi<br>
-				Revisi Ke<br>
-				Tanggal Efektif<br>
+				Tanggal Mulai<br>
+				Tanggal Selesai<br>
 				Disahkan Oleh<br>
 			</td>
 			<td style="font-size: 8pt;" rowspan="2" align="left">
 				'.$model->assesment_surat.'<br>
-				'.$model->assesment_surat.'<br>
-				'.$model->assesment_surat.'<br>
-				'.$model->assesment_surat.'<br>
-				'.$model->assesment_surat.'<br>
-				'.$model->assesment_surat.'<br>
+				'.$model->assesment_tanggal_mulai.'<br>
+				'.$model->assesment_tanggal_selesai.'<br>
+				KETUA PT JATIM<br>
 			</td>
 		</tr>
 		<tr>

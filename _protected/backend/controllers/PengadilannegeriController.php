@@ -146,7 +146,8 @@ class PengadilannegeriController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->pn_id]);
+            //return $this->redirect(['view', 'id' => $model->pn_id]);
+            return $this->redirect(['index']);
         }
 
         //data kelas PN

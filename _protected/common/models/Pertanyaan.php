@@ -15,7 +15,8 @@ use Yii;
  * @property string $tanya_ket_a
  * @property string $tanya_ket_b
  * @property string $tanya_ket_c
- * @property int $tanya_bobot
+ * @property double $tanya_bobot
+ * @property string $tanya_status
  * @property int $created_by
  * @property int $created_at
  * @property int $updated_by
@@ -24,7 +25,7 @@ use Yii;
 class Pertanyaan extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors(){
         return[
@@ -32,27 +33,27 @@ class Pertanyaan extends \yii\db\ActiveRecord
             \yii\behaviors\BlameableBehavior::className(),
         ];
     }
-    
+
     public static function tableName()
     {
         return 'tb_pertanyaan';
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['kelas_id', 'tujuan_id', 'kriteria_id', 'pertanyaan'], 'required'],
+            [['kelas_id', 'tujuan_id', 'kriteria_id', 'pertanyaan', 'tanya_bobot', 'tanya_aktif'], 'required'],
             [['kelas_id', 'tujuan_id', 'kriteria_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['pertanyaan', 'tanya_ket_a', 'tanya_ket_b', 'tanya_ket_c'], 'string'],
+            [['pertanyaan', 'tanya_ket_a', 'tanya_ket_b', 'tanya_ket_c', 'tanya_aktif'], 'string'],
             [['tanya_bobot'], 'number'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -66,6 +67,7 @@ class Pertanyaan extends \yii\db\ActiveRecord
             'tanya_ket_b' => 'Nilai B',
             'tanya_ket_c' => 'Nilai C',
             'tanya_bobot' => 'Bobot',
+            'tanya_aktif' => 'aktif',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_by' => 'Updated By',

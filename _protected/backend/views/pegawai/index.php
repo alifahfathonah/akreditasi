@@ -27,8 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             // 'pegawai_id',
             'pegawai_nama',
-            'pegawai_nip',
-            'pegawai_alamat',
+            // 'pegawai_nip',
+            // 'pegawai_alamat',
             'pegawai_status',
             //'created_by',
             //'created_at',

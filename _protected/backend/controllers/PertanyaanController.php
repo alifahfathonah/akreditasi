@@ -54,8 +54,8 @@ class PertanyaanController extends Controller
             $datakrit = $kriteria->find()->all();
 
             $query = (new \yii\db\Query())->from('tb_pertanyaan');
-            $bobotkls1 = $query->where(['kelas_id'=>1])->sum('tanya_bobot');
-            $bobotkls2 = $query->where(['kelas_id'=>2])->sum('tanya_bobot');
+            $bobotkls1 = $query->where(['kelas_id'=>1])->andWhere(['tanya_aktif'=>1])->sum('tanya_bobot');
+            $bobotkls2 = $query->where(['kelas_id'=>2])->andWhere(['tanya_aktif'=>1])->sum('tanya_bobot');
 
         $uug = Yii::$app->user->identity->ug_id;
         
@@ -163,7 +163,13 @@ class PertanyaanController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        //$this->findModel($id)->delete();
+
+         $model = $this->findModel($id);
+         if ($post = Yii::$app->request->post()) {
+            $model->tanya_aktif='0';
+            $model->save();
+         }
 
         return $this->redirect(['index']);
     }

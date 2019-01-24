@@ -102,6 +102,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'tanya_ket_b:ntext',
             'tanya_ket_c:ntext',
             'tanya_bobot',
+            [
+              'attribute' => 'tanya_aktif',
+              'value'=>function($model) { 
+                if($model->tanya_aktif ==1)
+                  return 'y';
+                else 
+                  return 't';
+               },
+            ],
             //'created_by',
             //'created_at',
             //'updated_by',

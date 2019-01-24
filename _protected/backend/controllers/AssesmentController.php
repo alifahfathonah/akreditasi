@@ -18,6 +18,7 @@ use common\models\Kriteria;
 use common\models\Jenis;
 use common\models\Kelas;
 use common\models\Pertanyaan;
+use common\models\Assessor;
 use common\models\PengadilanTinggi;
 use backend\models\AuditSearch;
 use yii\helpers\VarDumper;
@@ -302,15 +303,20 @@ class AssesmentController extends Controller
     public function actionCreate()
     {
         $model = new Assesment();
+        $model2 = new Assessor();
 
             $dataPN = PengadilanNegeri::find()->all();
             $dataPG = Pegawai::find()->all();
             $jenis = Jenis::find()->all();
             
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) ) {
+
+            $post = Yii::$app->request->post();
+            $anggota = $post['Assessor'];
             
             $kelas = PengadilanNegeri::find()->where(['pn_id'=>$model->pn_id])->one();
-            $detPertanyaan=Pertanyaan::find()->where(['kelas_id'=>$kelas->pn_kelas])->all();
+            $detPertanyaan=Pertanyaan::find()->where(['kelas_id'=>$kelas->pn_kelas])->andWhere(['tanya_aktif'=>1])->all();
+            $assessor = Assessor::find()->where(['assesment_id'=>$model->assesment_id])->all();
 
             $model->pn_kelas_type = $kelas->pn_kelas_type;
 
@@ -329,11 +335,20 @@ class AssesmentController extends Controller
                 $audit->save();
             }
 
+            foreach($anggota['assesment_anggota'] as $key=>$value){
+                $tt = new Assessor();
+                $tt->assesment_id = $model->assesment_id;
+                $tt->assesment_anggota = $value;
+                $tt->save();
+            }
+
             return $this->redirect(['index']);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'model2' => $model2,
+            // 'assessor' => $assessor,
             'dataPN' => $dataPN,
             'dataPG' => $dataPG,
             'jenis' => $jenis,
@@ -350,6 +365,14 @@ class AssesmentController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $value = [];
+
+        $anggota = Assessor::find()->where(['assesment_id'=>$id])->all();
+        $model2 = new Assessor();
+
+        foreach ($anggota as $row) {
+            array_push($value, $row['assesment_anggota']);
+        }
 
         //data PN
             $pn = new PengadilanNegeri();
@@ -363,11 +386,28 @@ class AssesmentController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             //return $this->redirect(['view', 'id' => $model->assesment_id]);
+            foreach ($anggota as $row) {
+            $row->delete();
+            }
+
+            $post = Yii::$app->request->post();
+            //$anggota = $post['Assessor'];
+            $assessor = Assessor::find()->where(['assesment_id'=>$id])->all();
+
+            foreach($post['assesment_anggota'] as $key=>$value){
+                $tt = new Assessor();
+                $tt->assesment_id = $model->assesment_id;
+                $tt->assesment_anggota = $value;
+                $tt->save();
+            }
+
             return $this->redirect(['index']);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'model2' => $model2,
+            'value' => $value,
             'dataPN' => $dataPN,
             'dataPG' => $dataPG,
             'jenis' => $jenis,
@@ -436,8 +476,22 @@ class AssesmentController extends Controller
         $kelas = Kelas::find()->where(['kelas_id'=>$model2->pn_kelas_type])->one();
         $jenis = Jenis::find()->where(['jenis_id'=>$model->assesment_jenis])->one();
         $pegawai = Pegawai::find()->where(['pegawai_id'=>$model->assesment_ketua])->one();
+        $anggota = Assessor::find()->where(['assesment_id'=>$id])->all();
+        //$anggota = Pegawai::find()->where(['pegawai_id'=>$assessor->assesment_anggota])->all();
         $temuan = Audit::find()->where(['assesment_id'=>$id])->andWhere(['not', ['audit_temuan' => null]])->andWhere(['not', ['audit_temuan' => 'observasi']])->all();
         $observasi = Audit::find()->where(['assesment_id'=>$id])->andWhere(['audit_temuan'=>'observasi'])->all();
+        $count = Audit::find()->where(['assesment_id'=>$id])->andWhere(['not',['audit_temuan'=>null]])->all();
+        $min1 = Audit::find()->where(['assesment_id'=>$id])->andWhere(['not',['audit_temuan'=>null]])->andWhere(['audit_temuan'=>'minor'])->orWhere(['tujuan_id'=>1])->orWhere(['tujuan_id'=>2])->orWhere(['tujuan_id'=>3])->count();
+        $may1 = Audit::find()->where(['assesment_id'=>$id])->andWhere(['not',['audit_temuan'=>null]])->andWhere(['audit_temuan'=>'mayor'])->orWhere(['tujuan_id'=>1])->orWhere(['tujuan_id'=>2])->orWhere(['tujuan_id'=>3])->count();
+        $obs1 = Audit::find()->where(['assesment_id'=>$id])->andWhere(['not',['audit_temuan'=>null]])->andWhere(['audit_temuan'=>'observasi'])->orWhere(['tujuan_id'=>1])->orWhere(['tujuan_id'=>2])->orWhere(['tujuan_id'=>3])->count();
+        // if ($count->tujuan_id == 1 or $count->tujuan_id == 2 or $count->tujuan_id == 3) {
+        //     $min1 = Audit::find()->where(['assesment_id'=>$id])->andWhere(['not',['audit_temuan'=>null]])->andWhere(['audit_temuan'=>'minor'])->count();
+        //     $may1 = Audit::find()->where(['assesment_id'=>$id])->andWhere(['not',['audit_temuan'=>null]])->andWhere(['audit_temuan'=>'mayor'])->count();
+        //     $obs1 = Audit::find()->where(['assesment_id'=>$id])->andWhere(['not',['audit_temuan'=>null]])->andWhere(['audit_temuan'=>'observasi'])->count();
+        // } else {
+        //     # code...
+        // }
+        
 
         $this->layout = false;
 
@@ -451,6 +505,12 @@ class AssesmentController extends Controller
             'pegawai'=>$pegawai,
             'temuan'=>$temuan,
             'observasi'=>$observasi,
+            'anggota'=>$anggota,
+            //'data'=>$data,
+            //'data2'=>$data2,
+            'min1'=>$min1,
+            'may1'=>$may1,
+            'obs1'=>$obs1,
         ]);
         $header = $this->renderPartial('rheader',[
             'model' => $model,

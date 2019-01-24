@@ -7,6 +7,7 @@ use dosamigos\multiselect\MultiSelect;
 use yii\web\JsExpression;
 use kartik\select2\Select2;
 use common\models\Pegawai;
+$value = [9,12,13];
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Assesment */
@@ -41,8 +42,9 @@ $data = ArrayHelper::map(Pegawai::find()->asArray()->all(),'pegawai_id', 'pegawa
         ArrayHelper::map($dataPG,'pegawai_id','pegawai_nama')
     ) ?>
 
-    <?= $form->field($model, 'assesment_anggota')->widget(Select2::classname(), [
+    <?= $form->field($model2, 'assesment_anggota')->widget(Select2::classname(), [
         'data' => $data,
+        'value' => $value,
         //'name' => 'id_barang[]',
         'options' => ['placeholder' => '-Select anggota-'],
         'pluginOptions' => [

@@ -68,8 +68,8 @@ $asset = AppAsset::register($this);
 
 				'items' => [
 					 ['label' => Html::img(Yii::$app->params['backendUrl'].'/user.png',['class'=>'img-circle','style'=>'height:90px; width:90px; border:3px solid; border-color:white;']).'<p style=\'color:white; font-size:15px;\'>'.Yii::$app->user->identity->username.'</p>','options'=>['style'=>'background-color:#2B333E; text-align:center;']],
-					 ['label' => '<i class="fa fa-eercast"></i> Site Home','url' => Url::to(Yii::$app->params['frontHome'])],
-					 ['label' => '<i class="fa fa-cogs"></i> Biodata','url' => Url::to(['biodata/index'])],
+					// ['label' => '<i class="fa fa-eercast"></i> Site Home','url' => Url::to(Yii::$app->params['frontHome'])],
+					 //['label' => '<i class="fa fa-cogs"></i> Biodata','url' => Url::to(['biodata/index'])],
 					 ['label' => '<i class="fa fa-sign-out"></i> Logout', 'url' => Url::to(['site/logout'])],
 				],
 			],

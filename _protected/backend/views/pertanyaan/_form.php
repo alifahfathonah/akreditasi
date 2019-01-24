@@ -13,8 +13,6 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <!-- <?= $form->field($model, 'tanya_id')->textInput(['maxlength' => true]) ?> -->
-
     <?= $form->field($model, 'kelas_id')->dropDownList(
         ArrayHelper::map($datakls,'kelas_id','kelas_nama')
     ) ?>
@@ -35,7 +33,9 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'tanya_ket_c')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'tanya_bobot')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'tanya_bobot')->textInput() ?>
+
+    <?= $form->field($model, 'tanya_aktif')->dropDownList([ 1 => 'y', 0 => 't', ]) ?>
 
     <!-- <?= $form->field($model, 'created_by')->textInput() ?>
 
